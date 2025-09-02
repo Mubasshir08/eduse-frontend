@@ -1,0 +1,37 @@
+import React from 'react'
+import edulog from './pages/media/logo.png'
+import serc from './pages/media/Vector.png'
+import globel from './pages/media/Group6.png'
+const Navbar = () => {
+  return (
+    // nav-bar started
+    <nav className='px-4 py-2 bg-white  flex items-center justify-between text-sm '>
+      {/* logo */}
+      <div>
+        <img src={edulog} className='h-6' alt="logo" />
+      </div>
+      {/* search-bar */}
+      <div className='flex items-center gap-5 border-3 rounded-4xl  py-1 border-blue-700 xl:w-180 lg:w-80 sm:w-60 px-4 '>
+      
+      {/* search icon */}
+        <img src={serc} alt="" />
+        {/*search */}
+        <input type="search"placeholder='Search for any service' id=""  className='h-6 text-slate-600 py-2 px-4 rounded w-full hover:border-none  '/>
+      </div>
+      {/* menus */}
+      <div className='flex items-center gap-6'>
+        <ul className='flex items-center gap-6 text-gray-600 font-semibold'>
+          <li>E-Commerce</li>
+          <li>E-Learning</li>
+          <li>Become a Seller</li>
+        </ul>
+     {/* button */}
+        <button className='w-20 rounded-md border-3 border-blue-700 '>sign in</button>
+        <button className=' bg-blue-700 bg text-white w-20 py-1 rounded-md'>join</button>
+        <button className='rounded-md  border-blue-700'><img src={globel} alt="" /></button>
+      </div>
+    </nav>
+  )
+}
+
+export default Navbar
