@@ -1,11 +1,11 @@
 import React from 'react'
-import edulog from './pages/media/logo.png'
-import serc from './pages/media/Vector.png'
-import globel from './pages/media/Group6.png'
+import edulog from './media/logo.png'
+import serc from './media/Vector.png'
+import globel from './media/Group6.png'
 const Navbar = () => {
   return (
     // nav-bar started
-    <nav className='px-4 py-2 bg-white  flex items-center justify-between text-sm '>
+    <nav className='font-inter px-4 py-2 bg-white  flex items-center justify-between text-sm '>
       {/* logo */}
       <div>
         <img src={edulog} className='h-6' alt="logo" />
@@ -16,7 +16,7 @@ const Navbar = () => {
       {/* search icon */}
         <img src={serc} alt="" />
         {/*search */}
-        <input type="search"placeholder='Search for any service' id=""  className='h-6 text-slate-600 py-2 px-4 rounded w-full hover:border-none  '/>
+        <input type="search"placeholder='Search for any service' id=""  className='h-6  border-blue-700 text-slate-600 py-2 px-4 rounded w-full  outline-none '/>
       </div>
       {/* menus */}
       <div className='flex items-center gap-6'>

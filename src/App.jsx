@@ -1,9 +1,11 @@
-import Navbar from "./Nav"
+import Navbar from "./pages/Nav"
+import Blog from "./pages/Blog"
 
 function App() {
   return (
     <>
-    <Navbar/>   
+    <Navbar/>  
+    <Blog/>
     </>
   )
 }
