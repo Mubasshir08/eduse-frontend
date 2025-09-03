@@ -1,7 +1,7 @@
 import React from 'react'
-import edulog from './media/logo.png'
-import serc from './media/Vector.png'
-import globel from './media/Group6.png'
+import edulog from '../assets/images/logo.png'
+import serc from '../assets/images/Vector.png'
+import globel from '../assets/images/Group6.png'
 const Navbar = () => {
   return (
     // nav-bar started
