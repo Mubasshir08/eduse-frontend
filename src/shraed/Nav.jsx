@@ -21,9 +21,9 @@ const Navbar = () => {
       {/* menus */}
       <div className='flex items-center gap-6'>
         <ul className='flex items-center gap-6 text-gray-600 font-semibold'>
-          <li>E-Commerce</li>
-          <li>E-Learning</li>
-          <li>Become a Seller</li>
+          <li><a href="#" className='hover:text-slate-950 duration-300'>E-Commerce</a></li>
+          <li><a href="#" className='hover:text-slate-950 duration-300'>E-Learning</a></li>
+          <li><a href="#" className='hover:text-slate-950 duration-300 '>Become a Seller</a></li>
         </ul>
      {/* button */}
         <button className='w-20 rounded-md border-3 border-blue-700 '>sign in</button>

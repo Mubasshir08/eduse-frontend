@@ -1,4 +1,4 @@
-import Navbar from "./pages/Nav"
+import Navbar from "./shraed/Nav"
 import Blog from "./pages/Blog"
 
 function App() {
