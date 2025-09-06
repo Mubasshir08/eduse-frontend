@@ -14,8 +14,8 @@ const Blog = () => {
   return (
     <div>
       <section className="font-inter text-[16px]">
-        <div className=" align-middle bg-[#015AD8] h-12 text-white flex items-center justify-center my-5">
-          <h1 className="text-4xl font-bold text-center my-10">Eduse Blog</h1>
+        <div className=" align-middle bg-[#015AD8] h-14 text-white flex items-center justify-center my-5">
+          <h1 className="text-[40px] font-bold text-center my-10">Eduse Blog</h1>
         </div>
         <div className="px-20 grid lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-4 sm:grid-cols-1 gap-10 mb-10">
           {/* card-1 start */}

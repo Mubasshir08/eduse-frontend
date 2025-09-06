@@ -9,10 +9,10 @@ const Navbar = () => {
     <nav className="font-inter text-sm px-4 py-2 bg-white  flex items-center justify-between  ">
       {/* logo */}
       <div>
-        <img src={edulog} className="h-6" alt="logo" />
+        <img src={edulog} className="h-[37px]" alt="logo" />
       </div>
       {/* search-bar */}
-      <div className="flex items-center gap-5 border-3 rounded-4xl  py-1 border-blue-700 xl:w-180 lg:w-80 sm:w-60 px-4 ">
+      <div className="flex items-center gap-5 border-3 rounded-4xl  py-1 border-[#015AD8] xl:w-180 lg:w-80 sm:w-60 px-4 ">
         {/* search icon */}
         <img src={serc} alt="" />
         {/*search */}
@@ -49,7 +49,7 @@ const Navbar = () => {
         <button className=" bg-blue-700 bg text-white w-20 py-1 rounded-md">
           Join
         </button>
-        <button className="rounded-md  border-blue-700 ">
+        <button className="rounded-md border-blue-700 ">
           <CiGlobe />
         </button>
       </div>
