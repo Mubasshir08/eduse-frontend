@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="px-20 xl:px-40  my-20 ">
       {/* top */}
-      <section className="flex justify-between gap-10 border-b-1 border-[#999999]">
+      <section className="flex xl:flex-row md:flex-col justify-between gap-10 border-b-1 border-[#999999]">
         {/* part-1 */}
         <div className=" flex flex-col ">
           <div>
@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
         </div>
         {/* part-2 */}
-        <div className="flex justify-between mt-12 w-[70%]">
+        <div className="flex justify-between mt-12 xl:w-[70%] md:w-[100%] ">
           {/* ch-1 */}
           <div>
             <h3 className=" font-bold text-[24px]">About us</h3>
