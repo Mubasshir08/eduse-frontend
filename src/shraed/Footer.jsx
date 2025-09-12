@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
         </div>
         {/* part-2 */}
-        <div className="flex justify-between mt-12 xl:w-[70%] md:w-[100%] ">
+        <div className="flex justify-between mt-12 xl:w-[70%] md:w-[100%] sm:flex-col ">
           {/* ch-1 */}
           <div>
             <h3 className=" font-bold text-[24px]">About us</h3>
@@ -119,11 +119,11 @@ const Footer = () => {
         </div>
         {/* part-2 */}
         <div className="flex gap-2 opacity-50">
-          <FaFacebook />
+          <a href="#"><FaFacebook /></a>
           <FaInstagramSquare />
-          <AiFillTwitterCircle />
-          <FaPinterest />
-          <FaYoutube />
+          <a href="#"><AiFillTwitterCircle /></a>
+          <a href="#"><FaPinterest /></a>
+          <a href="#"><FaYoutube /></a>
         </div>
       </section>
       {/* part-1 */}
