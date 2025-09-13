@@ -1,11 +1,12 @@
 import Navbar from "./shraed/Nav"
-import Blog from "./pages/Blog"
+import Catagory from "./pages/Catagory"
+
 
 function App() {
   return (
     <>
     <Navbar/>  
-    
+    <Catagory/>
     </>
   )
 }
