@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
         </div>
         {/* part-2 */}
-        <div className="flex justify-between mt-12 xl:w-[70%] md:w-[100%] sm:flex-col ">
+        <div className="flex justify-between mt-12 xl:w-[70%] md:w-[100%] flex-col md:flex-row">
           {/* ch-1 */}
           <div>
             <h3 className=" font-bold text-[24px]">About us</h3>
