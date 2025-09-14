@@ -61,7 +61,7 @@ const Header = () => {
               className="w-full border-2 border-blue-700 rounded-full py-2 pl-10 pr-4 text-sm"
             />
             <img
-              src="/src/assets/Vector.png"
+              src="src\assets\images\Vector.png"
               alt="search icon"
               className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4"
             />
