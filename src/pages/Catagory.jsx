@@ -1,11 +1,12 @@
 import React from "react";
 import { TiMediaPlayOutline } from "react-icons/ti";
+import { FaRegHeart } from "react-icons/fa";
 
 const Catagory = () => {
   return (
-    <section className="flex sm:px-10 max-w-7xl mx-auto font-Inter">
+    <section className="flex gap-30 sm:px-10 max-w-7xl mx-auto font-Inter my-10">
       {/* left */}
-      <dev>
+      <div>
         {/* left part-1 */}
         <div className="my-5">
           <h1 className="font-semibold text-xl">Category</h1>
@@ -38,7 +39,7 @@ const Catagory = () => {
             </button>
           </div>
           {/* left 4th part */}
-          <div>
+          <div className="my-5">
             {/* 4th area child-1 start*/}
             <div>
               <h1 className=" text-xl text-[#666666]">Store Rating</h1>
@@ -183,11 +184,41 @@ const Catagory = () => {
             </div>
           </div>
         </div>
-      </dev>
+      </div>
       {/* middle */}
-      <dev></dev>
+      <div>
+        {/* card-1 */}
+
+        <div className="w-70 h-88 shadow-md bg-base-100">
+          {/* img */}
+          <figure>
+            <div className="p-1 " ><img src="src\assets\images\img1.jpg" alt="" className="rounded-sm w-80 h-50 object-fill "  /></div>
+          </figure>
+          {/* body */}
+          <div className="px-6">
+            {/* bestseller */}
+            <div className="bg-[#D1E8FF] w-18 text-center rounded-2xl"><p className="text-sm text-[#666666] ">Bestseller</p></div>
+           {/*book names&st/so  */}
+            <div>
+                <h1 className="text-[#666666]">Programming Books Set</h1>
+                <p className="text-[#015AD8]">In stock*</p>
+                <h1 className="text-[24px] font-semibold">BDT 1500.34</h1>
+                {/* rating & fav section */}
+                <div className="flex justify-between">
+                  {/* rate */}
+                  <div className="flex gap-1">
+                    <p>5.4</p>
+                    <div className="items-center flex" ><img className="h-4" src="src\assets\images\Star18.png" alt="" /></div>
+                    </div>
+                  {/* fav */}
+                  <div><FaRegHeart /></div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* right */}
-      <dev></dev>
+      <div></div>
     </section>
   );
 };
