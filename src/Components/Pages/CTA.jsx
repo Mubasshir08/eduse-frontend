@@ -45,7 +45,7 @@ const CTA = () => {
        <h3 className="text-lg md:text-2xl font-bold text-gray-900 mb-10">
          TRUSTED BY THOUSANDS OF STUDENTS ACROSS CAMPUSES
        </h3>
-       <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
          <div>
            <h4 className="text-2xl md:text-4xl font-bold text-gray-900">1K+</h4>
            <p className="text-black font-bold text-sm mt-2">Active Student Shops</p>
@@ -59,7 +59,7 @@ const CTA = () => {
            <p className="text-black font-bold text-sm mt-2">Unique Products & Learning Materials Listed</p>
          </div>
          <div>
-           <h4 className="text-2xl sm:text-3xl font-bold text-blue-600">3K+</h4>
+           <h4 className="text-2xl md:text-4xl font-bold text-blue-600">3K+</h4>
            <p className="text-black font-bold text-sm mt-2">AI-Powered Search Interactions</p>
          </div>
        </div>
@@ -67,7 +67,7 @@ const CTA = () => {
      {/* Trusted by Students Section */}
      </div>
    </div>
-   
+
  </section>
   )
 }
