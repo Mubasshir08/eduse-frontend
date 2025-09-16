@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Header = () => {
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -87,4 +87,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Navbar

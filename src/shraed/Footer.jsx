@@ -10,7 +10,7 @@ import { FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="px-20 xl:px-40  my-20 ">
+    <footer className="px-20 xl:px-40  mb-3 ">
       {/* top */}
       <section className="flex xl:flex-row md:flex-col justify-between gap-10 border-b-1 border-[#999999]">
         {/* part-1 */}

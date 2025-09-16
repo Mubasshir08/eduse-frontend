@@ -1,12 +1,9 @@
-import Navbar from "./shraed/Nav"
-import Catagory from "./pages/Catagory"
-
-
-function App() {
+import React from 'react'
+import Catagory from './pages/Catagory'
+const App = () => {
   return (
     <>
-    <Navbar/>  
-    <Catagory/>
+      <Catagory />
     </>
   )
 }
