@@ -1,6 +1,6 @@
 import React from "react";
 
-import Header from "./Components/Pages/Header";
+import Navbar from "./Components/Pages/Navbar";
 import Hero from "./Components/Pages/Hero";
 import Courses from "./Components/Pages/PopularCourses";
 import Categories from "./Components/Pages/Categories";
@@ -13,7 +13,7 @@ import Footer from "./Components/Pages/Footer";
 function App() {
   return (
     <div>
-      <Header />
+      <Navbar />
       <Hero />
       <Courses />
       <Categories />
