@@ -1,12 +1,12 @@
-import Navbar from "./shraed/Nav"
-import Catagory from "./pages/Catagory"
+import Navbar from "./shraed/Navbar"
+
+import Cource_over_view from "./pages/Cource_over_view"
 
 
 function App() {
   return (
     <>
-    <Navbar/>  
-    <Catagory/>
+    <Cource_over_view />
     </>
   )
 }
