@@ -38,8 +38,9 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto  bg-white shadow rounded-md text-[#666666] ">
-      <div className="p-6">
+    <div className="max-w-3xl mx-auto  bg-white shadow rounded-md  pt-6 text-[#666666] ">
+      
+      <div className="p-6 ">
         {/* Header / Title */}
         <h2 className="text-xl font-semibold text-[#333333]">{product.name}</h2>
 
@@ -125,13 +126,15 @@ const ProductPage = () => {
           </ul>
         </div>
       </div>
+      <div/>
+      <hr  className=" border-[#D9D9D9]"/>
       <div className="p-6">
         {/* Reviews and Ratings */}
-        <div className=" mt-10 border-t border-[#D9D9D9] pt-6">
+        <div className=" mt-10 ">
           <div></div>
           <h3 className="text-lg font-semibold">Reviews and Ratings</h3>
 
-          <div className="flex  gap-66 mt-4">
+          <div className="flex flex-col xl:flex-row xl:gap-66 xm:gap-10 mt-4">
             <div className="order-2">
               {/* Average Rating */}
               <div className="">

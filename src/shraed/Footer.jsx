@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="px-20 xl:px-40  my-20 ">
       {/* top */}
-      <section className="flex xl:flex-row md:flex-col justify-between gap-10 border-b-1 border-[#999999]">
+      <section className="flex xl:flex-row md:flex-col flex-col items-center xl:items-start justify-between gap-10 border-b-1 border-[#999999]">
         {/* part-1 */}
         <div className=" flex flex-col ">
           <div>

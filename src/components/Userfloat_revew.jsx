@@ -77,7 +77,7 @@ export default function ReviewModal() {
 
             {/* Upload */}
             <div className="mt-3">
-              <label className="flex items-center justify-center border border-1 rounded-lg p-2 text-sm text-gray-500 cursor-pointer">
+              <label className="flex items-center justify-center border  rounded-lg p-2 text-sm text-gray-500 cursor-pointer">
                 <input type="file" className="hidden" />
                 Upload Photo
               </label>
