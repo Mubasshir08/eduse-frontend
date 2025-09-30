@@ -1,8 +1,10 @@
 import React from "react";
-import CoursePage from "./Pages/CoursePage";
+import SignIn from "./Pages/SignIn";
 
 const App = () => {
-  return <CoursePage />;
+  return (
+    <SignIn />
+  );
 };
 
 export default App;
