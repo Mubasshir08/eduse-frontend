@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 
 const SignIn = () => {
   return (
-    <section className='w-[454px] h-[626px] rounded-2xl shadow-md mx-auto translate-y-12'>
+    <form className='w-[454px] h-[626px] rounded-2xl shadow-md mx-auto translate-y-12'>
         <h3 className='text-[#015AD8] text-center text-2xl font-bold py-4'>WELCOME</h3>
         <section className='mt-5 px-9'>
            {/* email section */}
@@ -35,7 +35,7 @@ const SignIn = () => {
         </div>
         <p className='text-center text-gray-400 mt-4'>New to Eduse? <span className='text-[#015AD8] cursor-pointer underline'>Sign Up</span></p>
         </section>
-    </section>
+    </form>
   )
 }
 
