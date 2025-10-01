@@ -1,9 +1,9 @@
 import React from "react";
-import SignIn from "./Pages/SignIn";
+import Id_Recovery from "./Pages/Id_Recovery";
 
 const App = () => {
   return (
-    <SignIn />
+    <Id_Recovery />
   );
 };
 
