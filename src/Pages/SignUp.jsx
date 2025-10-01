@@ -2,7 +2,7 @@ import React from 'react'
 import { CiUnread } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <form className='w-[454px] rounded-2xl shadow-md mx-auto my-3 pb-5'>
         <h3 className='text-[#015AD8] text-center text-2xl font-bold py-4'>SIGN UP</h3>
@@ -54,4 +54,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default SignUp
