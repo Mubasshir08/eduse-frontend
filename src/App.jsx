@@ -1,8 +1,14 @@
 import React from "react";
-import CoursePage from "./Pages/CoursePage";
+import Navbar from "./Components/Navbar";
+import CoursePage from "./pages/CoursePage";
 
 const App = () => {
-  return <CoursePage />;
+  return (
+    <div className="bg-white min-h-screen">
+      <Navbar />
+      <CoursePage />
+    </div>
+  );
 };
 
 export default App;
