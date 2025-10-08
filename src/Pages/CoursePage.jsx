@@ -4,13 +4,16 @@ import InstructorSection from "../Components/InstructorSection";
 import ReviewsSection from "../Components/ReviewsSection";
 import CartSection from "../Components/CartSection";
 import RelatedTopics from "../Components/RelatedTopics";
+import CourseModules from "../Components/CourseModules"
+import CourseModule from "../Components/CourseModule"
 
 const CoursePage = () => {
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Course Details Section */}
-      <CourseDetails />
-
+        <CourseDetails /> 
+        <CourseModules/>
+        <CourseModule/>
       {/* Instructor Info + Reviews */}
       <div className="max-w-6xl mx-auto px-6">
         <InstructorSection />

@@ -62,7 +62,7 @@ const CourseDetails = () => {
           </div>
 
           {/* What You'll Learn */}
-          <div className="border-2 pt-5 px-5">
+          <div className="border-2 pt-5 px-5 rounded-lg">
             <h2 className="text-lg font-semibold mb-3">What You’ll Learn</h2>
           <ul className="space-y-2 mb-6">
             {learnPoints.map((point, i) => (

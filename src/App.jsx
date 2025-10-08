@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Components/Navbar";
-import CoursePage from "./pages/CoursePage";
+import CoursePage from "./Pages/CoursePage";
 
 const App = () => {
   return (
