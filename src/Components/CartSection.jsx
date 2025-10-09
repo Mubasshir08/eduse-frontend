@@ -1,7 +1,6 @@
-// src/components/AddToCart.jsx
 import React from "react";
 import { FaClock } from "react-icons/fa";
-import Navbar from "../Components/Navbar"; // adjust path if Navbar is in a different folder
+import Navbar from "../Components/Navbar";
 
 const AddToCart = () => {
   return (
