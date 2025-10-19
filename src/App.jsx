@@ -1,9 +1,9 @@
 import React from "react";
-import SignUp from "./Pages/SignUp";
+import Checkout from "./Pages/Checkout";
 
 const App = () => {
   return (
-    <SignUp />
+    <Checkout />
   );
 };
 
