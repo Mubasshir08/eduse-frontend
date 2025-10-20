@@ -50,20 +50,20 @@ const Checkout = () => {
                 <input type="text" placeholder="Enter Your Name" className="border rounded-lg p-2 w-full" />
                 <input type="text" placeholder="Alternative Phone No." className="border rounded-lg p-2 w-full" />
                 <input type="text" placeholder="Phone No." className="border rounded-lg p-2 w-full" />
-                <select className="border rounded-lg p-2 w-full">
-  <option value="">Select a country</option>
-  <option value="Bangladesh">Bangladesh</option>
-  <option value="Other">Other</option>
-</select>
+                <select className="border rounded-lg p-2 w-full font-light">
+                  <option value="">Select a country</option>
+                  <option value="Bangladesh">Bangladesh</option>
+                  <option value="Other">Other</option>
+                </select>
 
-<select className="border rounded-lg p-2 w-full">
+<select className="border rounded-lg p-2 w-full font-light">
   <option value="">Select a city</option>
   <option value="Dhaka">Dhaka</option>
   <option value="Chittagong">Chittagong</option>
   <option value="Other">Other</option>
 </select>
 
-<select className="border rounded-lg p-2 w-full">
+<select className="border rounded-lg p-2 w-full font-light">
   <option value="">Select an area</option>
   <option value="Gulshan">Gulshan</option>
   <option value="Banani">Banani</option>

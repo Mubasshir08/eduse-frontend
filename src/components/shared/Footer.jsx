@@ -1,4 +1,5 @@
 import React from "react"
+import EduseLogo from "../../assets/images/eduse-logo.png"
 import { FaFacebookF, FaInstagram, FaTwitter, FaPinterestP, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
@@ -8,10 +9,10 @@ const Footer = () => {
      {/* Left: Logo + Text */}
      <div>
        <div className="flex items-center mb-4">
-         <img src="/src/assets/Logo.png" alt="Eduse Logo" className="h-10 mr-2" />
+         <img src={EduseLogo} alt="eduse logo" className="h-10 mr-2" />
          <span className="text-xl font-bold text-blue-700"></span>
        </div>
-       <p className="text-gray-600 text-base">A Online Platform</p>
+       <p className="text-gray-600 text-base ml-2">A Online Platform</p>
      {/* Left: Logo + Text */}
      </div>
 

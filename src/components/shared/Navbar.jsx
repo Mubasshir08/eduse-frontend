@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import { FaSearch } from "react-icons/fa"
+import EduseLogo from "../../assets/images/eduse-logo.png"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -8,18 +10,14 @@ const Navbar = () => {
       <header className="max-w-7xl mx-auto py-4 px-6 flex items-center justify-between">
         {/* Left: Logo + Search */}
         <div className="flex items-center space-x-6 flex-1">
-          <img src="/src/assets/Logo.png" alt="Eduse Logo" className="h-7 sm:h-8" />
+          <img src={EduseLogo} alt="Eduse Logo" className="h-7 sm:h-8" />
           <div className="relative flex-grow max-w-lg hidden md:block">
             <input
               type="text"
               placeholder="Search for any service"
               className="w-full border-2 border-blue-700 rounded-full py-1 pl-10 pr-4 text-sm"
             />
-            <img
-              src="/src/assets/Vector.png"
-              alt="search icon"
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4"
-            />
+            <FaSearch className="absolute top-1/2 transform -translate-y-1/2 left-3 text-gray-500" />
           </div>
         </div>
 
