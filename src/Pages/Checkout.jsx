@@ -1,4 +1,9 @@
 import React, { useState } from 'react'
+import BkashLogo from "../assets/images/bkash-logo.png";
+import NagadLogo from "../assets/images/nagad-logo.png";
+import RocketLogo from "../assets/images/rocket-logo.png";
+import GpayLogo from "../assets/images/gpay-logo.png";
+import PayoneerLogo from "../assets/images/payoneer-logo.png";
 
 const Checkout = () => {
   const [pickupFrom, setPickupFrom] = useState("home");
@@ -45,9 +50,26 @@ const Checkout = () => {
                 <input type="text" placeholder="Enter Your Name" className="border rounded-lg p-2 w-full" />
                 <input type="text" placeholder="Alternative Phone No." className="border rounded-lg p-2 w-full" />
                 <input type="text" placeholder="Phone No." className="border rounded-lg p-2 w-full" />
-                <input type="text" placeholder="Bangladesh" className="border rounded-lg p-2 w-full" />
-                <input type="text" placeholder="Select City" className="border rounded-lg p-2 w-full" />
-                <input type="text" placeholder="Select Area" className="border rounded-lg p-2 w-full" />
+                <select className="border rounded-lg p-2 w-full">
+  <option value="">Select a country</option>
+  <option value="Bangladesh">Bangladesh</option>
+  <option value="Other">Other</option>
+</select>
+
+<select className="border rounded-lg p-2 w-full">
+  <option value="">Select a city</option>
+  <option value="Dhaka">Dhaka</option>
+  <option value="Chittagong">Chittagong</option>
+  <option value="Other">Other</option>
+</select>
+
+<select className="border rounded-lg p-2 w-full">
+  <option value="">Select an area</option>
+  <option value="Gulshan">Gulshan</option>
+  <option value="Banani">Banani</option>
+  <option value="Mohakhali">Mohakhali</option>
+  <option value="Other">Other</option>
+</select>
               </div>
 
               <textarea placeholder="Enter Your Address" className="border rounded-lg p-2 w-full h-20" />
@@ -60,7 +82,7 @@ const Checkout = () => {
               Payment Method (Please Select Your Payment Method)
             </div>
             <div className="p-6 space-y-4">
-              <div>
+              <div className='w-1/2 bg-[#fafafa] px-5 py-4 border border-[#999999] rounded-md'>
                 <label className="flex items-center gap-2">
                   <input type="radio" name="payment" />
                   Cash on Delivery
@@ -68,21 +90,30 @@ const Checkout = () => {
               </div>
 
               <div className="space-y-2">
-                <div className="font-medium">Mobile Wallet</div>
+                <div className="font-light">Mobile Wallet</div>
                 <div className="flex gap-3">
-                  <img src="https://seeklogo.com/images/B/bkash-logo-1A3D71A06E-seeklogo.com.png" alt="bKash" className="h-8" />
-                  <img src="https://upload.wikimedia.org/wikipedia/en/8/8f/Nagad_Logo.png" alt="Nagad" className="h-8" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Rocket_logo.png" alt="Rocket" className="h-8" />
+                  <div className='bg-[#fafafa] px-5 py-3 border border-[#999999] rounded-md'>
+                    <img src={BkashLogo} alt="" className='w-16'/>
+                  </div>
+                  <div className='bg-[#fafafa] px-5 py-3 border border-[#999999] rounded-md'>
+                    <img src={NagadLogo} alt="" className='w-16'/>
+                  </div>
+                  <div className='bg-[#fafafa] px-5 py-3 border border-[#999999] rounded-md'>
+                    <img src={RocketLogo} alt="" className='w-16'/>
+                  </div>
+                  
+                  
                 </div>
               </div>
 
               <div className="space-y-2">
-                <div className="font-medium">Debit/Credit Card</div>
-                <div className="flex gap-3">
+                <div className="font-light">Debit/Credit Card</div>
+                <div className="w-1/2 flex gap-3 bg-[#fafafa] px-5 py-3 border border-[#999999] rounded-md">
+                <input type="radio" name="payment" id="" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" className="h-8" />
                   <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="MasterCard" className="h-8" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="G Pay" className="h-8" />
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Payoneer_logo.svg" alt="Payoneer" className="h-8" />
+                  <img src={GpayLogo} alt="G Pay" className="h-8" />
+                  <img src={PayoneerLogo} alt="Payoneer" className="h-8" />
                 </div>
               </div>
             </div>
