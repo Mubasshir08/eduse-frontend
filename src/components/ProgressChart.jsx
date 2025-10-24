@@ -1,6 +1,6 @@
 import { PieChart, Pie, Cell } from "recharts";
 
-const COLORS = ["#E5E7EB", "#3B82F6", "#10B981"]; // grey, blue, green
+const COLORS = ["#E5E7EB", "#3B82F6", "#F82424"]; // grey, blue, red
 
 const ProgressChart = ({ data }) => (
   <PieChart width={180} height={180}>
