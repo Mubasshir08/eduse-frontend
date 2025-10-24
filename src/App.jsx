@@ -1,14 +1,10 @@
 import React from "react";
-import Checkout from "./Pages/Checkout";
-import Navbar from "./components/shared/Navbar";
-import Footer from "./components/shared/Footer";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
     <>    
-      <Navbar />
-      <Checkout />
-      <Footer />
+      <Dashboard />
     </>
   );
 };
