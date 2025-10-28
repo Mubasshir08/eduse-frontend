@@ -1,4 +1,6 @@
 import React from "react";
+import Navbar from "../shraed/Navbar";
+import Footer from "../shraed/Footer";
 import Cardvido from "../assets/video/v1.mp4";
 import Cardvidtwo from "../assets/video/v2.mp4";
 import Cardvidthre from "../assets/video/v3.mp4";
@@ -8,11 +10,12 @@ import Cardvidsix from "../assets/video/v6.mp4";
 import Cardvidseven from "../assets/video/v7.mp4";
 import Cardvieight from "../assets/video/v8.mp4";
 import Cardvidnine from "../assets/video/v9.mp4";
-import Footer from "../shraed/Footer";
+
 
 const Blog = () => {
   return (
     <div>
+      <Navbar />
       <section className="font-inter text-[16px]">
         <div className=" align-middle bg-[#015AD8] h-14 text-white flex items-center justify-center my-5">
           <h1 className="text-[40px] font-bold text-center my-10">Eduse Blog</h1>
