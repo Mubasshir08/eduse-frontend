@@ -6,10 +6,13 @@ import CartSection from "../Components/CartSection";
 import RelatedTopics from "../Components/RelatedTopics";
 import CourseModules from "../Components/CourseModules"
 import CourseModule from "../Components/CourseModule"
+import Footer from "../components/shared/Footer";
+import Navbar from "../Components/shared/Navbar";
 
 const CoursePage = () => {
   return (
     <div className="bg-white min-h-screen font-sans">
+      <Navbar />
       {/* Course Details Section */}
         <CourseDetails /> 
         <CourseModules/>
@@ -25,6 +28,7 @@ const CoursePage = () => {
         <CartSection />
         <RelatedTopics /> */}
       {/* </div> */}
+      <Footer />
     </div>
   );
 };
