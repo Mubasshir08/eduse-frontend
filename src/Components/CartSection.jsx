@@ -1,6 +1,6 @@
 import React from "react";
 import { FaClock } from "react-icons/fa";
-import Navbar from "./shared/Navbar";
+import Navbar from "../shared/Navbar";
 
 const AddToCart = () => {
   return (

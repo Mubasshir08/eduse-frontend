@@ -6,8 +6,8 @@ import CartSection from "../Components/CartSection";
 import RelatedTopics from "../Components/RelatedTopics";
 import CourseModules from "../Components/CourseModules"
 import CourseModule from "../Components/CourseModule"
-import Footer from "../components/shared/Footer";
-import Navbar from "../Components/shared/Navbar";
+import Footer from "../shared/Footer";
+import Navbar from "../shared/Navbar";
 
 const CoursePage = () => {
   return (
