@@ -1,6 +1,6 @@
 import React from "react";
 import { FaClock, FaArrowRight } from "react-icons/fa";
-import Navbar from "./Navbar";
+import Navbar from "./shared/Navbar";
 
 const RelatedTopics = () => {
   return (
