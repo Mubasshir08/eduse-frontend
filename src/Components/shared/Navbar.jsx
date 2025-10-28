@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Logo from "../../assets/images/eduse-logo.png"
 import { PiShoppingCartLight } from "react-icons/pi";
 
 const Navbar = () => {
@@ -9,7 +10,7 @@ const Navbar = () => {
       <header className="max-w-6xl mx-auto py-4 px-6 flex items-center justify-between">
         {/* Left: Logo + Search */}
         <div className="flex items-center space-x-6 flex-1 ">
-          <img src="/src/assets/images/Logo.png" alt="Eduse Logo" className="h-7 sm:h-8" />
+          <img src={Logo} alt="Eduse Logo" className="h-7 sm:h-8" />
            <p className="hover:text-blue-700 my-">Explore</p>
 
           <div className="relative flex-grow max-w-lg hidden md:block">
