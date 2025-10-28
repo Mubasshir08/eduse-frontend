@@ -1,6 +1,6 @@
 import React from "react";
 import { FaStar, FaRegUser, FaBookOpen, FaRegCommentDots } from "react-icons/fa";
-import instructorImg from "../assets/instructor.png"; 
+import instructorImg from "../assets/images/instructor.png"; 
 
 const InstructorSection = () => {
   return (

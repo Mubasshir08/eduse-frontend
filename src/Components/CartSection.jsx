@@ -15,7 +15,7 @@ const AddToCart = () => {
           <div className="flex items-start border rounded-lg p-4">
             <input type="checkbox" checked readOnly className="accent-blue-600 mt-2" />
             <img
-              src="/src/assets/design-thinking.png"
+              src="/src/assets/images/design-thinking.png"
               alt="Design Thinking"
               className="w-24 h-20 rounded-md ml-4 object-cover"
             />
@@ -55,7 +55,7 @@ const AddToCart = () => {
           <div className="flex items-start border rounded-lg p-4">
             <input type="checkbox" checked readOnly className="accent-blue-600 mt-2" />
             <img
-              src="/src/assets/figma-course.png"
+              src="/src/assets/images/figma-course.png"
               alt="Figma Course"
               className="w-24 h-20 rounded-md ml-4 object-cover"
             />

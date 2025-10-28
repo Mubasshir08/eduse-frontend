@@ -22,7 +22,7 @@ const ReviewsSection = () => {
         <div className="border rounded-lg p-4 relative">
           <div className="flex items-start space-x-3">
             <img
-              src="/src/assets/avatar-1.png"
+              src="/src/assets/images/avatar-1.png"
               alt="User"
               className="w-10 h-10 rounded-full"
             />
@@ -62,8 +62,8 @@ const ReviewsSection = () => {
             <p className="text-xs text-gray-500 mb-3">
               Flagged content is reviewed by Eduse staff to determine whether it violates Terms of Service or Community Guidelines. If you have a question or technical issue, please contact our Support team here.
             </p>
-            <label className="text-xs text-gray-600">Problem type</label>
-            <select className="w-full border rounded-md text-sm mt-1 p-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+            {/* <label className="text-xs text-gray-600">Problem type</label> */}
+            {/* <select className="w-full border rounded-md text-sm mt-1 p-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
               <option>Select an issue</option>
               <option>Inappropriate Course Content - Harmful, Violent</option>
               <option>Inappropriate Course Content - Other</option>
@@ -71,7 +71,7 @@ const ReviewsSection = () => {
               <option>Eduse Policy Violation</option>
               <option>Spam or Misleading Promotion</option>
               <option>Other Concerns</option>
-            </select>
+            </select> */}
           </div>
         </div>
 
@@ -79,7 +79,7 @@ const ReviewsSection = () => {
         <div className="border rounded-lg p-4">
           <div className="flex items-start space-x-3">
             <img
-              src="/src/assets/avatar-2.png"
+              src="/src/assets/images/avatar-2.png"
               alt="User"
               className="w-10 h-10 rounded-full"
             />
@@ -129,7 +129,7 @@ const ReviewsSection = () => {
         <div className="border rounded-lg p-4">
           <div className="flex items-start space-x-3">
             <img
-              src="/src/assets/avatar-3.png"
+              src="/src/assets/images/avatar-3.png"
               alt="User"
               className="w-10 h-10 rounded-full"
             />
@@ -179,7 +179,7 @@ const ReviewsSection = () => {
          <div className="border rounded-lg p-4">
           <div className="flex items-start space-x-3">
             <img
-              src="/src/assets/avatar-4.png"
+              src="/src/assets/images/avatar-4.png"
               alt="User"
               className="w-10 h-10 rounded-full"
             />

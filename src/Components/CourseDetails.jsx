@@ -79,7 +79,7 @@ const CourseDetails = () => {
         {/* Right Section */}
         <div className="border rounded-lg shadow-md p-6 flex flex-col items-center">
           <img
-            src="/src/assets/design-thinking.png"
+            src="/src/assets/images/design-thinking.png"
             alt="Course Thumbnail"
             className="rounded-md max-w-sm"
           />

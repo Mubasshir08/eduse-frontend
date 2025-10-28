@@ -20,11 +20,11 @@ const CoursePage = () => {
         <ReviewsSection />
       </div>
 
-      {/* Cart + Related Topics */}
+      {/* Cart + Related Topics
       <div className="max-w-7xl mx-auto px-6 my-10">
         <CartSection />
-        <RelatedTopics />
-      </div>
+        <RelatedTopics /> */}
+      {/* </div> */}
     </div>
   );
 };
