@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Logo from "../../assets/images/eduse-logo.png"
+import Logo from "../assets/images/eduse-logo.png"
 import { PiShoppingCartLight } from "react-icons/pi";
 
 const Navbar = () => {
