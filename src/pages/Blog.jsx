@@ -20,7 +20,7 @@ const Blog = () => {
         <div className=" align-middle bg-[#015AD8] h-14 text-white flex items-center justify-center my-5">
           <h1 className="text-[40px] font-bold text-center my-10">Eduse Blog</h1>
         </div>
-        <div className="px-20 grid lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-4 sm:grid-cols-1 gap-10 mb-10">
+        <div className="px-20 grid grid-cols-3 gap-10 mb-10">
           {/* card-1 start */}
           <div class="card bg-base-100 w-96 shadow-md  rounded-b-md">
             <figure>
@@ -371,8 +371,8 @@ const Blog = () => {
       </section>
 
       <section>
-        <Footer />
       </section>
+      <Footer />
     </div>
   );
 };
