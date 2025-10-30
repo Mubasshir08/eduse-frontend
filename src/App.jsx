@@ -1,14 +1,14 @@
 import React from "react";
 
-import Header from "./Components/Pages/Header";
-import Hero from "./Components/Pages/Hero";
-import Courses from "./Components/Pages/PopularCourses";
-import Categories from "./Components/Pages/Categories";
-import Testimonials from "./Components/Pages/Testimonials";
-import Blogs from "./Components/Pages/Blogs";
-import FAQ from "./Components/Pages/FAQ";
-import Journey from "./Components/Pages/CTA";
-import Footer from "./Components/Pages/Footer";
+import Header from "./pages/Header";
+import Hero from "./pages/Hero";
+import Courses from "./pages/PopularCourses";
+import Categories from "./pages/Categories";
+import Testimonials from "./pages/Testimonials";
+import Blogs from "./pages/Blogs";
+import FAQ from "./pages/FAQ";
+import Journey from "./pages/CTA";
+import Footer from "./pages/Footer";
 
 function App() {
   return (
