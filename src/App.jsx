@@ -1,7 +1,7 @@
 import React from "react";
-import SignUp from "./Pages/SignUp";
-import Id_Recovery from "./Pages/Id_Recovery";
-import SignIn from "./Pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Id_Recovery from "./pages/Id_Recovery";
+import SignIn from "./pages/SignIn";
 import Blog from "./pages/Blog"
 
 const App = () => {
