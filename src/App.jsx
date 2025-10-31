@@ -6,6 +6,7 @@ import Blog from "./pages/Blog"
 import CoursePage from "./pages/CoursePage";
 import Empowering_Student_Combine from "./pages/Empowering_Student_Combine";
 import Cource_over_view from "./pages/Cource_over_view"
+import Checkout from "./pages/Checkout";
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       <CoursePage />
       <Empowering_Student_Combine />
       <Cource_over_view />
+      <Checkout />
     </>
   );
 };

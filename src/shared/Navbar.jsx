@@ -1,15 +1,21 @@
 import React, { useState } from "react"
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Logo from "../assets/images/eduse-logo.png"
 import { PiShoppingCartLight } from "react-icons/pi";
 =======
 >>>>>>> course-overview-rating-review
+=======
+import { FaSearch } from "react-icons/fa"
+import EduseLogo from "../../assets/images/eduse-logo.png"
+>>>>>>> checkout-section
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <header className="max-w-6xl mx-auto py-4 px-6 flex items-center justify-between">
         {/* Left: Logo + Search */}
@@ -23,12 +29,19 @@ const Navbar = () => {
         <div className="flex items-center space-x-6 flex-1">
           <img src="/src/assets/images/Logo.png" alt="Eduse Logo" className="h-7 sm:h-8" />
 >>>>>>> course-overview-rating-review
+=======
+      <header className="max-w-7xl mx-auto py-4 px-6 flex items-center justify-between">
+        {/* Left: Logo + Search */}
+        <div className="flex items-center space-x-6 flex-1">
+          <img src={EduseLogo} alt="Eduse Logo" className="h-7 sm:h-8" />
+>>>>>>> checkout-section
           <div className="relative flex-grow max-w-lg hidden md:block">
             <input
               type="text"
               placeholder="Search for any service"
               className="w-full border-2 border-blue-700 rounded-full py-1 pl-10 pr-4 text-sm"
             />
+<<<<<<< HEAD
             <img
 <<<<<<< HEAD
               src="/src/assets/images/Vector.png"
@@ -38,11 +51,15 @@ const Navbar = () => {
               alt="search icon"
               className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4"
             />
+=======
+            <FaSearch className="absolute top-1/2 transform -translate-y-1/2 left-3 text-gray-500" />
+>>>>>>> checkout-section
           </div>
         </div>
 
         {/* Right: Nav + Buttons */}
         <div className="hidden md:flex items-center space-x-6">
+<<<<<<< HEAD
 <<<<<<< HEAD
           <nav className="flex ml-2 text-gray-700 text-sm font-medium">
             <a href="#" className="hover:text-blue-700">Become a Seller</a>
@@ -58,6 +75,8 @@ const Navbar = () => {
           </button>
           <img className="w-10" src="/src/assets/Group6.png" alt="" />
 =======
+=======
+>>>>>>> checkout-section
           <nav className="flex space-x-8 ml-6 text-gray-700 text-sm font-medium">
             <a href="#" className="hover:text-blue-700">E-Commerce</a>
             <a href="#" className="hover:text-blue-700">E-Learning</a>
@@ -70,8 +89,12 @@ const Navbar = () => {
           <button className="bg-blue-700 text-white font-medium px-6 py-2 rounded-lg">
             Join
           </button>
+<<<<<<< HEAD
           <img className="w-10" src="src\assets\images\Group6.png" alt="" />
 >>>>>>> course-overview-rating-review
+=======
+          <img className="w-10" src="/src/assets/Group6.png" alt="" />
+>>>>>>> checkout-section
         </div>
 
         {/* Hamburger */}
@@ -96,10 +119,14 @@ const Navbar = () => {
             />
             <img
 <<<<<<< HEAD
+<<<<<<< HEAD
               src="/src/assets/Vector.png"
 =======
               src="src\assets\images\Vector.png"
 >>>>>>> course-overview-rating-review
+=======
+              src="/src/assets/Vector.png"
+>>>>>>> checkout-section
               alt="search icon"
               className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4"
             />
@@ -126,7 +153,11 @@ const Navbar = () => {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default Navbar
 =======
 export default Navbar
 >>>>>>> course-overview-rating-review
+=======
+export default Navbar
+>>>>>>> checkout-section

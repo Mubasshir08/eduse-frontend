@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React from "react"
 import EduseLogo from "../assets/images/eduse-logo.png"
+=======
+import React from "react"
+import EduseLogo from "../../assets/images/eduse-logo.png"
+>>>>>>> checkout-section
 import { FaFacebookF, FaInstagram, FaTwitter, FaPinterestP, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
@@ -90,6 +95,7 @@ const Footer = () => {
   )
 }
 
+<<<<<<< HEAD
 export default Footer
 =======
 import React from "react";
@@ -227,3 +233,6 @@ const Footer = () => {
 
 export default Footer;
 >>>>>>> course-overview-rating-review
+=======
+export default Footer
+>>>>>>> checkout-section
