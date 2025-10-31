@@ -34,7 +34,6 @@ export default function ReviewModal() {
               <img
                 src="src/assets/images/img1.jpg"
                 alt="img" // replace with your image
-                alt="Product"
                 className="w-16 h-20 object-cover rounded"
               />
               <div>
