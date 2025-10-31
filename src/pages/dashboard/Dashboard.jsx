@@ -1,7 +1,7 @@
 import { Bell } from "lucide-react";
 import Avatar from "../assets/images/avatar-pic.jpg";
-import Sidebar from "../components/Sidebar";
-import ProgressChart from "../components/ProgressChart";
+import Sidebar from "../../components/dashboardComponents/Sidebar";
+import ProgressChart from "../../components/dashboardComponents/ProgressChart";
 
 const Dashboard = () => {
   const progressData = [

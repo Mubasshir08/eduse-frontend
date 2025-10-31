@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "./layout/DashboardLayout";
-import DashboardHome from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import EnrolledCourses from "./pages/EnrolledCourses";
-import Purchases from "./pages/Purchases";
-import Wishlist from "./pages/Wishlist";
-import Review from "./pages/Review";
-import Wallet from "./pages/Wallet";
-import Support from "./pages/Support";
-import Settings from "./pages/Settings";
+import DashboardHome from "./pages/dashboard/Dashboard";
+import Profile from "./pages/dashboard/Profile";
+import EnrolledCourses from "./pages/dashboard/EnrolledCourses";
+import Purchases from "./pages/dashboard/Purchases";
+import Wishlist from "./pages/dashboard/Wishlist";
+import Review from "./pages/dashboard/Review";
+import Wallet from "./pages/dashboard/Wallet";
+import Support from "./pages/dashboard/Support";
+import Settings from "./pages/dashboard/Settings";
 
 function App() {
   return (

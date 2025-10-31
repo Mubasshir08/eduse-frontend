@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Bell } from "lucide-react";
 import Avatar from "../assets/images/avatar-pic.jpg";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/dashboardComponents/Sidebar";
 
 const DashboardLayout = () => {
   return (
