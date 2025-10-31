@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import BkashLogo from "../assets/images/bkash-logo.png";
-import NagadLogo from "../assets/images/nagad-logo.png";
-import RocketLogo from "../assets/images/rocket-logo.png";
-import GpayLogo from "../assets/images/gpay-logo.png";
-import PayoneerLogo from "../assets/images/payoneer-logo.png";
+import BkashLogo from "../assets/images/dashboard_Images/bkash-logo.png";
+import NagadLogo from "../assets/images/dashboard_Images/nagad-logo.png";
+import RocketLogo from "../assets/images/dashboard_Images/rocket-logo.png";
+import GpayLogo from "../assets/images/dashboard_Images/gpay-logo.png";
+import PayoneerLogo from "../assets/images/dashboard_Images/payoneer-logo.png";
 
 const Checkout = () => {
   const [pickupFrom, setPickupFrom] = useState("home");

@@ -1,5 +1,5 @@
 import { Bell } from "lucide-react";
-import Avatar from "../assets/images/avatar-pic.jpg";
+import Avatar from "../../assets/images/avatar-1.png";
 import Sidebar from "../../components/dashboardComponents/Sidebar";
 import ProgressChart from "../../components/dashboardComponents/ProgressChart";
 

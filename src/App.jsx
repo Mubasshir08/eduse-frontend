@@ -21,8 +21,8 @@ import Settings from "./pages/dashboard/Settings";
 
 function App() {
   return (
-    <Router>
       <Routes>
+          {/* Normal Routes */}
         <Route path="/" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/forget-password" element={<Id_Recovery />} />
@@ -31,9 +31,9 @@ function App() {
         <Route path="/empowering_student_combine" element={<Empowering_Student_Combine />} />
         <Route path="/cource_over_view" element={<Cource_over_view />} />
         <Route path="/checkout" element={<Checkout />} />
-      </Routes>
-       {/* <Routes>
-      <Route path="/" element={<DashboardLayout />}>
+        
+          {/* Dashboard nested routes */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardHome />} />
         <Route path="profile" element={<Profile />} />
         <Route path="enrolled" element={<EnrolledCourses />} />
@@ -44,8 +44,8 @@ function App() {
         <Route path="support" element={<Support />} />
         <Route path="settings" element={<Settings />} />
       </Route>
-    </Routes> */}
-    </Router>
+
+      </Routes>
   );
 }
 

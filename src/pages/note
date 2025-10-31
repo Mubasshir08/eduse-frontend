@@ -1,82 +1,13 @@
-bg-blue-700
-px-20
-rafce
-
-Shopping_section
-
-
-import React, { useState } from "react";
-import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai"; // Close & Cross icons
-
-const ShoppingCart = () => {
-  const [isOpen, setIsOpen] = useState(true); // toggle cart
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: "C Programming Book", price: 1000, qty: 1, img: "/img1.jpg" },
-    { id: 2, name: "Gaming Mouse with LED Light - Black", price: 600, qty: 1, img: "/img2.jpg" },
-    { id: 3, name: "Ballpoint Pen", price: 60, qty: 1, img: "/img3.jpg" },
-    { id: 4, name: "Research Paper", price: 500, qty: 1, img: "/img4.jpg" },
-  ]);
-
-  // Remove item
-  const removeItem = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
-
-  // Calculate subtotal
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
-
-  if (!isOpen) return null; // hide cart when closed
-
-  return (
-    <div className="fixed right-0 top-0 h-full w-80 bg-white shadow-lg p-4 z-50 overflow-y-auto">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">Shopping Cart</h2>
-        <button onClick={() => setIsOpen(false)}>
-          <AiOutlineClose size={20} />
-        </button>
-      </div>
-
-      {/* Cart Items */}
-      <div className="space-y-4">
-        {cartItems.map((item) => (
-          <div
-            key={item.id}
-            className="flex items-center justify-between border-b pb-2"
-          >
-            <div className="flex items-center gap-3">
-              <img src={item.img} alt={item.name} className="w-12 h-12 object-cover rounded" />
-              <div>
-                <p className="text-sm font-medium">{item.name}</p>
-                <p className="text-xs text-gray-500">
-                  {item.qty} × {item.price} BDT
-                </p>
-              </div>
-            </div>
-            <button onClick={() => removeItem(item.id)}>
-              <AiOutlineDelete className="text-red-500" size={18} />
-            </button>
-          </div>
-        ))}
-      </div>
-
-      {/* Subtotal */}
-      <div className="flex justify-between items-center font-semibold mt-4">
-        <span>Subtotal:</span>
-        <span>BDT {subtotal}</span>
-      </div>
-
-      {/* Buttons */}
-      <div className="mt-6 space-y-2">
-        <button className="w-full py-2 border rounded-lg hover:bg-gray-100">
-          View Cart
-        </button>
-        <button className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-          Checkout
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default ShoppingCart;
+{/* <Routes>
+      <Route path="/" element={<DashboardLayout />}>
+        <Route index element={<DashboardHome />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="enrolled" element={<EnrolledCourses />} />
+        <Route path="purchases" element={<Purchases />} />
+        <Route path="wishlist" element={<Wishlist />} />
+        <Route path="review" element={<Review />} />
+        <Route path="wallet" element={<Wallet />} />
+        <Route path="support" element={<Support />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
+    </Routes> */}
