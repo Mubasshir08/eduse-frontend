@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "../shared/Navbar";
-import Left_section from "..//components/Left_section";
-import Right_section from "../components/Right_section";
-import ProductWithReview from "../components/Userfloat_revew";
-import Userfloat_revew from "../components/Userfloat_revew";
-import Footer from "../shared/Footer";
+import Navbar from "../../shared/Navbar";
+import Left_section from "../../components/Left_section";
+import Right_section from "../../components/Right_section";
+import ProductWithReview from "../../components/Userfloat_revew";
+import Userfloat_revew from "../../components/Userfloat_revew";
+import Footer from "../../shared/Footer";
 
 const Cource_over_view = () => {
   return (

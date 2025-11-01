@@ -1,13 +1,13 @@
 import React from "react";
-import CourseDetails from "../components/CourseDetails";
-import InstructorSection from "../components/InstructorSection";
-import ReviewsSection from "../components/ReviewsSection";
-import CartSection from "../components/CartSection";
-import RelatedTopics from "../components/RelatedTopics";
-import CourseModules from "../components/CourseModules"
-import CourseModule from "../components/CourseModule"
-import Footer from "../shared/Footer";
-import Navbar from "../shared/Navbar";
+import CourseDetails from "../../components/CourseDetails";
+import InstructorSection from "../../components/InstructorSection";
+import ReviewsSection from "../../components/ReviewsSection";
+import CartSection from "../../components/CartSection";
+import RelatedTopics from "../../components/RelatedTopics";
+import CourseModules from "../../components/CourseModules"
+import CourseModule from "../../components/CourseModule"
+import Footer from "../../shared/Footer";
+import Navbar from "../../shared/Navbar";
 
 const CoursePage = () => {
   return (
