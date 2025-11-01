@@ -3,15 +3,15 @@ import { Home, User, BookOpen, ShoppingCart, Heart, Star, Wallet, Headphones, Se
 
 const Sidebar = () => {
   const links = [
-    { name: "Dashboard", icon: <Home size={18} />, path: "/" },
-    { name: "My Profile", icon: <User size={18} />, path: "/profile" },
-    { name: "Enrolled Courses", icon: <BookOpen size={18} />, path: "/enrolled" },
-    { name: "My Purchases", icon: <ShoppingCart size={18} />, path: "/purchases" },
-    { name: "Wish List", icon: <Heart size={18} />, path: "/wishlist" },
-    { name: "Review", icon: <Star size={18} />, path: "/review" },
-    { name: "Wallet", icon: <Wallet size={18} />, path: "/wallet" },
-    { name: "Support", icon: <Headphones size={18} />, path: "/support" },
-    { name: "Settings", icon: <Settings size={18} />, path: "/settings" },
+    { name: "Dashboard", icon: <Home size={18} />, path: "/dashboard" },
+    { name: "My Profile", icon: <User size={18} />, path: "/dashboard/profile" },
+    { name: "Enrolled Courses", icon: <BookOpen size={18} />, path: "/dashboard/enrolled" },
+    { name: "My Purchases", icon: <ShoppingCart size={18} />, path: "/dashboard/purchases" },
+    { name: "Wish List", icon: <Heart size={18} />, path: "/dashboard/wishlist" },
+    { name: "Review", icon: <Star size={18} />, path: "/dashboard/review" },
+    { name: "Wallet", icon: <Wallet size={18} />, path: "/dashboard/wallet" },
+    { name: "Support", icon: <Headphones size={18} />, path: "/dashboard/support" },
+    { name: "Settings", icon: <Settings size={18} />, path: "/dashboard/settings" },
   ];
 
   return (

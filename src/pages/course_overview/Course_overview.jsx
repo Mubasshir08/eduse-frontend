@@ -6,7 +6,7 @@ import Right_section from "../../components/course_overview/Right_section";
 import Userfloat_revew from "../../components/course_overview/Userfloat_revew";
 import Footer from "../../shared/Footer";
 
-const Cource_over_view = () => {
+const Course_overview = () => {
   return (
     <>
       <Navbar />
@@ -20,4 +20,4 @@ const Cource_over_view = () => {
   );
 };
 
-export default Cource_over_view;
+export default Course_overview;

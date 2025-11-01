@@ -6,7 +6,7 @@ import SignIn from "./pages/auth/SignIn";
 import Blog from "./pages/blog/Blog";
 import CoursePage from "./pages/CoursePage/CoursePage";
 import Empowering_Student_Combine from "./pages/Empowering_Student_Combine/Empowering_Student_Combine";
-import Cource_over_view from "./pages/cource_overview/Cource_overview";
+import Cource_overview from "./pages/course_overview/Course_overview";
 import Checkout from "./pages/checkout/Checkout";
 import DashboardLayout from "./layout/DashboardLayout";
 import DashboardHome from "./pages/dashboard/Dashboard";
@@ -29,7 +29,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/coursepage" element={<CoursePage />} />
         <Route path="/student-combine" element={<Empowering_Student_Combine />} />
-        <Route path="/cource_over_view" element={<Cource_over_view />} />
+        <Route path="/course-overview" element={<Cource_overview />} />
         <Route path="/checkout" element={<Checkout />} />
         
           {/* Dashboard nested routes */}
