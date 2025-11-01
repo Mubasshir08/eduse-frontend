@@ -1,5 +1,5 @@
 import React from "react"
-import EduseLogo from "../assets/images/logo.png"
+import EduseLogo from "../assets/images/blog_Images/logo.png"
 import { FaFacebookF, FaInstagram, FaTwitter, FaPinterestP, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {

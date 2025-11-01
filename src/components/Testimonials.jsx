@@ -1,6 +1,6 @@
 import React from "react"
 import { FaStar } from "react-icons/fa";
-
+import User1 from "../assets/images/user1.jpg";
 const Testimonials = () => {
   return (
     <section className="bg-white py-">
@@ -29,7 +29,7 @@ const Testimonials = () => {
            {/* User Info */}
            <div className="flex items-center justify-start gap-4 mt-6">
              <img
-              src="/src/assets/user1.jpg"
+              src= {User1}
               alt="User"
               className="w-12 h-12 rounded-full object-cover"
             />

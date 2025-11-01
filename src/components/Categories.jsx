@@ -1,4 +1,12 @@
 import React from "react"
+import TshirtImg1 from "../assets/images/tshirt1.png"
+import TshirtImg2 from "../assets/images/tshirt2.png"
+import BookImg from "../assets/images/books.png"
+import NotebookImg from "../assets/images/notes.png"
+import PenImg from "../assets/images/pens.png"
+import DevicesImg from "../assets/images/devices.png"
+import StationaryImg from "../assets/images/stationary.png"
+import MouseImg from "../assets/images/mouse.png"
 
 const Categories = () => {
   return (
@@ -26,7 +34,7 @@ const Categories = () => {
          <div className="grid grid-cols-2 gap-6 mt-auto">
            <div className="bg-white text-gray-800 rounded-lg p-4">
              <img
-              src="/src/assets/tshirt1.png"
+              src={TshirtImg1}
               alt="Guitar T-shirt"
               className="rounded-md mb-3 w-full h-36 object-cover"
             />
@@ -38,7 +46,7 @@ const Categories = () => {
 
           <div className="bg-white text-gray-800 rounded-lg p-4">
             <img
-              src="/src/assets/tshirt2.png"
+              src={TshirtImg2}
               alt="Tea T-shirt"
               className="rounded-md mb-3 w-full h-36 object-cover"
             />
@@ -53,12 +61,12 @@ const Categories = () => {
       {/* Right Categories Grid (2 columns fixed) */}
       <div className="md:col-span-2 grid grid-cols-2 gap-6">
         {[
-          { title: "BOOKS", img: "/src/assets/books.png" },
-          { title: "PENS", img: "/src/assets/pens.png" },
-          { title: "DEVICES", img: "/src/assets/devices.png" },
-          { title: "MOUSE", img: "/src/assets/mouse.png" },
-          { title: "STATIONARY ITEM", img: "/src/assets/stationary.png" },
-          { title: "NOTES", img: "/src/assets/notes.png" },
+          { title: "BOOKS", img:  BookImg},
+          { title: "PENS", img: PenImg },
+          { title: "DEVICES", img: DevicesImg },
+          { title: "MOUSE", img: MouseImg },
+          { title: "STATIONARY ITEM", img: StationaryImg },
+          { title: "NOTES", img: NotebookImg },
         ].map((cat, index) => (
           <div
             key={index}

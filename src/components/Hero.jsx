@@ -1,5 +1,6 @@
 import React from "react"
 import { FaArrowRight } from "react-icons/fa"
+import HeroImg from "../assets/images/hero.png"
 
 const Hero = () => {
   return (
@@ -22,7 +23,7 @@ const Hero = () => {
       <div className="md:w-1/2 relative flex justify-center items-center">
         <div className="absolute bg-blue-700 rounded-full w-[350px] h-[350px] sm:w-[400px] sm:h-[400px] md:w-[420px] md:h-[420px] z-0"></div>
         <img
-          src="/src/assets/hero.png"
+          src={HeroImg}
           alt="Smiling student holding books"
           className="relative z-10 w-[320px] sm:w-[360px] md:w-[350px] object-contain"
         />

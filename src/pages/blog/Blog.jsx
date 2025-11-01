@@ -1,15 +1,15 @@
 import React from "react";
-import Navbar from "../shared/Navbar";
-import Footer from "../shared/Footer";
-import Cardvido from "../assets/video/v1.mp4";
-import Cardvidtwo from "../assets/video/v2.mp4";
-import Cardvidthre from "../assets/video/v3.mp4";
-import Cardvidfo from "../assets/video/v4.mp4";
-import Cardvidfit from "../assets/video/v5.mp4";
-import Cardvidsix from "../assets/video/v6.mp4";
-import Cardvidseven from "../assets/video/v7.mp4";
-import Cardvieight from "../assets/video/v8.mp4";
-import Cardvidnine from "../assets/video/v9.mp4";
+import Navbar from "../../shared/Navbar";
+import Footer from "../../shared/Footer";
+import Cardvido from "../../assets/video/v1.mp4";
+import Cardvidtwo from "../../assets/video/v2.mp4";
+import Cardvidthre from "../../assets/video/v3.mp4";
+import Cardvidfo from "../../assets/video/v4.mp4";
+import Cardvidfit from "../../assets/video/v5.mp4";
+import Cardvidsix from "../../assets/video/v6.mp4";
+import Cardvidseven from "../../assets/video/v7.mp4";
+import Cardvieight from "../../assets/video/v8.mp4";
+import Cardvidnine from "../../assets/video/v9.mp4";
 
 
 const Blog = () => {

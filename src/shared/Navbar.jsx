@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { FaSearch } from "react-icons/fa"
-import EduseLogo from "../assets/images/logo.png"
+import EduseLogo from "../assets/images/blog_Images/logo.png"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)

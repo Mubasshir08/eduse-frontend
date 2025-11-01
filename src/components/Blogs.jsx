@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaPlay } from "react-icons/fa";
+import Blog_Img1 from "../assets/images/blog1.png";
+import Blog_Img2 from "../assets/images/blog2.png";
+import Blog_Img3 from "../assets/images/blog3.png";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -12,7 +15,7 @@ function Blogs() {
      category: "e-learning • future-of-education",
      description:
        "Traditional classrooms are evolving. With the rise of digital platforms, e-learning is no longer just an option—it’s the future....",
-     image: "/src/assets/blog1.png",
+     image: Blog_Img1,
    },
 
       {
@@ -21,7 +24,7 @@ function Blogs() {
      category: "student-ecommerce • real-business-skills",
      description:
        "Forget theory—Eduse lets students dive into real-world entrepreneurship by buying and selling within a secure digital marketplace built just for them....",
-     image: "/src/assets/blog2.png",
+     image: Blog_Img2,
       },
 
       {
@@ -30,7 +33,7 @@ function Blogs() {
      category: "e-learning • future-of-education",
      description:
        "Want to stay ahead in today’s job market? These five skills are in demand, and you can master them all through Eduse’s certified courses......",
-     image: "/src/assets/blog3.png",
+     image: Blog_Img3,
       }
 
     ];

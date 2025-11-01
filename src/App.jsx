@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignUp from "./pages/auth/SignUp";
 import Id_Recovery from "./pages/auth/Id_Recovery";
 import SignIn from "./pages/auth/SignIn";
-import Blog from "./pages/Blog";
+import Blog from "./pages/blog/Blog";
 import CoursePage from "./pages/CoursePage/CoursePage";
 import Empowering_Student_Combine from "./pages/Empowering_Student_Combine/Empowering_Student_Combine";
-import Cource_over_view from "./pages/Cource_over_view/Cource_over_view";
-import Checkout from "./pages/Checkout/Checkout";
+import Cource_over_view from "./pages/cource_overview/Cource_overview";
+import Checkout from "./pages/checkout/Checkout";
 import DashboardLayout from "./layout/DashboardLayout";
 import DashboardHome from "./pages/dashboard/Dashboard";
 import Profile from "./pages/dashboard/Profile";
@@ -28,7 +28,7 @@ function App() {
         <Route path="/forget-password" element={<Id_Recovery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/coursepage" element={<CoursePage />} />
-        <Route path="/empowering_student_combine" element={<Empowering_Student_Combine />} />
+        <Route path="/student-combine" element={<Empowering_Student_Combine />} />
         <Route path="/cource_over_view" element={<Cource_over_view />} />
         <Route path="/checkout" element={<Checkout />} />
         
