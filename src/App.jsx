@@ -24,7 +24,7 @@ function App() {
       <Routes>
           {/* Normal Routes */}
         {/* <Route path="/" element={<SignIn />} /> */}
-        {/* <Route path="/login" element={<SignIn />} /> */}
+        <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/forget-password" element={<Id_Recovery />} />
         <Route path="/blog" element={<Blog />} />
