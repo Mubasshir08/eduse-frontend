@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { FaSearch } from "react-icons/fa"
 import EduseLogo from "../assets/images/blog_Images/logo.png"
+import { Link } from "react-router-dom"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -28,13 +29,16 @@ const Navbar = () => {
             <a href="#" className="hover:text-blue-700">E-Learning</a>
             <a href="#" className="hover:text-blue-700">Become a Seller</a>
           </nav>
-
+          <Link to ="/login">
           <button className="text-blue-700 font-medium px-4 py-2 hover:bg-blue-50 rounded-lg border border-blue-700">
             Sign in
           </button>
+          </Link>
+          <Link to ="/register">
           <button className="bg-blue-700 text-white font-medium px-6 py-2 rounded-lg">
             Join
           </button>
+          </Link>
           <img className="w-10" src="/src/assets/Group6.png" alt="" />
         </div>
 

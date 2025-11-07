@@ -23,12 +23,13 @@ function App() {
   return (
       <Routes>
           {/* Normal Routes */}
-        <Route path="/" element={<SignIn />} />
+        {/* <Route path="/" element={<SignIn />} /> */}
+        {/* <Route path="/login" element={<SignIn />} /> */}
         <Route path="/register" element={<SignUp />} />
         <Route path="/forget-password" element={<Id_Recovery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/coursepage" element={<CoursePage />} />
-        <Route path="/student-combine" element={<Empowering_Student_Combine />} />
+        <Route index path="/" element={<Empowering_Student_Combine />} />
         <Route path="/course-overview" element={<Cource_overview />} />
         <Route path="/checkout" element={<Checkout />} />
         

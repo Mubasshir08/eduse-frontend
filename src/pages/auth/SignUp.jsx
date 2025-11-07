@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
   return (
-    <form className='w-[454px] rounded-2xl shadow-md mx-auto my-3 pb-5'>
+    <form className='w-[454px] rounded-2xl shadow-md mx-auto my-3 pb-3'>
         <h3 className='text-[#015AD8] text-center text-2xl font-bold py-4'>SIGN UP</h3>
         <section className='mt-5 px-9'>
            {/* name section */}

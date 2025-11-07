@@ -3,6 +3,7 @@ import { FaPlay } from "react-icons/fa";
 import Blog_Img1 from "../assets/images/blog1.png";
 import Blog_Img2 from "../assets/images/blog2.png";
 import Blog_Img3 from "../assets/images/blog3.png";
+import { Link } from "react-router-dom";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -55,9 +56,11 @@ function Blogs() {
           </p>
 
           <div className="mt-3">
+            <Link to="/blog">
             <button className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 transition">
               See More
             </button>
+            </Link>
           </div>
         </div>
 
