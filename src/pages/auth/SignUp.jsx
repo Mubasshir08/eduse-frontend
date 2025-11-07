@@ -19,7 +19,7 @@ const SignUp = () => {
 
     try {
       await registerUser({ name, email, password });
-      window.location.href = "/sign-in"; // redirect after register
+      window.location.href = "/login"; // redirect after register
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed.");
     }

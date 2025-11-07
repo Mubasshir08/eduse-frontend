@@ -1,9 +1,29 @@
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Bell } from "lucide-react";
 import Avatar from "../assets/images/avatar-1.png";
 import Sidebar from "../components/dashboardComponents/Sidebar";
+import { getProfile } from "../api/auth";
 
 const DashboardLayout = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const res = await getProfile();
+        setUser(res.data);
+      } catch (error) {
+        console.log("Profile load error:", error);
+        window.location.href = "/sign-in"; // not logged in → redirect
+      }
+    };
+
+    loadUser();
+  }, []);
+
+  if (!user) return <p className="p-10 text-center">Loading...</p>;
+
   return (
     <div className="flex bg-gray-50 min-h-screen">
       {/* Sidebar */}
@@ -11,16 +31,20 @@ const DashboardLayout = () => {
       
       {/* Main Section */}
       <main className="flex-1 p-6">
+        
         {/* Topbar */}
-            <div className="flex items-center justify-between pb-3 border-b-[1px] mb-5">
-                  <div className="flex items-center gap-3">
-                    <img src={Avatar} alt="profile pic" className="w-16 h-16 rounded-full"/>
-                    <h2 className="text-xl font-semibold"><span className="font-normal text-gray-500"> Hello, </span> <br />Tanjina Akter 👋</h2>
-                  </div>
-                  <button className="bg-[#E4EFFF] p-2 rounded-md">
-                    <Bell size={22} className="text-gray-600" />
-                  </button>
-                </div>
+        <div className="flex items-center justify-between pb-3 border-b-[1px] mb-5">
+          <div className="flex items-center gap-3">
+            <img src={Avatar} alt="profile pic" className="w-16 h-16 rounded-full"/>
+            <h2 className="text-xl font-semibold">
+              <span className="font-normal text-gray-500"> Hello, </span> 
+              <br />{user.name} 👋
+            </h2>
+          </div>
+          <button className="bg-[#E4EFFF] p-2 rounded-md">
+            <Bell size={22} className="text-gray-600" />
+          </button>
+        </div>
 
         {/* Page Content */}
         <Outlet />

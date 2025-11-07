@@ -11,5 +11,7 @@ export const registerUser = (formData) =>
 // Logout 
 export const logoutUser = () => {
   localStorage.removeItem("user");
-  window.location.href = "/sign-in";
+  window.location.href = "/login";
 };
+
+export const getProfile = () => API.get("/auth/profile");

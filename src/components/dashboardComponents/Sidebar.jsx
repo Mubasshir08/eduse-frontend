@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Home, User, BookOpen, ShoppingCart, Heart, Star, Wallet, Headphones, Settings, LogOut } from "lucide-react";
+import { logoutUser } from "../../api/auth"; // <-- import here
 
 const Sidebar = () => {
   const links = [
@@ -17,6 +18,7 @@ const Sidebar = () => {
   return (
     <div className="w-64 bg-white h-screen p-4 shadow-md">
       <h1 className="text-2xl font-bold mb-6 text-blue-600">eduse</h1>
+
       <nav className="flex flex-col gap-2">
         {links.map((link) => (
           <NavLink
@@ -32,7 +34,11 @@ const Sidebar = () => {
           </NavLink>
         ))}
       </nav>
-      <button className="mt-6 flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100">
+
+      <button
+        onClick={logoutUser}
+        className="mt-6 flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+      >
         <LogOut size={18} /> Logout
       </button>
     </div>
