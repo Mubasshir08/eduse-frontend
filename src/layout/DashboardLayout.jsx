@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Bell } from "lucide-react";
 import Avatar from "../assets/images/avatar-1.png";
-import Sidebar from "../components/dashboardComponents/Sidebar";
+import Sidebar from "../components/dashboard_components/Sidebar";
 import { getProfile } from "../api/auth";
 
 const DashboardLayout = () => {

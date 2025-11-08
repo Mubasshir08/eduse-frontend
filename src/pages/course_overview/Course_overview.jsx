@@ -1,9 +1,9 @@
 import React from "react";
 import Navbar from "../../shared/Navbar";
-import Left_section from "../../components/course_overview/Left_section";
-import Right_section from "../../components/course_overview/Right_section";
+import Left_section from "../../components/course_overview_components/Left_section";
+import Right_section from "../../components/course_overview_components/Right_section";
 // import ProductWithReview from "../../components/Userfloat_revew";
-import Userfloat_revew from "../../components/course_overview/Userfloat_revew";
+import Userfloat_revew from "../../components/course_overview_components/Userfloat_revew";
 import Footer from "../../shared/Footer";
 
 const Course_overview = () => {
