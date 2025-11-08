@@ -1,17 +1,20 @@
 import React from "react"
-import TshirtImg1 from "../assets/images/tshirt1.png"
-import TshirtImg2 from "../assets/images/tshirt2.png"
-import BookImg from "../assets/images/books.png"
-import NotebookImg from "../assets/images/notes.png"
-import PenImg from "../assets/images/pens.png"
-import DevicesImg from "../assets/images/devices.png"
-import StationaryImg from "../assets/images/stationary.png"
-import MouseImg from "../assets/images/mouse.png"
+import TshirtImg1 from "../../assets/images/tshirt1.png"
+import TshirtImg2 from "../../assets/images/tshirt2.png"
+import BookImg from "../../assets/images/books.png"
+import NotebookImg from "../../assets/images/notes.png"
+import PenImg from "../../assets/images/pens.png"
+import DevicesImg from "../../assets/images/devices.png"
+import StationaryImg from "../../assets/images/stationary.png"
+import MouseImg from "../../assets/images/mouse.png"
+import Navbar from "../../shared/Navbar"
+import Footer from "../../shared/Footer"
 
 const Categories = () => {
   return (
-     <section className="bg-white mb-20">
-   <div className="max-w-7xl mx-auto px-6">
+     <section className="bg-white">
+      <Navbar />
+   <div className="max-w-7xl mx-auto px-6 py-12">
      {/* Title */}
      <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 mb-2">
        SHOP BY CATEGORIES
@@ -87,6 +90,7 @@ const Categories = () => {
       </div>
     </div>
   </div>
+  <Footer />
 </section>
   )
 }

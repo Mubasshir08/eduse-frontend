@@ -20,7 +20,7 @@ import Wallet from "./pages/dashboard/Wallet";
 import Support from "./pages/dashboard/Support";
 import Settings from "./pages/dashboard/Settings";
 import Catagory from "./pages/catagory/Catagory";
-import Catagories from "./components/Categories"
+import Catagories from "./pages/e-commerce/Categories"
 
 function App() {
   return (
