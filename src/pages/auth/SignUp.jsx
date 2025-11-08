@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CiUnread } from "react-icons/ci";
+import { CiRead, CiUnread } from "react-icons/ci";
 import { FcGoogle } from "react-icons/fc";
 import { registerUser } from "../../api/auth";
 import { Link } from "react-router-dom";
@@ -9,6 +9,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
   const [error, setError] = useState("");
 
   const handleRegister = async (e) => {
@@ -19,7 +21,7 @@ const SignUp = () => {
 
     try {
       await registerUser({ name, email, password });
-      window.location.href = "/login"; // redirect after register
+      window.location.href = "/login";
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed.");
     }
@@ -34,7 +36,7 @@ const SignUp = () => {
       <section className="mt-5">
         <div>
           <h3>Full Name*</h3>
-          <input 
+          <input
             type="text"
             className="w-full border-2 border-gray-400 my-3 py-2 px-2 rounded-lg"
             value={name}
@@ -45,7 +47,7 @@ const SignUp = () => {
 
         <div>
           <h3>E-mail*</h3>
-          <input 
+          <input
             type="email"
             className="w-full border-2 border-gray-400 my-3 py-2 px-2 rounded-lg"
             value={email}
@@ -54,31 +56,43 @@ const SignUp = () => {
           />
         </div>
 
+        {/* Password */}
         <div className="mt-4">
           <h3>Password*</h3>
           <div className="relative">
-            <input 
-              type="password"
+            <input
+              type={showPassword ? "text" : "password"}
               className="w-full border-2 border-gray-400 my-3 py-2 px-2 rounded-lg"
               value={password}
               onChange={(e)=>setPassword(e.target.value)}
               required
             />
-            <CiUnread className="absolute top-1/2 right-3 -translate-y-1/2" />
+            <span
+              className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <CiRead /> : <CiUnread />}
+            </span>
           </div>
         </div>
 
+        {/* Re-type Password */}
         <div className="mt-4">
           <h3>Re-Type Password*</h3>
           <div className="relative">
-            <input 
-              type="password"
+            <input
+              type={showRePassword ? "text" : "password"}
               className="w-full border-2 border-gray-400 my-3 py-2 px-2 rounded-lg"
               value={rePassword}
               onChange={(e)=>setRePassword(e.target.value)}
               required
             />
-            <CiUnread className="absolute top-1/2 right-3 -translate-y-1/2" />
+            <span
+              className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+              onClick={() => setShowRePassword(!showRePassword)}
+            >
+              {showRePassword ? <CiRead /> : <CiUnread />}
+            </span>
           </div>
         </div>
 
@@ -97,11 +111,9 @@ const SignUp = () => {
           Continue with Google
         </button>
 
-        <Link to ="/login">
         <p className="text-center text-gray-400 mt-4">
-          Already on Eduse? <a href="/sign-in" className="text-[#015AD8] underline cursor-pointer">Login</a>
+          Already on Eduse? <Link to="/login" className="text-[#015AD8] underline">Login</Link>
         </p>
-        </Link>
       </section>
     </form>
   );

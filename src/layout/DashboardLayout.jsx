@@ -15,7 +15,7 @@ const DashboardLayout = () => {
         setUser(res.data);
       } catch (error) {
         console.log("Profile load error:", error);
-        window.location.href = "/sign-in"; // not logged in → redirect
+        window.location.href = "/login"; // 
       }
     };
 
@@ -47,7 +47,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* Page Content */}
-        <Outlet />
+        <Outlet context={{user}} />
       </main>
     </div>
   );

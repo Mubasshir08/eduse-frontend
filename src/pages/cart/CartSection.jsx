@@ -1,11 +1,12 @@
 import React from "react";
 import { FaClock } from "react-icons/fa";
-import Navbar from "../shared/Navbar";
+import Navbar from "../../shared/Navbar";
 
 const AddToCart = () => {
   return (
     <div className="min-h-screen font-inter">
-      <div className="max-w-2xl mt-10 bg-white p-6 rounded-lg shadow-lg">
+      <Navbar />
+      <div className="max-w-2xl mt-10 bg-white px-16 rounded-lg shadow-lg">
         {/* Header */}
         <h2 className="font-semibold text-lg text-gray-800 mb-4">Addes To Cart</h2>
 
@@ -124,11 +125,6 @@ const AddToCart = () => {
 
       {/* Space before bottom navbar */}
       <div className="h-10" />
-
-      {/* Navbar at the end */}
-      <div className="mt-8 mb-8">
-        <Navbar />
-      </div>
     </div>
   );
 };

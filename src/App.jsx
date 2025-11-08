@@ -7,6 +7,7 @@ import Blog from "./pages/blog/Blog";
 import CoursePage from "./pages/CoursePage/CoursePage";
 import Empowering_Student_Combine from "./pages/Empowering_Student_Combine/Empowering_Student_Combine";
 import Cource_overview from "./pages/course_overview/Course_overview";
+import CartSection from "./pages/cart/CartSection";
 import Checkout from "./pages/checkout/Checkout";
 import DashboardLayout from "./layout/DashboardLayout";
 import DashboardHome from "./pages/dashboard/Dashboard";
@@ -24,13 +25,14 @@ function App() {
       <Routes>
           {/* Normal Routes */}
         {/* <Route path="/" element={<SignIn />} /> */}
+        <Route index path="/" element={<Empowering_Student_Combine />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/forget-password" element={<Id_Recovery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/coursepage" element={<CoursePage />} />
-        <Route index path="/" element={<Empowering_Student_Combine />} />
         <Route path="/course-overview" element={<Cource_overview />} />
+        <Route path="/cart" element={<CartSection />} />
         <Route path="/checkout" element={<Checkout />} />
         
           {/* Dashboard nested routes */}
