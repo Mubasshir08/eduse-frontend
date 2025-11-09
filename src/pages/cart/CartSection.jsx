@@ -1,6 +1,7 @@
 import React from "react";
 import { FaClock } from "react-icons/fa";
 import Navbar from "../../shared/Navbar";
+import { Link } from "react-router-dom";
 
 const AddToCart = () => {
   return (
@@ -95,9 +96,9 @@ const AddToCart = () => {
           <p className="font-medium text-gray-700 text-sm">
             Total <span className="font-semibold text-lg ml-2">3500 BDT</span>
           </p>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2 rounded-md">
+          <Link to="/checkout" className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2 rounded-md"> 
             Check Cart
-          </button>
+          </Link>
         </div>
 
         {/* Related Topics */}

@@ -21,6 +21,8 @@ import Support from "./pages/dashboard/Support";
 import Settings from "./pages/dashboard/Settings";
 import Catagory from "./pages/catagory/Catagory";
 import Catagories from "./pages/e-commerce/Categories"
+import StripePayment from "./pages/stripe-payment/StripePayment";
+import PaymentSuccess from "./pages/stripe-payment/PaymentSuccess";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
         <Route path="/cart" element={<CartSection />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/e-commerce" element={<Catagories />} />
+        <Route path="/stripe-pay" element={<StripePayment />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
         
           {/* Dashboard nested routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>

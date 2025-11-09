@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { FaRegUser, FaSearch } from "react-icons/fa"
 import { Link, useNavigate } from "react-router-dom"
 import EduseLogo from "../assets/images/blog_Images/logo.png"
+import { FaCartShopping } from "react-icons/fa6"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -45,7 +46,7 @@ const handleLogout = () => {
         {/* Right menu - desktop */}
         <div className="hidden md:flex items-center space-x-6">
           <nav className="flex space-x-8 ml-6 text-gray-700 text-sm font-medium">
-            <Link to="/e-coomerce" className="hover:text-blue-700">E-Commerce</Link>
+            <Link to="/e-commerce" className="hover:text-blue-700">E-Commerce</Link>
             <Link to="#" className="hover:text-blue-700">E-Learning</Link>
             <Link to="#" className="hover:text-blue-700">Become a Seller</Link>
           </nav>
@@ -65,7 +66,11 @@ const handleLogout = () => {
               </Link>
             </>
           ) : (
-            // Avatar + Dropdown
+            // Cart + Avatar + Dropdown
+            <div className="flex gap-x-5">
+              <Link to="/cart">
+              <FaCartShopping className="text-lg cursor-pointer" />
+              </Link>
             <div className="relative group z-30">
               <FaRegUser className="text-lg cursor-pointer" />
               <div className="absolute right-0 mt-3 w-40 bg-white shadow-lg rounded-lg p-2 
@@ -84,6 +89,7 @@ const handleLogout = () => {
                   Logout
                 </button>
               </div>
+            </div>
             </div>
           )}
         </div>
