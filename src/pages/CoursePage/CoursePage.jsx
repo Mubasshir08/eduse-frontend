@@ -25,7 +25,7 @@ const CoursePage = () => {
       {/* Cart + Related Topics */}
       <div className="max-w-7xl mx-auto px-6 my-10">
         {/* <CartSection /> */}
-        <RelatedTopics /> 
+        {/* <RelatedTopics />  */}
       </div>
       <Footer />
     </div>

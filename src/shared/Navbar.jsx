@@ -47,7 +47,7 @@ const handleLogout = () => {
         <div className="hidden md:flex items-center space-x-6">
           <nav className="flex space-x-8 ml-6 text-gray-700 text-sm font-medium">
             <Link to="/e-commerce" className="hover:text-blue-700">E-Commerce</Link>
-            <Link to="#" className="hover:text-blue-700">E-Learning</Link>
+            <Link to="/courses" className="hover:text-blue-700">E-Learning</Link>
             <Link to="#" className="hover:text-blue-700">Become a Seller</Link>
           </nav>
 

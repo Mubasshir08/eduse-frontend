@@ -7,12 +7,14 @@ import RocketLogo from "../../assets/images/checkout_Images/rocket-logo.png";
 import GpayLogo from "../../assets/images/checkout_Images/gpay-logo.png";
 import stripeLogo from "../../assets/images/checkout_Images/stripe-logo.png";
 import PayoneerLogo from "../../assets/images/checkout_Images/payoneer-logo.png";
+import Navbar from "../../shared/Navbar";
+import Footer from "../../shared/Footer";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const [pickupFrom, setPickupFrom] = useState("home");
   const [shipping, setShipping] = useState("courier");
-  const [paymentMethod, setPaymentMethod] = useState(""); // "stripe", "cod", "bkash", etc.
+  const [paymentMethod, setPaymentMethod] = useState(""); 
   const [termsChecked, setTermsChecked] = useState(false);
 
   const subtotal = 2100;
@@ -30,12 +32,11 @@ const Checkout = () => {
       return;
     }
 
-    // If Stripe selected -> go to local StripePayment simulator page and pass order info
     if (paymentMethod === "stripe") {
       navigate("/stripe-pay", {
         state: {
           total,
-          currency: "BDT", // display only; our simulator accepts card numbers, currency not enforced
+          currency: "BDT", 
           orderSummary: {
             subtotal,
             condition,
@@ -47,7 +48,7 @@ const Checkout = () => {
       return;
     }
 
-    // For other methods, simple demo behavior:
+    
     if (paymentMethod === "cod") {
       alert(`Order placed with Cash on Delivery. Total: ${total} BDT`);
       navigate("/payment-success", { state: { method: "COD", total } });
@@ -60,7 +61,9 @@ const Checkout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8">
+    <div>
+      <Navbar />
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8">
       <div className="w-full max-w-6xl grid lg:grid-cols-3 gap-6 px-4">
         {/* Shipping + Payment */}
         <div className="lg:col-span-2 space-y-6">
@@ -185,7 +188,7 @@ const Checkout = () => {
               <div className="space-y-2">
                 <div className="font-light">Debit/Credit Card</div>
                 <div className="w-3/5 flex gap-3 bg-[#fafafa] px-5 py-3 border border-[#999999] rounded-md items-center">
-                  {/* Here we show logos, but selection is done by radio below */}
+                  
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="radio"
@@ -273,6 +276,9 @@ const Checkout = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </div>
+    
   );
 };
 

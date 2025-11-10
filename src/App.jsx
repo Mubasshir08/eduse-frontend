@@ -23,6 +23,7 @@ import Catagory from "./pages/catagory/Catagory";
 import Catagories from "./pages/e-commerce/Categories"
 import StripePayment from "./pages/stripe-payment/StripePayment";
 import PaymentSuccess from "./pages/stripe-payment/PaymentSuccess";
+import E_learning from "./pages/e-learning/E_learning";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/cart" element={<CartSection />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/e-commerce" element={<Catagories />} />
+        <Route path="/courses" element={<E_learning />} />
         <Route path="/stripe-pay" element={<StripePayment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         
