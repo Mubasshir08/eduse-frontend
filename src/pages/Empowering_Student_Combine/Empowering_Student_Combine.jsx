@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from '../../shared/Navbar'
-import Hero from '../../components/Hero'
-import PopularCourses from '../../components/PopularCourses'
+import Hero from '../../components/empowering_student_combine_components/Hero'
+import PopularCourses from '../../components/empowering_student_combine_components/PopularCourses'
 import Categories from '../e-commerce/Categories'
-import Testimonials from '../../components/Testimonials'
-import Blogs from '../../components/Blogs'
-import FAQ from '../../components/FAQ'
-import CTA from '../../components/CTA'
+import Testimonials from '../../components/empowering_student_combine_components/Testimonials'
+import Blogs from '../../components/empowering_student_combine_components/Blogs'
+import FAQ from '../../components/empowering_student_combine_components/FAQ'
+import CTA from '../../components/empowering_student_combine_components/CTA'
 import Footer from '../../shared/Footer'
 
 const Empowering_Student_Combine = () => {

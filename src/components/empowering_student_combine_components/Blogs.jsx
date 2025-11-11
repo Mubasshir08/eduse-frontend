@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaPlay } from "react-icons/fa";
-import Blog_Img1 from "../assets/images/blog1.png";
-import Blog_Img2 from "../assets/images/blog2.png";
-import Blog_Img3 from "../assets/images/blog3.png";
+import Blog_Img1 from "../../assets/images/blog1.png";
+import Blog_Img2 from "../../assets/images/blog2.png";
+import Blog_Img3 from "../../assets/images/blog3.png";
 import { Link } from "react-router-dom";
 
 function Blogs() {

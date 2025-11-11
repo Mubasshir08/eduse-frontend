@@ -1,6 +1,6 @@
 import React from "react"
 import { FaStar } from "react-icons/fa";
-import User1 from "../assets/images/user1.jpg";
+import User1 from "../../assets/images/user1.jpg";
 const Testimonials = () => {
   return (
     <section className="bg-white py-">
