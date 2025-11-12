@@ -3,9 +3,12 @@ import { FaRegUser, FaSearch } from "react-icons/fa"
 import { Link, useNavigate } from "react-router-dom"
 import EduseLogo from "../assets/images/blog_Images/logo.png"
 import { FaCartShopping } from "react-icons/fa6"
+import { useSelector } from "react-redux"
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const cartCount = useSelector((state) => state.cart.items.length);
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 useEffect(() => {
@@ -70,6 +73,11 @@ const handleLogout = () => {
             <div className="flex gap-x-5">
               <Link to="/cart">
               <FaCartShopping className="text-lg cursor-pointer" />
+                  {cartCount > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+            {cartCount}
+          </span>
+        )}
               </Link>
             <div className="relative group z-30">
               <FaRegUser className="text-lg cursor-pointer" />
