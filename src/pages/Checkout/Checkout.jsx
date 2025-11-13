@@ -10,6 +10,7 @@ import stripeLogo from "../../assets/images/checkout_Images/stripe-logo.png";
 import PayoneerLogo from "../../assets/images/checkout_Images/payoneer-logo.png";
 import Navbar from "../../shared/Navbar";
 import Footer from "../../shared/Footer";
+import { getProfile } from "../../api/auth";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -20,6 +21,11 @@ const Checkout = () => {
   const selectedCartItems = checkoutData.selectedItemsData || [];
   const subtotalFromRedux = checkoutData.subtotal || 0;
 
+  // Auth state
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  // Form state
   const [pickupFrom, setPickupFrom] = useState("home");
   const [shipping, setShipping] = useState("courier");
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -37,30 +43,50 @@ const Checkout = () => {
 
   // Dynamic image imports
   const [images, setImages] = useState({});
-  console.log(images)
 
- useEffect(() => {
-   const importedImages = import.meta.glob(
-     "../../assets/images/courseImages/*",
-     { eager: true, query: '?url' }
-   );
- 
-   const imageMap = {};
-   for (const path in importedImages) {
-     const parts = path.split("/");
-     const relativePath = "assets/images/courseImages/" + parts.pop();
-     imageMap[relativePath] = importedImages[path];
-   }
-   setImages(imageMap);
- }, []);
+  // Check authentication
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const res = await getProfile();
+        setUser(res.data);
+        setAuthLoading(false);
+      } catch (error) {
+        console.log("Profile load error:", error);
+        setAuthLoading(false);
+        // alert("Please login to continue checkout");
+        navigate("/login");
+      }
+    };
+
+    loadUser();
+  }, [navigate]);
+
+  // Load images
+  useEffect(() => {
+    const importedImages = import.meta.glob(
+      "../../assets/images/courseImages/*",
+      { eager: true, as: "url" }
+    );
+
+    const imageMap = {};
+    for (const path in importedImages) {
+      const parts = path.split("/");
+      const relativePath = "assets/images/courseImages/" + parts.pop();
+      imageMap[relativePath] = importedImages[path];
+    }
+    setImages(imageMap);
+  }, []);
 
   // Redirect if cart empty
-  useEffect(() => {
-    if (selectedCartItems.length === 0) {
+  if(user){
+    useEffect(() => {
+    if (!authLoading && selectedCartItems.length === 0) {
       alert("Your cart is empty!");
       navigate("/cart");
     }
-  }, [selectedCartItems.length, navigate]);
+  }, [authLoading, selectedCartItems.length, navigate]);
+  }
 
   // Utility: extract numeric price
   const getNumericPrice = (price) => {
@@ -73,9 +99,12 @@ const Checkout = () => {
   const shippingCost = shipping === "courier" ? 60 : shipping === "outside" ? 120 : 60;
   const total = subtotal + condition + shippingCost;
 
+  // Store intotal in Redux
   useEffect(() => {
-    dispatch(setIntotal(parseFloat(total.toFixed(2))));
-  }, [total, dispatch]);
+    if (!authLoading) {
+      dispatch(setIntotal(parseFloat(total.toFixed(2))));
+    }
+  }, [total, dispatch, authLoading]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -86,19 +115,43 @@ const Checkout = () => {
   };
 
   const validateForm = () => {
-    if (!formData.name.trim()) return alert("Please enter your name");
-    if (!formData.phone.trim()) return alert("Please enter your phone number");
-    if (!formData.country) return alert("Please select a country");
-    if (!formData.city) return alert("Please select a city");
-    if (!formData.area) return alert("Please select an area");
-    if (!formData.address.trim()) return alert("Please enter your address");
+    if (!formData.name.trim()) {
+      alert("Please enter your name");
+      return false;
+    }
+    if (!formData.phone.trim()) {
+      alert("Please enter your phone number");
+      return false;
+    }
+    if (!formData.country) {
+      alert("Please select a country");
+      return false;
+    }
+    if (!formData.city) {
+      alert("Please select a city");
+      return false;
+    }
+    if (!formData.area) {
+      alert("Please select an area");
+      return false;
+    }
+    if (!formData.address.trim()) {
+      alert("Please enter your address");
+      return false;
+    }
     return true;
   };
 
   const handlePlaceOrder = () => {
     if (!validateForm()) return;
-    if (!termsChecked) return alert("Please accept Terms & Conditions");
-    if (!paymentMethod) return alert("Please select a payment method");
+    if (!termsChecked) {
+      alert("Please accept Terms & Conditions");
+      return;
+    }
+    if (!paymentMethod) {
+      alert("Please select a payment method");
+      return;
+    }
 
     const orderData = {
       items: selectedCartItems,
@@ -140,14 +193,29 @@ const Checkout = () => {
   };
 
   // Get image helper
-   const getImageUrl = (item) => {
-  // If item already has a resolved Vite URL
-  if (item.img && (item.img.startsWith('/') || item.img.startsWith('blob:') || item.img.startsWith('http'))) {
-    return item.img;
+  const getImageUrl = (item) => {
+    if (item.img && (item.img.startsWith('/') || item.img.startsWith('blob:') || item.img.startsWith('http'))) {
+      return item.img;
+    }
+    return images[item.img] || item.img || "https://via.placeholder.com/150x120?text=Course";
+  };
+
+  // Show loading while checking auth
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
   }
-  // Otherwise, get it from the image map
-  return images[item.img] || item.img || "https://via.placeholder.com/150x120?text=Course";
-};
+
+  // Don't render if no user (will redirect)
+  if (!user) {
+    return null;
+  }
 
   return (
     <div>
@@ -169,6 +237,9 @@ const Checkout = () => {
                       src={getImageUrl(item)}
                       alt={item.name}
                       className="w-16 h-16 rounded object-cover"
+                      onError={(e) => {
+                        e.target.src = "https://via.placeholder.com/60?text=Course";
+                      }}
                     />
                     <div className="flex-1">
                       <h4 className="font-medium text-sm text-gray-800">{item.name}</h4>
@@ -193,7 +264,7 @@ const Checkout = () => {
               <div className="p-6 space-y-4">
                 <div className="flex items-center gap-4">
                   <span className="font-medium">Pick Up Your Parcel From:</span>
-                  <label className="flex items-center gap-2">
+                  <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="radio"
                       name="pickup"
@@ -202,7 +273,7 @@ const Checkout = () => {
                     />
                     Home
                   </label>
-                  <label className="flex items-center gap-2">
+                  <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="radio"
                       name="pickup"
@@ -308,7 +379,7 @@ const Checkout = () => {
                 <div>
                   <div className="font-light mb-1">Mobile Wallet</div>
                   <div className="flex flex-wrap gap-3">
-                    <label className="payment-option">
+                    <label className="bg-[#fafafa] px-5 py-3 border border-[#999999] rounded-md cursor-pointer flex items-center gap-3">
                       <input
                         type="radio"
                         name="payment"
@@ -319,7 +390,7 @@ const Checkout = () => {
                       <img src={BkashLogo} alt="bkash" className="w-16" />
                     </label>
 
-                    <label className="payment-option">
+                    <label className="bg-[#fafafa] px-5 py-3 border border-[#999999] rounded-md cursor-pointer flex items-center gap-3">
                       <input
                         type="radio"
                         name="payment"
@@ -330,7 +401,7 @@ const Checkout = () => {
                       <img src={NagadLogo} alt="nagad" className="w-16" />
                     </label>
 
-                    <label className="payment-option">
+                    <label className="bg-[#fafafa] px-5 py-3 border border-[#999999] rounded-md cursor-pointer flex items-center gap-3">
                       <input
                         type="radio"
                         name="payment"

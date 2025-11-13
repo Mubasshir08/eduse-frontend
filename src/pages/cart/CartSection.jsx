@@ -4,8 +4,10 @@ import Navbar from "../../shared/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity, setCheckoutData } from "../../redux/cartSlice";
+import { getProfile } from "../../api/auth";
 
 const AddToCart = () => {
+  const [user, setUser] = useState(null);
   const [images, setImages] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,6 +15,20 @@ const AddToCart = () => {
   const [selectedItems, setSelectedItems] = useState(
     cartItems.map((item) => item.id)
   );
+
+ useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const res = await getProfile();
+        setUser(res.data);
+      } catch (error) {
+        console.log("Profile load error:", error);
+        window.location.href = "/login";
+      }
+    };
+
+    loadUser();
+  }, []);
 
   useEffect(() => {
   const importedImages = import.meta.glob(
@@ -90,6 +106,8 @@ const AddToCart = () => {
   // Otherwise, get it from the image map
   return images[item.img] || item.img || "https://via.placeholder.com/150x120?text=Course";
 };
+
+if (!user) return <p className="p-10 text-center">Loading...</p>;
 
   if (cartItems.length === 0) {
     return (

@@ -1,9 +1,12 @@
 // src/pages/StripePayment.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const StripePayment = () => {
+
+  const [user, setUser] = useState(null);
+
   // Get checkout data from Redux
   const checkoutData = useSelector((state) => state.cart.checkoutData);
   const intotal = checkoutData.intotal || 0; // Get the total with shipping and fees
@@ -17,6 +20,20 @@ const StripePayment = () => {
   const [cvc, setCvc] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+      const loadUser = async () => {
+        try {
+          const res = await getProfile();
+          setUser(res.data);
+        } catch (error) {
+          console.log("Profile load error:", error);
+          window.location.href = "/login";
+        }
+      };
+  
+      loadUser();
+    }, []);
 
   // helper to remove spaces
   const digitsOnly = (s) => s.replace(/\s+/g, "");
@@ -90,6 +107,8 @@ const StripePayment = () => {
       });
     }
   };
+
+  if(!user) return <p className="p-10 text-center">Loading...</p>;
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
