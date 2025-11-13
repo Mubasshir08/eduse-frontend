@@ -8,7 +8,7 @@ import {
 import { useDispatch } from "react-redux";
 import AddToCart from "../../pages/cart/CartSection";
 
-const Right_section = ({ onReviewClick }) => {
+const Right_section = ({ onReviewClick, course }) => {
   const dispatch = useDispatch();
   const [cart, setCart] = useState([]);
   const [rating, setRating] = useState(0);
@@ -43,14 +43,14 @@ const Right_section = ({ onReviewClick }) => {
   return (
     <div className="max-w-4xl mx-auto bg-white shadow rounded-md pt-6 text-[#666666]">
       <div className="p-6">
-        <h2 className="text-xl font-semibold text-[#333333]">{product.name}</h2>
+        <h2 className="text-xl font-semibold text-[#333333]">{course.title}</h2>
         <p className="text-lg font-bold text-[#333333] mt-2">
-          Price: {product.price} BDT
+          Price: {course.price}
         </p>
         <p className="mt-1 text-gray-600 text-sm">
-          Start Learning Programming with C – The Right Way.
+          {course.title}
         </p>
-        <p className="mt-2 font-semibold text-sm">by {product.author}</p>
+        <p className="mt-2 font-semibold text-sm">by {course.author}</p>
 
         <div className="w-55 my-4 border border-blue-600 text-[#666666] px-3 py-1 rounded-md text-sm">
           <span className="inline-block w-2 h-2 rounded-full bg-blue-600 mr-2" />

@@ -1,0 +1,48 @@
+{
+    "products": [
+        {
+            "id" : 1,
+            "title" : "Design Thinking & UX Fundamentals",
+            "author" : "Salauddin, UX Studio",
+            "rating" : "4.7 (10 ratings)",
+            "price" : "2000 BDT",
+            "originalPrice" : "2000 BDT",
+            "img" : "assets/images/courseImages/course_Image-3.png",
+            "category" : "Design Thinking",
+            "bestseller" : true
+        },
+        {
+            "id" : 2,
+            "title" : "UI Design with Figma: Complete Guide",
+            "author" : "Sumaiya jaman",
+            "rating" : "4.8 (7 ratings)",
+            "price" : "2000 BDT",
+            "originalPrice" : "3000 BDT",
+            "img" : "assets/images/courseImages/course_Image-2.png",
+            "category" : "UI Design with Figma",
+            "bestseller" : true
+        },
+        {
+            "id" : 3,
+            "title" : "User Research & Usability Testing",
+            "author" : "Amaira Amer",
+            "rating" : "4.7 (785 ratings)",
+            "price" : "1500 BDT",
+            "originalPrice" : "2000 BDT",
+            "img" : "assets/images/courseImages/course_Image-4.png",
+            "category" : "UI Research",
+            "bestseller" : true
+        },
+        {
+            "id" : 4,
+            "title" : "UX Writing & Microcopy Mastery",
+            "author" : "Ahmed Musa",
+            "rating" : "4.7 (5 ratings)",
+            "price" : "1200 BDT",
+            "originalPrice" : "1500 BDT",
+            "img" : "assets/images/courseImages/course_Image-1.png",
+            "category" : "UX Writing",
+            "bestseller" : true
+        }
+    ]
+}

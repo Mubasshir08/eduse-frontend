@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
-const Left_section = () => {
+const Left_section = ({course}) => {
+  console.log(course)
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <section className="relative w-2/3 h-135 shadow-xl rounded-sm p-6 bg-white overflow-visible">
       <img
         className="h-100 w-full object-cover rounded-md"
-        src="/src/assets/images/img1.jpg"
+        src= {course.img}
         alt="Course"
       />
 

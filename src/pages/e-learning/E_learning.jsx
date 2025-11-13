@@ -1,31 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../shared/Navbar'
 import Footer from '../../shared/Footer'
 import CourseCard from '../../components/e_learning_components/CourseCard'
-import CourseImg1 from '../../assets/images/course_card_Images/course_Image-1.png'
-import CourseImg2 from '../../assets/images/course_card_Images/course_Image-2.png'
-import CourseImg3 from '../../assets/images/course_card_Images/course_Image-3.png'
-import CourseImg4 from '../../assets/images/course_card_Images/course_Image-4.png'
+import FakeData from '../../assets/data/fakedata.json'
 import { Link } from 'react-router-dom'
 
 const E_learning = () => {
+  const [courses, setCourses] = useState([])
+  const [images, setImages] = useState({})
+
+  useEffect(() => {
+    setCourses(FakeData.products)
+
+    // dynamically import all course images from assets
+    const importedImages = import.meta.glob('../../assets/images/courseImages/*', { eager: true, as: 'url' })
+    setImages(importedImages)
+  }, [])
+
   return (
     <div>
       <Navbar />
-      {/* // courses page */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ml-20 mt-10">
-        <Link to = "/course-overview">
-          <CourseCard img = {CourseImg1} title = "UX Writing & Microcopy Mastery" author = "Salauddin, UX Studio"/>
-        </Link> 
-        <Link to = "/course-overview">
-          <CourseCard img = {CourseImg2} title = "UI Design with Figma: Complete Guide" author = "Sumaiya jaman"/>
-        </Link>  
-        <Link to = "/course-overview">
-          <CourseCard img = {CourseImg3} title = "UX Writing & Microcopy Mastery" author = "Salauddin, UX Studio"/>
-        </Link>
-        <Link to = "/course-overview">
-          <CourseCard img = {CourseImg4} title = "UX Writing & Microcopy Mastery" author = "Salauddin, UX Studio"/>
-        </Link>
+        {courses.map((course) => {
+          // get the dynamic URL for the image
+          const imgPath = '../../' + course.img
+          const imgUrl = images[imgPath] || ''
+          return <Link key={course.id} to={`/course-details/${course.id}`}> <CourseCard key={course.id} course={{ ...course, img: imgUrl }} /> </Link>
+        })}
       </div>
       <Footer />
     </div>

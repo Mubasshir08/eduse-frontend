@@ -36,7 +36,7 @@ function App() {
         <Route path="/forget-password" element={<Id_Recovery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/coursepage" element={<CoursePage />} />
-        <Route path="/course-overview" element={<Cource_overview />} />
+        <Route path= "course-details/:id" element={<Cource_overview />} />
         <Route path="/cart" element={<CartSection />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/e-commerce" element={<Catagories />} />
