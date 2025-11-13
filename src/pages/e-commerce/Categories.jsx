@@ -13,6 +13,7 @@ import Footer from "../../shared/Footer"
 const Categories = () => {
   return (
      <section className="bg-white">
+   <Navbar />
    <div className="max-w-7xl mx-auto px-6 py-12">
      {/* Title */}
      <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-gray-900 mb-2">
@@ -89,6 +90,7 @@ const Categories = () => {
       </div>
     </div>
   </div>
+    <Footer />
 </section>
   )
 }
