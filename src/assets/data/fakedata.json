@@ -43,6 +43,17 @@
             "img" : "assets/images/courseImages/course_Image-1.png",
             "category" : "UX Writing",
             "bestseller" : true
+        },
+        {
+            "id" : 5,
+            "title" : "Advanced UX Design Techniques",
+            "author" : "Nafisa Nawar",
+            "rating" : "4.9 (15 ratings)",
+            "price" : "2500 BDT",
+            "originalPrice" : "3000 BDT",
+            "img" : "assets/images/courseImages/course_Image-4.png",
+            "category" : "UX Design",
+            "bestseller" : false
         }
     ]
 }

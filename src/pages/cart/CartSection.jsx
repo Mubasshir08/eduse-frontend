@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { FaClock, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import Navbar from "../../shared/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, updateQuantity, setCheckoutData } from "../../redux/cartSlice";
+import {
+  removeFromCart,
+  updateQuantity,
+  setCheckoutData,
+} from "../../redux/cartSlice";
 import { getProfile } from "../../api/auth";
 
 const AddToCart = () => {
@@ -16,7 +20,8 @@ const AddToCart = () => {
     cartItems.map((item) => item.id)
   );
 
- useEffect(() => {
+  // 🔹 Load user profile
+  useEffect(() => {
     const loadUser = async () => {
       try {
         const res = await getProfile();
@@ -26,60 +31,63 @@ const AddToCart = () => {
         window.location.href = "/login";
       }
     };
-
     loadUser();
   }, []);
 
+  // 🔹 Dynamically import course images
   useEffect(() => {
-  const importedImages = import.meta.glob(
-    "../../assets/images/courseImages/*",
-    { eager: true, query: "?url" }
-  );
+    const importedImages = import.meta.glob(
+      "../../assets/images/courseImages/*",
+      { eager: true, query: "?url" }
+    );
 
-  const imageMap = {};
-  for (const path in importedImages) {
-    const parts = path.split("/");
-    const relativePath = "assets/images/courseImages/" + parts.pop();
-    imageMap[relativePath] = importedImages[path];
-  }
-  setImages(imageMap);
-}, []);
+    const imageMap = {};
+    for (const path in importedImages) {
+      const parts = path.split("/");
+      const relativePath = "assets/images/courseImages/" + parts.pop();
+      // Some imports may not need .default depending on your Vite version
+      imageMap[relativePath] = importedImages[path].default || importedImages[path];
+    }
+    setImages(imageMap);
+  }, []);
 
-  // Toggle item selection
+  // 🔹 Toggle item selection
   const toggleItemSelection = (id) => {
     setSelectedItems((prev) =>
-      prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
+      prev.includes(id)
+        ? prev.filter((itemId) => itemId !== id)
+        : [...prev, id]
     );
   };
 
-  // Remove item from cart
+  // 🔹 Remove item from cart
   const handleRemoveItem = (id) => {
     dispatch(removeFromCart(id));
     setSelectedItems((prev) => prev.filter((itemId) => itemId !== id));
   };
 
-  // Extract numeric price
+  // 🔹 Convert price string to number
   const getNumericPrice = (price) => {
-    const numericPrice = parseFloat(price.toString().replace(/[^0-9.]/g, ""));
-    return isNaN(numericPrice) ? 0 : numericPrice;
+    const numeric = parseFloat(price.toString().replace(/[^0-9.]/g, ""));
+    return isNaN(numeric) ? 0 : numeric;
   };
 
-  // Calculate total for selected items
+  // 🔹 Calculate total
   const calculateTotal = () => {
     return cartItems
       .filter((item) => selectedItems.includes(item.id))
-      .reduce((total, item) => {
-        const price = getNumericPrice(item.price);
-        return total + price * (item.quantity || 1);
-      }, 0);
+      .reduce(
+        (total, item) =>
+          total + getNumericPrice(item.price) * (item.quantity || 1),
+        0
+      );
   };
 
-  // Get selected items data
-  const getSelectedItemsData = () => {
-    return cartItems.filter((item) => selectedItems.includes(item.id));
-  };
+  // 🔹 Get selected items data
+  const getSelectedItemsData = () =>
+    cartItems.filter((item) => selectedItems.includes(item.id));
 
-  // Handle proceed to checkout
+  // 🔹 Proceed to checkout
   const handleProceedToCheckout = (e) => {
     if (selectedItems.length === 0) {
       e.preventDefault();
@@ -87,35 +95,50 @@ const AddToCart = () => {
       return;
     }
 
-    // Store checkout data in Redux
     const checkoutData = {
       subtotal: calculateTotal(),
       selectedItemsData: getSelectedItemsData(),
-      selectedItemIds: selectedItems
+      selectedItemIds: selectedItems,
     };
 
     dispatch(setCheckoutData(checkoutData));
     navigate("/checkout");
   };
 
+  // 🔹 Get image URL (handles static + Vite dynamic + fallback)
   const getImageUrl = (item) => {
-  // If item already has a resolved Vite URL
-  if (item.img && (item.img.startsWith('/') || item.img.startsWith('blob:') || item.img.startsWith('http'))) {
-    return item.img;
-  }
-  // Otherwise, get it from the image map
-  return images[item.img] || item.img || "https://via.placeholder.com/150x120?text=Course";
-};
+    if (!item?.img) return "https://via.placeholder.com/150x120?text=Course";
 
-if (!user) return <p className="p-10 text-center">Loading...</p>;
+    // Already a valid resolved path
+    if (
+      item.img.startsWith("/") ||
+      item.img.startsWith("blob:") ||
+      item.img.startsWith("http")
+    ) {
+      return item.img;
+    }
+
+    // Otherwise, resolve via dynamic imports
+    return (
+      images[item.img] ||
+      "https://via.placeholder.com/150x120?text=Course"
+    );
+  };
+
+  if (!user)
+    return <p className="p-10 text-center">Loading user profile...</p>;
 
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen font-inter">
         <Navbar />
         <div className="max-w-2xl mx-auto mt-10 bg-white px-16 py-10 rounded-lg shadow-lg text-center">
-          <h2 className="font-semibold text-xl text-gray-800 mb-4">Your Cart is Empty</h2>
-          <p className="text-gray-600 mb-6">Add some courses to get started!</p>
+          <h2 className="font-semibold text-xl text-gray-800 mb-4">
+            Your Cart is Empty
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Add some courses to get started!
+          </p>
           <Link
             to="/courses"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-md"
@@ -133,13 +156,17 @@ if (!user) return <p className="p-10 text-center">Loading...</p>;
       <div className="max-w-4xl mx-auto mt-10 bg-white px-8 py-6 rounded-lg shadow-lg">
         {/* Header */}
         <h2 className="font-semibold text-lg text-gray-800 mb-4">
-          Added To Cart ({cartItems.length} {cartItems.length === 1 ? "item" : "items"})
+          Added To Cart ({cartItems.length}{" "}
+          {cartItems.length === 1 ? "item" : "items"})
         </h2>
 
         {/* Cart Items */}
         <div className="space-y-4">
           {cartItems.map((item) => (
-            <div key={item.id} className="flex items-start border rounded-lg p-4 relative">
+            <div
+              key={item.id}
+              className="flex items-start border rounded-lg p-4 relative"
+            >
               {/* Checkbox */}
               <input
                 type="checkbox"
@@ -150,19 +177,20 @@ if (!user) return <p className="p-10 text-center">Loading...</p>;
 
               {/* Image */}
               <img
-    src={getImageUrl(item)}
-  alt={item.name}
-  className="w-24 h-20 rounded-md ml-4 object-cover"
-  onError={(e) => {
-    e.target.src = "https://via.placeholder.com/150x120?text=Course";
-  }}
-/>
+                src={getImageUrl(item)}
+                alt={item.name || item.title}
+                className="w-24 h-20 rounded-md ml-4 object-cover"
+                onError={(e) => {
+                  e.target.src =
+                    "https://via.placeholder.com/150x120?text=Course";
+                }}
+              />
 
               {/* Item Details */}
               <div className="ml-4 flex-1">
                 <div className="flex items-center justify-between">
                   <h3 className="font-semibold text-blue-700 text-sm pr-4">
-                    {item.name}
+                    {item.name || item.title}
                   </h3>
                   <span className="text-gray-700 text-sm font-medium whitespace-nowrap">
                     Price: {item.price}
@@ -170,10 +198,11 @@ if (!user) return <p className="p-10 text-center">Loading...</p>;
                 </div>
 
                 <p className="text-xs text-gray-600 mt-1">
-                  Created By <span className="font-medium">{item.author}</span>
+                  Created By{" "}
+                  <span className="font-medium">{item.author}</span>
                 </p>
 
-                {/* Category/Tag */}
+                {/* Category */}
                 {item.category && (
                   <div className="flex items-center space-x-2 mt-2">
                     <span className="bg-blue-100 text-gray-700 text-[11px] font-semibold px-2 py-0.5 rounded">
@@ -263,7 +292,9 @@ if (!user) return <p className="p-10 text-center">Loading...</p>;
 
         {/* Related Topics */}
         <div className="mt-8 pb-4">
-          <h3 className="font-semibold text-gray-800 text-sm mb-3">Related Topics</h3>
+          <h3 className="font-semibold text-gray-800 text-sm mb-3">
+            Related Topics
+          </h3>
           <div className="flex flex-wrap gap-3">
             {[
               "Design Thinking",
@@ -284,7 +315,6 @@ if (!user) return <p className="p-10 text-center">Loading...</p>;
         </div>
       </div>
 
-      {/* Space before footer */}
       <div className="h-10" />
     </div>
   );

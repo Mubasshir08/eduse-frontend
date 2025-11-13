@@ -13,37 +13,40 @@ const Course_overview = () => {
   const [images, setImages] = useState({});
 
   useEffect(() => {
-    // find course by id
+    // Find course by ID
     const selectedCourse = FakeData.products.find(
       (product) => product.id === parseInt(id)
     );
     setCourse(selectedCourse);
 
-    // import all images in the folder
+    // Dynamically import all images in the folder
     const importedImages = import.meta.glob(
       "../../assets/images/courseImages/*",
       { eager: true, query: "?url" }
     );
 
-    // create a map from relative path to URL
+    // Build a map of relative path -> image URL
     const imageMap = {};
     for (const path in importedImages) {
-      const parts = path.split("/"); 
-      const relativePath = "assets/images/courseImages/" + parts.pop();
-      imageMap[relativePath] = importedImages[path];
+      const filename = path.split("/").pop(); // e.g., course_Image-1.png
+      const relativePath = `assets/images/courseImages/${filename}`;
+      // ✅ .default is needed for Vite’s glob imports
+      imageMap[relativePath] = importedImages[path].default;
     }
+
     setImages(imageMap);
   }, [id]);
 
   if (!course) return <p>Loading...</p>;
 
-  // get the Vite-resolved image URL
-  const courseImageUrl = images[course.img];
+  // Get the image URL from the map
+  const courseImageUrl = images[course.img] || "";
 
   return (
     <>
       <Navbar />
       <div className="xl:items-start max-w-7xl mx-auto py-4 px-6 flex flex-col xl:flex-row justify-between gap-6">
+        {/* ✅ pass resolved image URL */}
         <Left_section course={{ ...course, img: courseImageUrl }} />
         <Right_section course={course} />
       </div>

@@ -79,14 +79,14 @@ const Checkout = () => {
   }, []);
 
   // Redirect if cart empty
-  if(user){
-    useEffect(() => {
-    if (!authLoading && selectedCartItems.length === 0) {
-      alert("Your cart is empty!");
-      navigate("/cart");
-    }
-  }, [authLoading, selectedCartItems.length, navigate]);
+   useEffect(() => {
+  // Conditional logic is now inside the hook's callback function
+  if (user && !authLoading && selectedCartItems.length === 0) {
+    alert("Your cart is empty!");
+    navigate("/cart");
   }
+}, [user, authLoading, selectedCartItems.length, navigate]);
+
 
   // Utility: extract numeric price
   const getNumericPrice = (price) => {

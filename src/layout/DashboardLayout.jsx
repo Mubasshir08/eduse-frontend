@@ -35,7 +35,7 @@ const DashboardLayout = () => {
         {/* Topbar */}
         <div className="flex items-center justify-between pb-3 border-b-[1px] mb-5">
           <div className="flex items-center gap-3">
-            <img src={Avatar} alt="profile pic" className="w-16 h-16 rounded-full"/>
+            {/* <img src={Avatar} alt="profile pic" className="w-16 h-16 rounded-full"/> */}
             <h2 className="text-xl font-semibold">
               <span className="font-normal text-gray-500"> Hello, </span> 
               <br />{user.name} 👋

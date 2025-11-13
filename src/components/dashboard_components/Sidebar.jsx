@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Home, User, BookOpen, ShoppingCart, Heart, Star, Wallet, Headphones, Settings, LogOut } from "lucide-react";
-import { logoutUser } from "../../api/auth"; // <-- import here
+import { logoutUser } from "../../api/auth"; 
+import LogoImg from "../../../public/logo.png";
 
 const Sidebar = () => {
   const links = [
@@ -17,8 +18,7 @@ const Sidebar = () => {
 
   return (
     <div className="w-64 bg-white h-screen p-4 shadow-md">
-      <h1 className="text-2xl font-bold mb-6 text-blue-600">eduse</h1>
-
+      <img src={LogoImg} alt="logo" className="pb-5 w-1/2" />
       <nav className="flex flex-col gap-2">
         {links.map((link) => (
           <NavLink
