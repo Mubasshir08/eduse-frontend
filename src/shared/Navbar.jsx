@@ -11,22 +11,21 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-useEffect(() => {
-  const storedUser = localStorage.getItem("user");
-  if (storedUser) {
-    const parsedUser = JSON.parse(storedUser);
-    if (parsedUser.token) {
-      setIsLoggedIn(true);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser.token) {
+        setIsLoggedIn(true);
+      }
     }
-  }
-}, []);
+  }, []);
 
-const handleLogout = () => {
-  localStorage.removeItem("user");
-  setIsLoggedIn(false);
-  navigate("/login");
-};
-
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
 
   return (
     <>
@@ -71,33 +70,33 @@ const handleLogout = () => {
           ) : (
             // Cart + Avatar + Dropdown
             <div className="flex gap-x-5">
-              <Link to="/cart">
-              <FaCartShopping className="text-lg cursor-pointer" />
-                  {cartCount > 0 && (
-          <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-            {cartCount}
-          </span>
-        )}
+              <Link to="/cart" className="relative">
+                <FaCartShopping className="text-lg cursor-pointer" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                    {cartCount}
+                  </span>
+                )}
               </Link>
-            <div className="relative group z-30">
-              <FaRegUser className="text-lg cursor-pointer" />
-              <div className="absolute right-0 mt-3 w-40 bg-white shadow-lg rounded-lg p-2 
-        opacity-0 invisible group-hover:opacity-100 group-hover:visible
-        transition-all duration-200 z-50">
-                <Link to="/dashboard/profile" className="block px-3 py-2 hover:bg-gray-100 rounded">
-                  Profile
-                </Link>
-                <Link to="/dashboard" className="block px-3 py-2 hover:bg-gray-100 rounded">
-                  Dashboard
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-3 py-2 hover:bg-red-100 text-red-500 rounded"
-                >
-                  Logout
-                </button>
+              <div className="relative group z-30">
+                <FaRegUser className="text-lg cursor-pointer" />
+                <div className="absolute right-0 mt-3 w-40 bg-white shadow-lg rounded-lg p-2 
+                  opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                  transition-all duration-200 z-50">
+                  <Link to="/dashboard/profile" className="block px-3 py-2 hover:bg-gray-100 rounded">
+                    Profile
+                  </Link>
+                  <Link to="/dashboard" className="block px-3 py-2 hover:bg-gray-100 rounded">
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-3 py-2 hover:bg-red-100 text-red-500 rounded"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
-            </div>
             </div>
           )}
         </div>
@@ -138,6 +137,10 @@ const handleLogout = () => {
             </div>
           ) : (
             <div className="flex flex-col space-y-3">
+              <Link to="/cart" className="flex items-center gap-2 hover:text-blue-700">
+                <FaCartShopping />
+                <span>Cart {cartCount > 0 && `(${cartCount})`}</span>
+              </Link>
               <Link to="/profile" className="hover:text-blue-700">Profile</Link>
               <Link to="/dashboard" className="hover:text-blue-700">Dashboard</Link>
               <button onClick={handleLogout} className="text-red-500 hover:text-red-700 text-left">
@@ -147,8 +150,8 @@ const handleLogout = () => {
           )}
 
           <nav className="flex flex-col space-y-3 text-gray-700 text-sm font-medium">
-            <Link to="#" className="hover:text-blue-700">E-Commerce</Link>
-            <Link to="#" className="hover:text-blue-700">E-Learning</Link>
+            <Link to="/e-commerce" className="hover:text-blue-700">E-Commerce</Link>
+            <Link to="/courses" className="hover:text-blue-700">E-Learning</Link>
             <Link to="#" className="hover:text-blue-700">Become a Seller</Link>
           </nav>
         </div>

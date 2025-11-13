@@ -1,14 +1,18 @@
 // src/pages/StripePayment.jsx
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const StripePayment = () => {
+  // Get checkout data from Redux
+  const checkoutData = useSelector((state) => state.cart.checkoutData);
+  const subtotalFromRedux = checkoutData.subtotal || 0;
   const location = useLocation();
   const navigate = useNavigate();
   const { state } = location;
 
-  const total = state?.total ?? 0;
-  const orderSummary = state?.orderSummary ?? null;
+  // const total = state?.total ?? 0;
+  // const orderSummary = state?.orderSummary ?? null;
 
   const [cardNumber, setCardNumber] = useState("");
   const [nameOnCard, setNameOnCard] = useState("");
@@ -72,7 +76,7 @@ const StripePayment = () => {
         <h2 className="text-xl font-semibold mb-4">Stripe - Test Payment</h2>
 
         <div className="mb-4 text-sm text-gray-600">
-          <div>Order total: <strong>{total} BDT</strong></div>
+          <div>Order total: <strong>{subtotalFromRedux} BDT</strong></div>
           <div className="mt-2">Use test card <strong>4242 4242 4242 4242</strong> for success.</div>
           <div className="text-xs text-gray-400 mt-1">Decline test card: <strong>4000 0000 0000 9995</strong></div>
         </div>
@@ -133,7 +137,7 @@ const StripePayment = () => {
               className="bg-blue-600 text-white px-5 py-2 rounded-md"
               disabled={loading}
             >
-              {loading ? "Processing..." : `Pay ${total} BDT`}
+              {loading ? "Processing..." : `Pay ${subtotalFromRedux} BDT`}
             </button>
 
             <button

@@ -6,28 +6,31 @@ import {
   AiFillHeart,
 } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import AddToCart from "../../pages/cart/CartSection";
+import { addToCart } from "../../redux/cartSlice";
 
 const Right_section = ({ onReviewClick, course }) => {
   const dispatch = useDispatch();
-  const [cart, setCart] = useState([]);
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [wishlistCount, setWishlistCount] = useState(3);
   const [justAddedToCart, setJustAddedToCart] = useState(false);
 
-  const product = {
-    id: 1,
-    name: "Computer Programming in C for Beginners",
-    price: 350,
-    author: "John Smith",
-    stock: 21,
-    category: "Programming | C Language | Beginner-friendly",
-  };
+  const handleAddToCart = () => {
+    // Prepare the product data from course prop
+    const product = {
+      id: course.id,
+      name: course.title,
+      price: course.price,
+      author: course.author,
+      img: course.img,
+      category: course.category || "Programming",
+    };
 
-  const addToCart = () => {
-    setCart((prev) => [...prev, product]);
+    // Dispatch to Redux store
+    dispatch(addToCart(product));
+    
+    // Show confirmation message
     setJustAddedToCart(true);
     setTimeout(() => setJustAddedToCart(false), 1800);
   };
@@ -54,7 +57,7 @@ const Right_section = ({ onReviewClick, course }) => {
 
         <div className="w-55 my-4 border border-blue-600 text-[#666666] px-3 py-1 rounded-md text-sm">
           <span className="inline-block w-2 h-2 rounded-full bg-blue-600 mr-2" />
-          In Stock (only {product.stock} left!)
+          In Stock (only {course.stock || 21} left!)
         </div>
 
         <button
@@ -73,15 +76,12 @@ const Right_section = ({ onReviewClick, course }) => {
         </button>
 
         <p className="mt-3 text-sm">
-          <span className="font-medium">Category:</span> {product.category}
+          <span className="font-medium">Category:</span> {course.category || "Programming"}
         </p>
 
         <div className="mt-4">
           <button
-            onClick={() => {
-              addToCart();
-              dispatch(AddToCart(product));
-            }}
+            onClick={handleAddToCart}
             className="px-5 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
           >
             Add to Cart
