@@ -17,13 +17,13 @@ const Right_section = ({ onReviewClick, course }) => {
   const [justAddedToCart, setJustAddedToCart] = useState(false);
 
   const handleAddToCart = () => {
-    // Prepare the product data from course prop
+    // Prepare the product data from course prop with resolved image URL
     const product = {
       id: course.id,
       name: course.title,
       price: course.price,
       author: course.author,
-      img: course.img,
+      img: course.img, // This now contains the resolved Vite URL
       category: course.category || "Programming",
     };
 

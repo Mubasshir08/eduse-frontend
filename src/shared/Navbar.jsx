@@ -32,8 +32,9 @@ const Navbar = () => {
       <header className="max-w-7xl mx-auto py-4 px-6 flex items-center justify-between">
         {/* Left: Logo + Search */}
         <div className="flex items-center space-x-6 flex-1">
-          <img src={EduseLogo} alt="Eduse Logo" className="h-7 sm:h-8 cursor-pointer" />
-
+          <Link to="/">
+            <img src={EduseLogo} alt="Eduse Logo" className="h-7 sm:h-8 cursor-pointer" />
+          </Link>
           {/* Search */}
           <div className="relative flex-grow max-w-lg hidden md:block">
             <input
@@ -73,7 +74,7 @@ const Navbar = () => {
               <Link to="/cart" className="relative">
                 <FaCartShopping className="text-lg cursor-pointer" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                     {cartCount}
                   </span>
                 )}

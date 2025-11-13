@@ -6,13 +6,10 @@ import { useSelector } from "react-redux";
 const StripePayment = () => {
   // Get checkout data from Redux
   const checkoutData = useSelector((state) => state.cart.checkoutData);
-  const subtotalFromRedux = checkoutData.subtotal || 0;
+  const intotal = checkoutData.intotal || 0; // Get the total with shipping and fees
+  
   const location = useLocation();
   const navigate = useNavigate();
-  const { state } = location;
-
-  // const total = state?.total ?? 0;
-  // const orderSummary = state?.orderSummary ?? null;
 
   const [cardNumber, setCardNumber] = useState("");
   const [nameOnCard, setNameOnCard] = useState("");
@@ -57,7 +54,19 @@ const StripePayment = () => {
     if (digits === "4242424242424242") {
       // success
       setLoading(false);
-      navigate("/payment-success", { state: { method: "Stripe (test)", total } });
+      navigate("/payment-success", { 
+        state: { 
+          method: "Stripe (test)", 
+          total: intotal.toFixed(2),
+          orderData: {
+            items: checkoutData.selectedItemsData,
+            pricing: {
+              subtotal: checkoutData.subtotal,
+              total: intotal
+            }
+          }
+        } 
+      });
       return;
     } else if (digits === "4000000000009995") {
       setLoading(false);
@@ -66,7 +75,19 @@ const StripePayment = () => {
     } else {
       // treat other 16-digit numbers as success for demo
       setLoading(false);
-      navigate("/payment-success", { state: { method: "Stripe (test)", total } });
+      navigate("/payment-success", { 
+        state: { 
+          method: "Stripe (test)", 
+          total: intotal.toFixed(2),
+          orderData: {
+            items: checkoutData.selectedItemsData,
+            pricing: {
+              subtotal: checkoutData.subtotal,
+              total: intotal
+            }
+          }
+        } 
+      });
     }
   };
 
@@ -76,7 +97,13 @@ const StripePayment = () => {
         <h2 className="text-xl font-semibold mb-4">Stripe - Test Payment</h2>
 
         <div className="mb-4 text-sm text-gray-600">
-          <div>Order total: <strong>{subtotalFromRedux} BDT</strong></div>
+          <div className="mb-2">
+            <span className="text-gray-500">Subtotal:</span> <strong>{checkoutData.subtotal?.toFixed(2) || '0.00'} BDT</strong>
+          </div>
+          <div className="mb-3 pb-3 border-b">
+            <span className="text-gray-500">Order Total (with shipping & fees):</span> 
+            <div className="text-lg font-bold text-blue-600 mt-1">{intotal.toFixed(2)} BDT</div>
+          </div>
           <div className="mt-2">Use test card <strong>4242 4242 4242 4242</strong> for success.</div>
           <div className="text-xs text-gray-400 mt-1">Decline test card: <strong>4000 0000 0000 9995</strong></div>
         </div>
@@ -134,16 +161,16 @@ const StripePayment = () => {
           <div className="flex items-center justify-between gap-3">
             <button
               type="submit"
-              className="bg-blue-600 text-white px-5 py-2 rounded-md"
+              className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition"
               disabled={loading}
             >
-              {loading ? "Processing..." : `Pay ${subtotalFromRedux} BDT`}
+              {loading ? "Processing..." : `Pay ${intotal.toFixed(2)} BDT`}
             </button>
 
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="text-sm text-gray-600 underline"
+              className="text-sm text-gray-600 underline hover:text-gray-800"
             >
               Cancel
             </button>

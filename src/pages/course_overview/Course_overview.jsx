@@ -22,7 +22,7 @@ const Course_overview = () => {
     // import all images in the folder
     const importedImages = import.meta.glob(
       "../../assets/images/courseImages/*",
-      { eager: true, as: "url" }
+      { eager: true, query: "?url" }
     );
 
     // create a map from relative path to URL

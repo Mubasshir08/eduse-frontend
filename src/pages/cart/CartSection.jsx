@@ -6,12 +6,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity, setCheckoutData } from "../../redux/cartSlice";
 
 const AddToCart = () => {
+  const [images, setImages] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
   const [selectedItems, setSelectedItems] = useState(
     cartItems.map((item) => item.id)
   );
+
+  useEffect(() => {
+  const importedImages = import.meta.glob(
+    "../../assets/images/courseImages/*",
+    { eager: true, query: "?url" }
+  );
+
+  const imageMap = {};
+  for (const path in importedImages) {
+    const parts = path.split("/");
+    const relativePath = "assets/images/courseImages/" + parts.pop();
+    imageMap[relativePath] = importedImages[path];
+  }
+  setImages(imageMap);
+}, []);
 
   // Toggle item selection
   const toggleItemSelection = (id) => {
@@ -66,6 +82,15 @@ const AddToCart = () => {
     navigate("/checkout");
   };
 
+  const getImageUrl = (item) => {
+  // If item already has a resolved Vite URL
+  if (item.img && (item.img.startsWith('/') || item.img.startsWith('blob:') || item.img.startsWith('http'))) {
+    return item.img;
+  }
+  // Otherwise, get it from the image map
+  return images[item.img] || item.img || "https://via.placeholder.com/150x120?text=Course";
+};
+
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen font-inter">
@@ -107,13 +132,13 @@ const AddToCart = () => {
 
               {/* Image */}
               <img
-                src={item.img || "/placeholder-course.png"}
-                alt={item.name}
-                className="w-24 h-20 rounded-md ml-4 object-cover"
-                onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/150x120?text=Course";
-                }}
-              />
+    src={getImageUrl(item)}
+  alt={item.name}
+  className="w-24 h-20 rounded-md ml-4 object-cover"
+  onError={(e) => {
+    e.target.src = "https://via.placeholder.com/150x120?text=Course";
+  }}
+/>
 
               {/* Item Details */}
               <div className="ml-4 flex-1">

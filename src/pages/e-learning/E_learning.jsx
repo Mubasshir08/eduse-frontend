@@ -13,7 +13,7 @@ const E_learning = () => {
     setCourses(FakeData.products)
 
     // dynamically import all course images from assets
-    const importedImages = import.meta.glob('../../assets/images/courseImages/*', { eager: true, as: 'url' })
+    const importedImages = import.meta.glob('../../assets/images/courseImages/*', { eager: true, query: '?url' })
     setImages(importedImages)
   }, [])
 
