@@ -66,7 +66,7 @@ const Checkout = () => {
   useEffect(() => {
     const importedImages = import.meta.glob(
       "../../assets/images/courseImages/*",
-      { eager: true, query: "?url" }
+      { eager: true, query: "?url", import: "default" }
     );
 
     const imageMap = {};
