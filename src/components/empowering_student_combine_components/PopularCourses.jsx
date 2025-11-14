@@ -1,15 +1,23 @@
 import React from "react"
 import { MdOutlineArrowForwardIos } from "react-icons/md"
+import BusinessIcon from "../../assets/images/empowering_student_combine_Images/PopularCourses_Images/business.png"
+import DataScienceIcon from "../../assets/images/empowering_student_combine_Images/PopularCourses_Images/datascience.png"
+import UiUxIcon from "../../assets/images/empowering_student_combine_Images/PopularCourses_Images/uiux.png"
+import WebDesignIcon from "../../assets/images/empowering_student_combine_Images/PopularCourses_Images/webdesign.png"
+import CreativesIcon from "../../assets/images/empowering_student_combine_Images/PopularCourses_Images/creatives.png"
+import LanguagesIcon from "../../assets/images/empowering_student_combine_Images/PopularCourses_Images/languages.png"
+import CyberSecurityIcon from "../../assets/images/empowering_student_combine_Images/PopularCourses_Images/cybersecurity.png"
+import BlockChainIcon from "../../assets/images/empowering_student_combine_Images/PopularCourses_Images/blockchain.png"
 
 const courses = [
-  { title: "Business & Marketing", icon: "/src/assets/icons/business.png" },
-  { title: "Data Science", icon: "/src/assets/icons/datascience.png" },
-  { title: "Ui/Ux Design", icon: "/src/assets/icons/uiux.png" },
-  { title: "Web Design", icon: "/src/assets/icons/webdesign.png" },
-  { title: "Creatives", icon: "/src/assets/icons/creatives.png" },
-  { title: "Languages", icon: "/src/assets/icons/languages.png" },
-  { title: "Cyber Security", icon: "/src/assets/icons/cybersecurity.png" },
-  { title: "Block Chain", icon: "/src/assets/icons/blockchain.png" },
+  { title: "Business & Marketing", icon: BusinessIcon},
+  { title: "Data Science", icon: DataScienceIcon},
+  { title: "Ui/Ux Design", icon: UiUxIcon},
+  { title: "Web Design", icon: WebDesignIcon},
+  { title: "Creatives", icon: CreativesIcon},
+  { title: "Languages", icon: LanguagesIcon},
+  { title: "Cyber Security", icon: CyberSecurityIcon},
+  { title: "Block Chain", icon: BlockChainIcon},
 ];
 
 const PopularCourses = () => {

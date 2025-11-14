@@ -19,11 +19,12 @@ import Review from "./pages/dashboard/Review";
 import Wallet from "./pages/dashboard/Wallet";
 import Support from "./pages/dashboard/Support";
 import Settings from "./pages/dashboard/Settings";
-import Catagory from "./pages/catagory/Catagory";
-import Catagories from "./pages/e-commerce/Categories"
 import StripePayment from "./pages/stripe-payment/StripePayment";
 import PaymentSuccess from "./pages/stripe-payment/PaymentSuccess";
 import E_learning from "./pages/e-learning/E_learning";
+import E_commerce from "./pages/e-commerce/E_commerce";
+// import Catagory from "./pages/catagory/Catagory";
+// import Catagories from "./pages/e-commerce/Categories";
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
         <Route path= "course-details/:id" element={<Cource_overview />} />
         <Route path="/cart" element={<CartSection />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/e-commerce" element={<Catagories />} />
+        <Route path="/e-commerce" element={<E_commerce />} />
         <Route path="/courses" element={<E_learning />} />
         <Route path="/stripe-pay" element={<StripePayment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
