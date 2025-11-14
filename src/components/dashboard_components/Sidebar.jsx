@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Home, User, BookOpen, ShoppingCart, Heart, Star, Wallet, Headphones, Settings, LogOut } from "lucide-react";
 import { logoutUser } from "../../api/auth"; 
-import LogoImg from "../../../public/logo.png";
+import LogoImg from "../../assets/images/logo.png";
 
 const Sidebar = () => {
   const links = [
