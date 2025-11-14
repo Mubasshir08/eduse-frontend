@@ -4,7 +4,7 @@ import SignUp from "./pages/auth/SignUp";
 import Id_Recovery from "./pages/auth/Id_Recovery";
 import SignIn from "./pages/auth/SignIn";
 import Blog from "./pages/blog/Blog";
-import CoursePage from "./pages/coursePage/CoursePage";
+import CoursePage from "./pages/coursepage/CoursePage";
 import Empowering_Student_Combine from "./pages/empowering_student_combine/Empowering_Student_Combine";
 import Cource_overview from "./pages/course_overview/Course_overview";
 import CartSection from "./pages/cart/CartSection";
