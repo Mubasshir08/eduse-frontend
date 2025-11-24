@@ -7,6 +7,7 @@ import PenImg from "../assets/images/pens.png"
 import DevicesImg from "../assets/images/devices.png"
 import StationaryImg from "../assets/images/stationary.png"
 import MouseImg from "../assets/images/mouse.png"
+import { Link } from "react-router-dom"
 
 const Categories = () => {
   return (
@@ -68,7 +69,8 @@ const Categories = () => {
           { title: "STATIONARY ITEM", img: StationaryImg },
           { title: "NOTES", img: NotebookImg },
         ].map((cat, index) => (
-          <div
+          <Link to='/e-commerce' key={index}>
+            <div
             key={index}
             className="rounded-lg overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition cursor-pointer"
           >
@@ -83,6 +85,8 @@ const Categories = () => {
               </h4>
             </div>
           </div>
+          </Link>
+
         ))}
       </div>
     </div>

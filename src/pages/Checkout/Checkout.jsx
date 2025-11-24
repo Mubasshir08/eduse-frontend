@@ -65,14 +65,14 @@ const Checkout = () => {
   // Load images
   useEffect(() => {
     const importedImages = import.meta.glob(
-      "../../assets/images/courseImages/*",
+      "../../assets/images/course_Imagess/*",
       { eager: true, query: "?url", import: "default" }
     );
 
     const imageMap = {};
     for (const path in importedImages) {
       const parts = path.split("/");
-      const relativePath = "assets/images/courseImages/" + parts.pop();
+      const relativePath = "assets/images/course_Imagess/" + parts.pop();
       imageMap[relativePath] = importedImages[path];
     }
     setImages(imageMap);

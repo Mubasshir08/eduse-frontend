@@ -7,7 +7,7 @@
             "rating" : "4.7 (10 ratings)",
             "price" : "2000 BDT",
             "originalPrice" : "2000 BDT",
-            "img" : "assets/images/courseImages/course_Image-3.png",
+            "img" : "assets/images/course_Imagess/course_Image-3.png",
             "category" : "Design Thinking",
             "bestseller" : true
         },
@@ -18,7 +18,7 @@
             "rating" : "4.8 (7 ratings)",
             "price" : "2000 BDT",
             "originalPrice" : "3000 BDT",
-            "img" : "assets/images/courseImages/course_Image-2.png",
+            "img" : "assets/images/course_Imagess/course_Image-2.png",
             "category" : "UI Design with Figma",
             "bestseller" : true
         },
@@ -29,7 +29,7 @@
             "rating" : "4.7 (785 ratings)",
             "price" : "1500 BDT",
             "originalPrice" : "2000 BDT",
-            "img" : "assets/images/courseImages/course_Image-4.png",
+            "img" : "assets/images/course_Imagess/course_Image-4.png",
             "category" : "UI Research",
             "bestseller" : true
         },
@@ -40,7 +40,7 @@
             "rating" : "4.7 (5 ratings)",
             "price" : "1200 BDT",
             "originalPrice" : "1500 BDT",
-            "img" : "assets/images/courseImages/course_Image-1.png",
+            "img" : "assets/images/course_Imagess/course_Image-1.png",
             "category" : "UX Writing",
             "bestseller" : true
         },
@@ -51,7 +51,7 @@
             "rating" : "4.9 (15 ratings)",
             "price" : "2500 BDT",
             "originalPrice" : "3000 BDT",
-            "img" : "assets/images/courseImages/course_Image-4.png",
+            "img" : "assets/images/course_Imagess/course_Image-4.png",
             "category" : "UX Design",
             "bestseller" : false
         }

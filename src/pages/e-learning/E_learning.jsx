@@ -14,7 +14,7 @@ const E_learning = () => {
 
     // Dynamically import all course images
     const importedImages = import.meta.glob(
-      "../../assets/images/courseImages/*",
+      "../../assets/images/course_Imagess/*",
       { eager: true }
     );
 
@@ -23,7 +23,7 @@ const E_learning = () => {
       const module = importedImages[path];
       const parts = path.split("/");
       const filename = parts.pop();
-      const relativePath = `assets/images/courseImages/${filename}`;
+      const relativePath = `assets/images/course_Imagess/${filename}`;
 
       // Handle both string and object return types
       imageMap[relativePath] =

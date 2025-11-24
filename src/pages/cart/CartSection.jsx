@@ -37,14 +37,14 @@ const AddToCart = () => {
   // 🔹 Dynamically import course images
   useEffect(() => {
     const importedImages = import.meta.glob(
-      "../../assets/images/courseImages/*",
+      "../../assets/images/course_Imagess/*",
       { eager: true, query: "?url" }
     );
 
     const imageMap = {};
     for (const path in importedImages) {
       const parts = path.split("/");
-      const relativePath = "assets/images/courseImages/" + parts.pop();
+      const relativePath = "assets/images/course_Imagess/" + parts.pop();
       // Some imports may not need .default depending on your Vite version
       imageMap[relativePath] = importedImages[path].default || importedImages[path];
     }

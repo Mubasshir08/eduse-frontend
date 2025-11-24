@@ -21,7 +21,7 @@ const Course_overview = () => {
 
     // Dynamically import all images in the folder
     const importedImages = import.meta.glob(
-      "../../assets/images/courseImages/*",
+      "../../assets/images/course_Imagess/*",
       { eager: true, query: "?url" }
     );
 
@@ -29,7 +29,7 @@ const Course_overview = () => {
     const imageMap = {};
     for (const path in importedImages) {
       const filename = path.split("/").pop(); // e.g., course_Image-1.png
-      const relativePath = `assets/images/courseImages/${filename}`;
+      const relativePath = `assets/images/course_Imagess/${filename}`;
       // ✅ .default is needed for Vite’s glob imports
       imageMap[relativePath] = importedImages[path].default;
     }
