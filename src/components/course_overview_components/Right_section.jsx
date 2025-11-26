@@ -16,6 +16,8 @@ const Right_section = ({ onReviewClick, course }) => {
   const [wishlistCount, setWishlistCount] = useState(3);
   const [justAddedToCart, setJustAddedToCart] = useState(false);
 
+  console.log(course)
+
   const handleAddToCart = () => {
     // Prepare the product data from course prop with resolved image URL
     const product = {
@@ -23,8 +25,9 @@ const Right_section = ({ onReviewClick, course }) => {
       name: course.title,
       price: course.price,
       author: course.author,
-      img: course.img, // This now contains the resolved Vite URL
+      img: course.img,
       category: course.category || "Programming",
+      isCourse: course.isCourse || false
     };
 
     // Dispatch to Redux store

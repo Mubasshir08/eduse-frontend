@@ -21,6 +21,8 @@ const Checkout = () => {
   const selectedCartItems = checkoutData.selectedItemsData || [];
   const subtotalFromRedux = checkoutData.subtotal || 0;
 
+// console.log(selectedCartItems)
+
   // Auth state
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
@@ -65,7 +67,7 @@ const Checkout = () => {
   // Load images
   useEffect(() => {
     const importedImages = import.meta.glob(
-      "../../assets/images/course_Imagess/*",
+      "../../assets/images/course_Images/*",
       { eager: true, query: "?url", import: "default" }
     );
 
@@ -113,6 +115,18 @@ const Checkout = () => {
       [name]: value
     }));
   };
+
+  const shouldShowPickupOption = () => {
+  // If cart is empty, don't show
+  if (selectedCartItems.length === 0) return false;
+  
+  // Check if ALL items are courses
+  const allAreCourses = selectedCartItems.every(item => item.isCourse === true);
+  
+  // Only hide if ALL items are courses
+  // Show if: mixed cart OR all items are NOT courses
+  return !allAreCourses;
+};
 
   const validateForm = () => {
     if (!formData.name.trim()) {
@@ -258,31 +272,34 @@ const Checkout = () => {
 
             {/* Shipping Form */}
             <div className="bg-white rounded-2xl shadow-md">
-              <div className="bg-blue-600 text-white px-6 py-3 rounded-t-2xl font-semibold">
-                Shipping Address (Please Fill Out Your Information)
-              </div>
-              <div className="p-6 space-y-4">
-                <div className="flex items-center gap-4">
-                  <span className="font-medium">Pick Up Your Parcel From:</span>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="pickup"
-                      checked={pickupFrom === "home"}
-                      onChange={() => setPickupFrom("home")}
-                    />
-                    Home
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="pickup"
-                      checked={pickupFrom === "university"}
-                      onChange={() => setPickupFrom("university")}
-                    />
-                    University
-                  </label>
-                </div>
+  <div className="bg-blue-600 text-white px-6 py-3 rounded-t-2xl font-semibold">
+    Shipping Address (Please Fill Out Your Information)
+  </div>
+  <div className="p-6 space-y-4">
+    {/* Conditionally show pickup option */}
+    {shouldShowPickupOption() && (
+      <div className="flex items-center gap-4">
+        <span className="font-medium">Pick Up Your Parcel From:</span>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            name="pickup"
+            checked={pickupFrom === "home"}
+            onChange={() => setPickupFrom("home")}
+          />
+          Home
+        </label>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="radio"
+            name="pickup"
+            checked={pickupFrom === "university"}
+            onChange={() => setPickupFrom("university")}
+          />
+          University
+        </label>
+      </div>
+    )}
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <input

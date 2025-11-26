@@ -21,7 +21,7 @@ const Course_overview = () => {
 
     // Dynamically import all images in the folder
     const importedImages = import.meta.glob(
-      "../../assets/images/course_Imagess/*",
+      "../../assets/images/course_Images/*",
       { eager: true, query: "?url" }
     );
 
@@ -36,6 +36,8 @@ const Course_overview = () => {
 
     setImages(imageMap);
   }, [id]);
+
+  // console.log(course)
 
   if (!course) return <p>Loading...</p>;
 

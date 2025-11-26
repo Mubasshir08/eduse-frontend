@@ -37,7 +37,7 @@ const AddToCart = () => {
   // 🔹 Dynamically import course images
   useEffect(() => {
     const importedImages = import.meta.glob(
-      "../../assets/images/course_Imagess/*",
+      "../../assets/images/course_Images/*",
       { eager: true, query: "?url" }
     );
 

@@ -14,7 +14,7 @@ const E_learning = () => {
 
     // Dynamically import all course images
     const importedImages = import.meta.glob(
-      "../../assets/images/course_Imagess/*",
+      "../../assets/images/course_Images/*",
       { eager: true }
     );
 
@@ -38,7 +38,7 @@ const E_learning = () => {
       <Navbar />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ml-20 mt-10">
         {courses.map((course) => {
-          const imgUrl = images[course.img] || "";
+          const imgUrl = images[course.img] || null;
           return (
             <Link key={course.id} to={`/course-details/${course.id}`}>
               <CourseCard course={{ ...course, img: imgUrl }} />

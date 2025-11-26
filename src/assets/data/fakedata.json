@@ -9,6 +9,7 @@
             "originalPrice" : "2000 BDT",
             "img" : "assets/images/course_Imagess/course_Image-3.png",
             "category" : "Design Thinking",
+            "isCourse" : true,
             "bestseller" : true
         },
         {
@@ -20,6 +21,7 @@
             "originalPrice" : "3000 BDT",
             "img" : "assets/images/course_Imagess/course_Image-2.png",
             "category" : "UI Design with Figma",
+            "isCourse" : true,
             "bestseller" : true
         },
         {
@@ -31,6 +33,7 @@
             "originalPrice" : "2000 BDT",
             "img" : "assets/images/course_Imagess/course_Image-4.png",
             "category" : "UI Research",
+            "isCourse" : true,
             "bestseller" : true
         },
         {
@@ -42,18 +45,8 @@
             "originalPrice" : "1500 BDT",
             "img" : "assets/images/course_Imagess/course_Image-1.png",
             "category" : "UX Writing",
+            "isCourse" : true,
             "bestseller" : true
-        },
-        {
-            "id" : 5,
-            "title" : "Advanced UX Design Techniques",
-            "author" : "Nafisa Nawar",
-            "rating" : "4.9 (15 ratings)",
-            "price" : "2500 BDT",
-            "originalPrice" : "3000 BDT",
-            "img" : "assets/images/course_Imagess/course_Image-4.png",
-            "category" : "UX Design",
-            "bestseller" : false
         }
     ]
 }
