@@ -1,176 +1,153 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { ChevronRight } from 'lucide-react';
 
-const Catagory_section = () => {
+const CategorySection = () => {
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [selectedRatings, setSelectedRatings] = useState([]);
+  const [selectedWarranty, setSelectedWarranty] = useState([]);
+
+  const handleRatingChange = (rating) => {
+    setSelectedRatings(prev => 
+      prev.includes(rating) 
+        ? prev.filter(r => r !== rating)
+        : [...prev, rating]
+    );
+  };
+
+  const handleWarrantyChange = (warranty) => {
+    setSelectedWarranty(prev =>
+      prev.includes(warranty)
+        ? prev.filter(w => w !== warranty)
+        : [...prev, warranty]
+    );
+  };
+
+  const handlePriceFilter = () => {
+    console.log('Filtering:', { minPrice, maxPrice });
+    // Add your filter logic here
+  };
+
   return (
-    // left
-    <section >
-        {/* left */}
-      <div>
-        {/* left part-1 */}
-        <div className="my-5">
-          <h1 className="font-semibold text-xl">Category</h1>
-          <p className="">Study Materials</p>
-        </div>
-        {/*left part-2 */}
-        <div>
-          <h1 className="text-[#015AD8] text-xl font-bold my-5">Filter</h1>
-        </div>
-        {/* left 3rd part */}
-        <div>
-          <h1 className="text-xl">Price</h1>
-          {/* max_min-filter */}
-          <div className="flex my-2">
-            <input
-              type="number"
-              placeholder="Min"
-              className="w-15 text-center rounded-md border-1 border-[#666666] "
-            />
-            <samp className="flex items-center justify-center">-</samp>
+    <aside className="w-full lg:w-1/5 bg-white rounded-lg shadow-sm p-6 h-fit sticky top-4">
+      {/* Category Header */}
+      <div className="mb-6">
+        <h2 className="font-semibold text-xl text-gray-800 mb-2">Category</h2>
+        <button className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1 text-sm">
+          Study Materials
+          <ChevronRight size={16} />
+        </button>
+      </div>
 
-            <input
-              type="number"
-              placeholder="Max"
-              className="w-15 text-center rounded-md border-1 border-[#666666] "
-            />
+      {/* Filter Title */}
+      <div className="mb-6">
+        <h3 className="text-[#015AD8] text-xl font-bold">Filter</h3>
+      </div>
 
-            <button className="mx-2 bg-blue-100 rounded-md w-10 jus flex justify-center items-center ">
-              <img src="" alt="" srcset="src\assets\images\Submit.png" />
-            </button>
-          </div>
-          {/* left 4th part */}
-          <div className="my-5">
-            {/* 4th area child-1 start*/}
-            <div>
-              <h1 className=" text-xl text-[#666666]">Store Rating</h1>
-              <p className="text-[#666666] text-sm">
-                Based on a 5-star rating system
-              </p>
-            </div>
-                   {/* 4th area child-1 end */}
-
-                   {/* 4th area child-2 */}
-            <div>
-              {/* 1st*/}
-            <div>
-              <div class="flex items-center mb-4 mt-5">
-                <input
-                  id="default-checkboxon"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 "
-                />
-                <label
-                  for="default-checkboxon"
-                  class="ms-2 text-sm font-medium  dark:text-gray-300   text-[#999999] hover:text-[#666666]"
-                >
-                  3.5 & up
-                </label>
-              </div>
-            </div>
-            {/* 2nd*/}
-           
-            
-            <div>
-              <div class="flex items-center mb-4 mt-5">
-                <input
-                  id="default-checkboxtree"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 focus:ring-2 dark:bg-blue-700 dark:border-blue-600 "
-                />
-                <label
-                  for="default-checkboxtree"
-                  class="ms-2 text-sm font-medium  dark:text-gray-300 text-[#999999] hover:text-[#666666]"
-                >
-                  4.0 & up
-                </label>
-              </div>
-            </div>
-            {/* 4th*/}
-            <div>
-              <div class="flex items-center mb-4 mt-5">
-                <input
-                  id="default-checkboxfour"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 focus:ring-2 dark:bg-blue-700 dark:border-blue-600 "
-                />
-                <label
-                  for="default-checkboxfour"
-                  class="ms-2 text-sm font-medium  dark:text-gray-300 text-[#999999] hover:text-[#666666]"
-                >
-                  4.5 & up
-                </label>
-              </div>
-            </div>
-            {/* 5th*/}
-            <div>
-              <div class="flex items-center mb-4 mt-5">
-                <input
-                  id="default-checkboxfive"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 focus:ring-2 dark:bg-blue-700 dark:border-blue-600 "
-                />
-                <label
-                  for="default-checkboxfive"
-                  class="ms-2 text-sm font-medium  dark:text-gray-300 text-[#999999] hover:text-[#666666]"
-                >
-                  5.0 & up
-                </label>
-              </div>
-            </div>
-            </div>
-            {/* 4th area child-2 end */}
-            {/* 4th area child-3 start */}
-            <div>
-              {/* warranty */}
-              <div>
-                <h1 className="text-xl text-[#666666]">Warranty Type</h1>
-              </div>
-              <div>
-                {/* child3-part-1 start*/}
-                <div>
-              <div class="flex items-center mb-4 mt-5">
-                <input
-                  id="default-checkboxsix"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 focus:ring-2 dark:bg-blue-700 dark:border-blue-600 "
-                />
-                <label
-                  for="default-checkboxsix"
-                  class="ms-2 text-sm font-medium  dark:text-gray-300 text-[#999999] hover:text-[#666666]"
-                >
-                  No Warranty
-                </label>
-              </div>
-              {/* child3-part-1 end */}
-            </div>
-              <div>
-              <div class="flex items-center mb-4 mt-5">
-                <input
-                  id="default-checkboxseven"
-                  type="checkbox"
-                  value=""
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-800 focus:ring-2 dark:bg-blue-700 dark:border-blue-600 "
-                />
-                <label
-                  for="default-checkboxseven"
-                  class="ms-2 text-sm font-medium  dark:text-gray-300 text-[#999999] hover:text-[#666666]"
-                >
-                  1 Year Warranty
-                </label>
-              </div>
-              {/* child3-part-1 end */}
-            </div>
-              </div>
-            </div>
-          </div>
+      {/* Price Filter */}
+      <div className="mb-6">
+        <h4 className="text-lg font-semibold text-gray-800 mb-3">Price</h4>
+        <div className="flex items-center gap-2">
+          <input
+            type="number"
+            placeholder="Min"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+            className="w-20 px-2 py-1.5 text-center text-sm rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+          />
+          <span className="text-gray-400">-</span>
+          <input
+            type="number"
+            placeholder="Max"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            className="w-20 px-2 py-1.5 text-center text-sm rounded-md border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+          />
+          <button
+            onClick={handlePriceFilter}
+            className="bg-blue-500 hover:bg-blue-600 text-white rounded-md w-10 h-10 px-1 flex justify-center items-center transition-colors"
+          >
+            <ChevronRight size={18} />
+          </button>
         </div>
       </div>
-    </section>
-  )
-}
 
-export default Catagory_section
+      {/* Store Rating Filter */}
+      <div className="mb-6">
+        <h4 className="text-lg font-semibold text-gray-800 mb-1">Store Rating</h4>
+        <p className="text-gray-500 text-xs mb-4">Based on a 5-star rating system</p>
+        
+        <div className="space-y-3">
+          {[
+            { value: 3.5, label: '3.5 & up' },
+            { value: 4.0, label: '4.0 & up' },
+            { value: 4.5, label: '4.5 & up' },
+            { value: 5.0, label: '5.0 & up' }
+          ].map((rating) => (
+            <label
+              key={rating.value}
+              className="flex items-center cursor-pointer group"
+            >
+              <input
+                type="checkbox"
+                checked={selectedRatings.includes(rating.value)}
+                onChange={() => handleRatingChange(rating.value)}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+              />
+              <span className="ml-2 text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
+                ⭐ {rating.label}
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Warranty Type Filter */}
+      <div>
+        <h4 className="text-lg font-semibold text-gray-800 mb-4">Warranty Type</h4>
+        
+        <div className="space-y-3">
+          {[
+            { value: 'none', label: 'No Warranty' },
+            { value: '1year', label: '1 Year Warranty' },
+            { value: '2year', label: '2 Year Warranty' }
+          ].map((warranty) => (
+            <label
+              key={warranty.value}
+              className="flex items-center cursor-pointer group"
+            >
+              <input
+                type="checkbox"
+                checked={selectedWarranty.includes(warranty.value)}
+                onChange={() => handleWarrantyChange(warranty.value)}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
+              />
+              <span className="ml-2 text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
+                {warranty.label}
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Active Filters Summary (Optional) */}
+      {(selectedRatings.length > 0 || selectedWarranty.length > 0 || minPrice || maxPrice) && (
+        <div className="mt-6 pt-6 border-t border-gray-200">
+          <button
+            onClick={() => {
+              setSelectedRatings([]);
+              setSelectedWarranty([]);
+              setMinPrice('');
+              setMaxPrice('');
+            }}
+            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+          >
+            Clear All Filters
+          </button>
+        </div>
+      )}
+    </aside>
+  );
+};
+
+export default CategorySection;

@@ -11,10 +11,10 @@ const E_commerce = () => {
   return (
     <div>
       <Navbar />
-      <section className="flex xl:flex-row xl:items-start  items-center flex-col mb-12 gap-40 mx-auto max-w-7xl pl-7">
+      <section className="flex xl:flex-row xl:items-start  items-center flex-col mb-12 gap-4 mx-auto max-w-7xl pl-2 pr-7">
         <Catagory_section />
         <Products />
-        <Shopping_section />
+        {/* <Shopping_section /> */}
       </section>
       <Footer />
     </div>
