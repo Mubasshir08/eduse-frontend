@@ -4,7 +4,7 @@ import { TiMediaPlayOutline } from "react-icons/ti";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Catagory_section from "../../components/e_commerce_components/Catagory_section";
 import Products from "../../components/e_commerce_components/Products";
-import Shopping_section from "../../components/e_commerce_components/Shopping_section";
+// import Shopping_section from "../../components/e_commerce_components/Shopping_section";
 import Footer from "../../shared/Footer";
 
 const E_commerce = () => {

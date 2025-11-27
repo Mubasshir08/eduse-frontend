@@ -14,7 +14,7 @@ const Course_overview = () => {
 
   useEffect(() => {
     // Find course by ID
-    const selectedCourse = FakeData.products.find(
+    const selectedCourse = FakeData.coursesData.find(
       (product) => product.id === parseInt(id)
     );
     setCourse(selectedCourse);

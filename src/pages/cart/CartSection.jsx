@@ -44,7 +44,7 @@ const AddToCart = () => {
     const imageMap = {};
     for (const path in importedImages) {
       const parts = path.split("/");
-      const relativePath = "assets/images/course_Imagess/" + parts.pop();
+      const relativePath = "assets/images/course_Images/" + parts.pop();
       // Some imports may not need .default depending on your Vite version
       imageMap[relativePath] = importedImages[path].default || importedImages[path];
     }

@@ -10,7 +10,7 @@ const E_learning = () => {
   const [images, setImages] = useState({});
 
   useEffect(() => {
-    setCourses(FakeData.products);
+    setCourses(FakeData.coursesData);
 
     // Dynamically import all course images
     const importedImages = import.meta.glob(
