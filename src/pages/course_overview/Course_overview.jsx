@@ -29,7 +29,7 @@ const Course_overview = () => {
     const imageMap = {};
     for (const path in importedImages) {
       const filename = path.split("/").pop(); // e.g., course_Image-1.png
-      const relativePath = `assets/images/course_Imagess/${filename}`;
+      const relativePath = `assets/images/course_Images/${filename}`;
       // ✅ .default is needed for Vite’s glob imports
       imageMap[relativePath] = importedImages[path].default;
     }

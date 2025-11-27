@@ -21,7 +21,7 @@ const Checkout = () => {
   const selectedCartItems = checkoutData.selectedItemsData || [];
   const subtotalFromRedux = checkoutData.subtotal || 0;
 
-// console.log(selectedCartItems)
+  // console.log(selectedCartItems)
 
   // Auth state
   const [user, setUser] = useState(null);
@@ -40,7 +40,7 @@ const Checkout = () => {
     country: "",
     city: "",
     area: "",
-    address: ""
+    address: "",
   });
 
   // Dynamic image imports
@@ -74,21 +74,20 @@ const Checkout = () => {
     const imageMap = {};
     for (const path in importedImages) {
       const parts = path.split("/");
-      const relativePath = "assets/images/course_Imagess/" + parts.pop();
+      const relativePath = "assets/images/course_Images/" + parts.pop();
       imageMap[relativePath] = importedImages[path];
     }
     setImages(imageMap);
   }, []);
 
   // Redirect if cart empty
-   useEffect(() => {
-  // Conditional logic is now inside the hook's callback function
-  if (user && !authLoading && selectedCartItems.length === 0) {
-    alert("Your cart is empty!");
-    navigate("/cart");
-  }
-}, [user, authLoading, selectedCartItems.length, navigate]);
-
+  useEffect(() => {
+    // Conditional logic is now inside the hook's callback function
+    if (user && !authLoading && selectedCartItems.length === 0) {
+      alert("Your cart is empty!");
+      navigate("/cart");
+    }
+  }, [user, authLoading, selectedCartItems.length, navigate]);
 
   // Utility: extract numeric price
   const getNumericPrice = (price) => {
@@ -98,7 +97,8 @@ const Checkout = () => {
 
   const subtotal = subtotalFromRedux;
   const condition = 30;
-  const shippingCost = shipping === "courier" ? 60 : shipping === "outside" ? 120 : 60;
+  const shippingCost =
+    shipping === "courier" ? 60 : shipping === "outside" ? 120 : 60;
   const total = subtotal + condition + shippingCost;
 
   // Store intotal in Redux
@@ -112,21 +112,23 @@ const Checkout = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const shouldShowPickupOption = () => {
-  // If cart is empty, don't show
-  if (selectedCartItems.length === 0) return false;
-  
-  // Check if ALL items are courses
-  const allAreCourses = selectedCartItems.every(item => item.isCourse === true);
-  
-  // Only hide if ALL items are courses
-  // Show if: mixed cart OR all items are NOT courses
-  return !allAreCourses;
-};
+    // If cart is empty, don't show
+    if (selectedCartItems.length === 0) return false;
+
+    // Check if ALL items are courses
+    const allAreCourses = selectedCartItems.every(
+      (item) => item.isCourse === true
+    );
+
+    // Only hide if ALL items are courses
+    // Show if: mixed cart OR all items are NOT courses
+    return !allAreCourses;
+  };
 
   const validateForm = () => {
     if (!formData.name.trim()) {
@@ -174,10 +176,10 @@ const Checkout = () => {
         subtotal,
         condition,
         shippingCost,
-        total: parseFloat(total.toFixed(2))
+        total: parseFloat(total.toFixed(2)),
       },
       paymentMethod,
-      shipping
+      shipping,
     };
 
     if (paymentMethod === "stripe") {
@@ -186,32 +188,47 @@ const Checkout = () => {
           total: parseFloat(total.toFixed(2)),
           currency: "BDT",
           orderSummary: orderData.pricing,
-          orderData
-        }
+          orderData,
+        },
       });
       return;
     }
 
     if (paymentMethod === "cod") {
-      alert(`Order placed with Cash on Delivery. Total: ${total.toFixed(2)} BDT`);
+      alert(
+        `Order placed with Cash on Delivery. Total: ${total.toFixed(2)} BDT`
+      );
       navigate("/payment-success", {
-        state: { method: "COD", total: total.toFixed(2), orderData }
+        state: { method: "COD", total: total.toFixed(2), orderData },
       });
       return;
     }
 
-    alert(`Selected ${paymentMethod}. (Demo) Payment Successful. Total: ${total.toFixed(2)} BDT`);
+    alert(
+      `Selected ${paymentMethod}. (Demo) Payment Successful. Total: ${total.toFixed(
+        2
+      )} BDT`
+    );
     navigate("/payment-success", {
-      state: { method: paymentMethod, total: total.toFixed(2), orderData }
+      state: { method: paymentMethod, total: total.toFixed(2), orderData },
     });
   };
 
   // Get image helper
   const getImageUrl = (item) => {
-    if (item.img && (item.img.startsWith('/') || item.img.startsWith('blob:') || item.img.startsWith('http'))) {
+    if (
+      item.img &&
+      (item.img.startsWith("/") ||
+        item.img.startsWith("blob:") ||
+        item.img.startsWith("http"))
+    ) {
       return item.img;
     }
-    return images[item.img] || item.img || "https://via.placeholder.com/150x120?text=Course";
+    return (
+      images[item.img] ||
+      item.img ||
+      "https://via.placeholder.com/150x120?text=Course"
+    );
   };
 
   // Show loading while checking auth
@@ -246,23 +263,34 @@ const Checkout = () => {
               </div>
               <div className="space-y-3 max-h-60 overflow-y-auto">
                 {selectedCartItems.map((item) => (
-                  <div key={item.id} className="flex items-center gap-4 border-b pb-3">
+                  <div
+                    key={item.id}
+                    className="flex items-center gap-4 border-b pb-3"
+                  >
                     <img
                       src={getImageUrl(item)}
                       alt={item.name}
                       className="w-16 h-16 rounded object-cover"
                       onError={(e) => {
-                        e.target.src = "https://via.placeholder.com/60?text=Course";
+                        e.target.src =
+                          "https://via.placeholder.com/60?text=Course";
                       }}
                     />
                     <div className="flex-1">
-                      <h4 className="font-medium text-sm text-gray-800">{item.name}</h4>
+                      <h4 className="font-medium text-sm text-gray-800">
+                        {item.name}
+                      </h4>
                       <p className="text-xs text-gray-600">by {item.author}</p>
-                      <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+                      <p className="text-xs text-gray-500">
+                        Qty: {item.quantity}
+                      </p>
                     </div>
                     <div className="text-right">
                       <p className="font-semibold text-gray-800">
-                        {(getNumericPrice(item.price) * item.quantity).toFixed(2)} BDT
+                        {(getNumericPrice(item.price) * item.quantity).toFixed(
+                          2
+                        )}{" "}
+                        BDT
                       </p>
                     </div>
                   </div>
@@ -271,108 +299,111 @@ const Checkout = () => {
             </div>
 
             {/* Shipping Form */}
-            <div className="bg-white rounded-2xl shadow-md">
-  <div className="bg-blue-600 text-white px-6 py-3 rounded-t-2xl font-semibold">
-    Shipping Address (Please Fill Out Your Information)
-  </div>
-  <div className="p-6 space-y-4">
-    {/* Conditionally show pickup option */}
-    {shouldShowPickupOption() && (
-      <div className="flex items-center gap-4">
-        <span className="font-medium">Pick Up Your Parcel From:</span>
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="radio"
-            name="pickup"
-            checked={pickupFrom === "home"}
-            onChange={() => setPickupFrom("home")}
-          />
-          Home
-        </label>
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="radio"
-            name="pickup"
-            checked={pickupFrom === "university"}
-            onChange={() => setPickupFrom("university")}
-          />
-          University
-        </label>
-      </div>
-    )}
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Enter Your Name *"
-                    className="border rounded-lg p-2 w-full"
-                  />
-                  <input
-                    type="text"
-                    name="altPhone"
-                    value={formData.altPhone}
-                    onChange={handleInputChange}
-                    placeholder="Alternative Phone No."
-                    className="border rounded-lg p-2 w-full"
-                  />
-                  <input
-                    type="text"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="Phone No. *"
-                    className="border rounded-lg p-2 w-full"
-                  />
-                  <select
-                    name="country"
-                    value={formData.country}
-                    onChange={handleInputChange}
-                    className="border rounded-lg p-2 w-full"
-                  >
-                    <option value="">Select a country *</option>
-                    <option value="Bangladesh">Bangladesh</option>
-                    <option value="India">India</option>
-                    <option value="Pakistan">Pakistan</option>
-                    <option value="Other">Other</option>
-                  </select>
-                  <select
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    className="border rounded-lg p-2 w-full"
-                  >
-                    <option value="">Select a city *</option>
-                    <option value="Dhaka">Dhaka</option>
-                    <option value="Chittagong">Chittagong</option>
-                    <option value="Sylhet">Sylhet</option>
-                    <option value="Khulna">Khulna</option>
-                  </select>
-                  <select
-                    name="area"
-                    value={formData.area}
-                    onChange={handleInputChange}
-                    className="border rounded-lg p-2 w-full"
-                  >
-                    <option value="">Select an area *</option>
-                    <option value="Gulshan">Gulshan</option>
-                    <option value="Banani">Banani</option>
-                    <option value="Mohakhali">Mohakhali</option>
-                    <option value="Dhanmondi">Dhanmondi</option>
-                  </select>
+            {shouldShowPickupOption() && (
+              <div className="bg-white rounded-2xl shadow-md">
+                <div className="bg-blue-600 text-white px-6 py-3 rounded-t-2xl font-semibold">
+                  Shipping Address (Please Fill Out Your Information)
                 </div>
+                <div className="p-6 space-y-4">
+                  {/* Conditionally show pickup option */}
 
-                <textarea
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  placeholder="Enter Your Address *"
-                  className="border rounded-lg p-2 w-full h-20"
-                />
+                  <div className="flex items-center gap-4">
+                    <span className="font-medium">
+                      Pick Up Your Parcel From:
+                    </span>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="pickup"
+                        checked={pickupFrom === "home"}
+                        onChange={() => setPickupFrom("home")}
+                      />
+                      Home
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="pickup"
+                        checked={pickupFrom === "university"}
+                        onChange={() => setPickupFrom("university")}
+                      />
+                      University
+                    </label>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Enter Your Name *"
+                      className="border rounded-lg p-2 w-full"
+                    />
+                    <input
+                      type="text"
+                      name="altPhone"
+                      value={formData.altPhone}
+                      onChange={handleInputChange}
+                      placeholder="Alternative Phone No."
+                      className="border rounded-lg p-2 w-full"
+                    />
+                    <input
+                      type="text"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Phone No. *"
+                      className="border rounded-lg p-2 w-full"
+                    />
+                    <select
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                      className="border rounded-lg p-2 w-full"
+                    >
+                      <option value="">Select a country *</option>
+                      <option value="Bangladesh">Bangladesh</option>
+                      <option value="India">India</option>
+                      <option value="Pakistan">Pakistan</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <select
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      className="border rounded-lg p-2 w-full"
+                    >
+                      <option value="">Select a city *</option>
+                      <option value="Dhaka">Dhaka</option>
+                      <option value="Chittagong">Chittagong</option>
+                      <option value="Sylhet">Sylhet</option>
+                      <option value="Khulna">Khulna</option>
+                    </select>
+                    <select
+                      name="area"
+                      value={formData.area}
+                      onChange={handleInputChange}
+                      className="border rounded-lg p-2 w-full"
+                    >
+                      <option value="">Select an area *</option>
+                      <option value="Gulshan">Gulshan</option>
+                      <option value="Banani">Banani</option>
+                      <option value="Mohakhali">Mohakhali</option>
+                      <option value="Dhanmondi">Dhanmondi</option>
+                    </select>
+                  </div>
+
+                  <textarea
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    placeholder="Enter Your Address *"
+                    className="border rounded-lg p-2 w-full h-20"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Payment Method */}
             <div className="bg-white rounded-2xl shadow-md">
@@ -444,8 +475,16 @@ const Checkout = () => {
                       />
                       <img src={stripeLogo} alt="Stripe" className="h-8" />
                     </label>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" className="h-8" />
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="MasterCard" className="h-8" />
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg"
+                      alt="Visa"
+                      className="h-8"
+                    />
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
+                      alt="MasterCard"
+                      className="h-8"
+                    />
                     <img src={GpayLogo} alt="G Pay" className="h-8" />
                     <img src={PayoneerLogo} alt="Payoneer" className="h-8" />
                   </div>
@@ -514,7 +553,9 @@ const Checkout = () => {
                   onChange={() => setTermsChecked(!termsChecked)}
                   className="mt-1"
                 />
-                <span>I have read and agree to the website terms and conditions.</span>
+                <span>
+                  I have read and agree to the website terms and conditions.
+                </span>
               </label>
             </div>
 

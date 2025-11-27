@@ -23,7 +23,7 @@ const E_learning = () => {
       const module = importedImages[path];
       const parts = path.split("/");
       const filename = parts.pop();
-      const relativePath = `assets/images/course_Imagess/${filename}`;
+      const relativePath = `assets/images/course_Images/${filename}`;
 
       // Handle both string and object return types
       imageMap[relativePath] =
