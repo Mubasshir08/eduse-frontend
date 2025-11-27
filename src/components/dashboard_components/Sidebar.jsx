@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Home, User, BookOpen, ShoppingCart, Heart, Star, Wallet, Headphones, Settings, LogOut } from "lucide-react";
 import { logoutUser } from "../../api/auth"; 
 import LogoImg from "../../assets/images/logo.png";
@@ -18,12 +18,15 @@ const Sidebar = () => {
 
   return (
     <div className="w-64 bg-white h-screen p-4 shadow-md">
-      <img src={LogoImg} alt="logo" className="pb-5 w-1/2" />
+     <Link to="/"  >
+        <img src={LogoImg} alt="logo" className="pb-5 w-1/2" />
+     </Link> 
       <nav className="flex flex-col gap-2">
         {links.map((link) => (
           <NavLink
             key={link.name}
             to={link.path}
+            end
             className={({ isActive }) =>
               `flex items-center gap-3 p-2 rounded-lg transition ${
                 isActive ? "bg-blue-600 text-white" : "hover:bg-gray-100"
