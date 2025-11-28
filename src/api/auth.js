@@ -1,8 +1,12 @@
 import API from "./api";
 
-// Login request
+// Login request (Regular users)
 export const loginUser = (credentials) =>
   API.post("/auth/login", credentials);
+
+// Admin Login request
+export const adminLogin = (credentials) =>
+  API.post("/auth/admin-login", credentials);
 
 // Register request
 export const registerUser = (formData) =>
@@ -14,4 +18,11 @@ export const logoutUser = () => {
   window.location.href = "/login";
 };
 
+// Admin Logout (redirects to admin login)
+export const adminLogout = () => {
+  localStorage.removeItem("user");
+  window.location.href = "/admin/login";
+};
+
+// Get user profile
 export const getProfile = () => API.get("/auth/profile");
