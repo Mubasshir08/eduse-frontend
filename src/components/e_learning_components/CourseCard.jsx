@@ -1,4 +1,5 @@
 import React from "react";
+import { FaStar } from "react-icons/fa";
 
 const CourseCard = ({ course }) => {
   return (
@@ -10,11 +11,12 @@ const CourseCard = ({ course }) => {
 
         {/* Rating */}
         <div className="flex items-center gap-1">
-          <img
+          {/* <img
             className="h-4"
-            src="/src/assets/images/Star18.png" // fix slashes
+            src= // fix slashes
             alt="star"
-          />
+          /> */}
+          <FaStar color="#fbbf24" />
           <p className="text-gray-500">{course.rating}</p>
         </div>
 
