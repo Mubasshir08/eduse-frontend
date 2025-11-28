@@ -23,6 +23,7 @@ import StripePayment from "./pages/stripe-payment/StripePayment";
 import PaymentSuccess from "./pages/stripe-payment/PaymentSuccess";
 import E_learning from "./pages/e-learning/E_learning";
 import E_commerce from "./pages/e-commerce/E_commerce";
+import AdminDashboard from "./pages/dashboard/admin/AdminDashboard";
 // import Catagory from "./pages/catagory/Catagory";
 // import Catagories from "./pages/e-commerce/Categories";
 
@@ -56,7 +57,12 @@ function App() {
         <Route path="wallet" element={<Wallet />} />
         <Route path="support" element={<Support />} />
         <Route path="settings" element={<Settings />} />
-      </Route>
+        </Route>
+        
+        {/* Admin nested routes */}
+        <Route path="/admin" element={<AdminDashboard />}>
+        <Route index element={<AdminDashboard />} />
+        </Route>
 
       </Routes>
   );

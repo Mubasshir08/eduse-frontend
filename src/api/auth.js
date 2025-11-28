@@ -6,7 +6,7 @@ export const loginUser = (credentials) =>
 
 // Admin Login request
 export const adminLogin = (credentials) =>
-  API.post("/auth/admin-login", credentials);
+  API.post("/auth/admin/login", credentials);
 
 // Register request
 export const registerUser = (formData) =>
@@ -21,7 +21,7 @@ export const logoutUser = () => {
 // Admin Logout (redirects to admin login)
 export const adminLogout = () => {
   localStorage.removeItem("user");
-  window.location.href = "/admin/login";
+  window.location.href = "/login";
 };
 
 // Get user profile
