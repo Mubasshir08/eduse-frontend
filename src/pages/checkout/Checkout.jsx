@@ -95,11 +95,24 @@ const Checkout = () => {
     return isNaN(numericPrice) ? 0 : numericPrice;
   };
 
+  const shouldShowPickupOption = () => {
+    // If cart is empty, don't show
+    if (selectedCartItems.length === 0) return false;
+
+    // Check if ALL items are courses
+    const allAreCourses = selectedCartItems.every(
+      (item) => item.isCourse === true
+    );
+
+    // Only hide if ALL items are courses
+    // Show if: mixed cart OR all items are NOT courses
+    return !allAreCourses;
+  };
+
   const subtotal = subtotalFromRedux;
   const condition = 30;
-  const shippingCost =
-    shipping === "courier" ? 60 : shipping === "outside" ? 120 : 60;
-  const total = subtotal + condition + shippingCost;
+  const shippingCost = shipping === "courier" ? 60 : shipping === "outside" ? 120 : 60;
+  const total = shouldShowPickupOption() ? subtotal + condition + shippingCost : subtotal;
 
   // Store intotal in Redux
   useEffect(() => {
@@ -114,20 +127,6 @@ const Checkout = () => {
       ...prev,
       [name]: value,
     }));
-  };
-
-  const shouldShowPickupOption = () => {
-    // If cart is empty, don't show
-    if (selectedCartItems.length === 0) return false;
-
-    // Check if ALL items are courses
-    const allAreCourses = selectedCartItems.every(
-      (item) => item.isCourse === true
-    );
-
-    // Only hide if ALL items are courses
-    // Show if: mixed cart OR all items are NOT courses
-    return !allAreCourses;
   };
 
   const validateForm = () => {
@@ -411,7 +410,9 @@ const Checkout = () => {
                 Payment Method (Please Select Your Payment Method)
               </div>
               <div className="p-6 space-y-4">
-                <div className="w-full md:w-1/2 bg-[#fafafa] px-5 py-4 border border-[#999999] rounded-md">
+               {
+                 shouldShowPickupOption() && (
+                   <div className="w-full md:w-1/2 bg-[#fafafa] px-5 py-4 border border-[#999999] rounded-md">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="radio"
@@ -423,6 +424,8 @@ const Checkout = () => {
                     Cash on Delivery
                   </label>
                 </div>
+                 )
+               }
 
                 <div>
                   <div className="font-light mb-1">Mobile Wallet</div>
@@ -501,8 +504,10 @@ const Checkout = () => {
                 <span>Subtotal ({selectedCartItems.length} items)</span>
                 <span>{subtotal.toFixed(2)} BDT</span>
               </div>
-
-              <div className="space-y-2">
+            {
+              shouldShowPickupOption() && (
+                <>
+                         <div className="space-y-2">
                 <div>Shipping</div>
                 <label className="flex justify-between items-center cursor-pointer">
                   <span>Courier Delivery (60 BDT)</span>
@@ -537,6 +542,10 @@ const Checkout = () => {
                 <span>Service Fee</span>
                 <span>{condition} BDT</span>
               </div>
+                </>
+              )
+            }
+             
 
               <hr />
               <div className="flex justify-between font-semibold text-lg">

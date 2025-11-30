@@ -20,6 +20,7 @@ import {
 } from '../../../api/admin';
 import { adminLogout } from '../../../api/auth';
 import Navbar from '../../../shared/Navbar';
+import { LogOut } from 'lucide-react';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -197,9 +198,12 @@ const AdminDashboard = () => {
       {/* <Navbar /> */}
       <div className="max-w-7xl mx-auto p-6">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
-          <p className="text-gray-600">Manage users, courses, and products</p>
+        <div className='flex items-center justify-between'>
+                <div className="mb-8">
+                <h1 className="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+                <p className="text-gray-600">Manage users, courses, and products</p>
+              </div>
+              <LogOut className="-mt-7 hover:text-red-600 transition duration-300" onClick={adminLogout} />
         </div>
 
         {/* Stats Cards */}
