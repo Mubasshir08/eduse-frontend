@@ -33,6 +33,7 @@ const SellerDashboard = () => {
   const [formData, setFormData] = useState({
     title: '',
     name: '',
+    authorName: '',
     description: '',
     price: '',
     originalPrice: '',
@@ -94,7 +95,7 @@ const SellerDashboard = () => {
     const file = e.target.files[0];
     if (file) {
       setFormData({ ...formData, image: file });
-      
+
       // Create preview
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -113,6 +114,7 @@ const SellerDashboard = () => {
 
       if (postType === 'course') {
         formDataToSend.append('title', formData.title);
+        formDataToSend.append('authorName', formData.authorName);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
         formDataToSend.append('originalPrice', formData.originalPrice || formData.price);
@@ -126,6 +128,7 @@ const SellerDashboard = () => {
         loadCourses();
       } else {
         formDataToSend.append('name', formData.name);
+        formDataToSend.append('authorName', formData.authorName);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
         if (formData.image) {
@@ -151,6 +154,7 @@ const SellerDashboard = () => {
     setFormData({
       title: '',
       name: '',
+      authorName: '',
       description: '',
       price: '',
       originalPrice: '',
@@ -260,31 +264,28 @@ const SellerDashboard = () => {
             <div className="flex">
               <button
                 onClick={() => setActiveTab('overview')}
-                className={`px-6 py-3 font-medium ${
-                  activeTab === 'overview'
+                className={`px-6 py-3 font-medium ${activeTab === 'overview'
                     ? 'border-b-2 border-blue-600 text-blue-600'
                     : 'text-gray-600 hover:text-gray-800'
-                }`}
+                  }`}
               >
                 Overview
               </button>
               <button
                 onClick={() => setActiveTab('courses')}
-                className={`px-6 py-3 font-medium ${
-                  activeTab === 'courses'
+                className={`px-6 py-3 font-medium ${activeTab === 'courses'
                     ? 'border-b-2 border-blue-600 text-blue-600'
                     : 'text-gray-600 hover:text-gray-800'
-                }`}
+                  }`}
               >
                 My Courses
               </button>
               <button
                 onClick={() => setActiveTab('products')}
-                className={`px-6 py-3 font-medium ${
-                  activeTab === 'products'
+                className={`px-6 py-3 font-medium ${activeTab === 'products'
                     ? 'border-b-2 border-blue-600 text-blue-600'
                     : 'text-gray-600 hover:text-gray-800'
-                }`}
+                  }`}
               >
                 My Products
               </button>
@@ -320,6 +321,7 @@ const SellerDashboard = () => {
                           />
                         )}
                         <h3 className="font-semibold text-lg mb-2">{course.title}</h3>
+                        <p className="text-xs text-gray-500 mb-2">by {course.authorName}</p>
                         <p className="text-sm text-gray-600 mb-2 line-clamp-2">{course.description}</p>
                         <p className="text-blue-600 font-bold mb-2">{course.price} BDT</p>
                         <p className="text-xs text-gray-500 mb-3">Category: {course.category}</p>
@@ -354,6 +356,7 @@ const SellerDashboard = () => {
                           />
                         )}
                         <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
+                        <p className="text-xs text-gray-500 mb-2">by {product.sellerName}</p> 
                         <p className="text-sm text-gray-600 mb-2 line-clamp-2">{product.description}</p>
                         <p className="text-blue-600 font-bold mb-3">{product.price} BDT</p>
                         <button
@@ -385,22 +388,20 @@ const SellerDashboard = () => {
                 <div className="flex gap-4">
                   <button
                     onClick={() => setPostType('course')}
-                    className={`flex-1 py-3 px-4 rounded-lg border-2 ${
-                      postType === 'course'
+                    className={`flex-1 py-3 px-4 rounded-lg border-2 ${postType === 'course'
                         ? 'border-blue-600 bg-blue-50 text-blue-600'
                         : 'border-gray-300'
-                    }`}
+                      }`}
                   >
                     <FaBook className="inline mr-2" />
                     Course
                   </button>
                   <button
                     onClick={() => setPostType('product')}
-                    className={`flex-1 py-3 px-4 rounded-lg border-2 ${
-                      postType === 'product'
+                    className={`flex-1 py-3 px-4 rounded-lg border-2 ${postType === 'product'
                         ? 'border-blue-600 bg-blue-50 text-blue-600'
                         : 'border-gray-300'
-                    }`}
+                      }`}
                   >
                     <FaShoppingBag className="inline mr-2" />
                     Product
@@ -421,6 +422,22 @@ const SellerDashboard = () => {
                     onChange={handleInputChange}
                     className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none"
                     placeholder={postType === 'course' ? 'e.g., Design Thinking & UX Fundamentals' : 'e.g., Programming Books Set'}
+                    required
+                  />
+                </div>
+
+                {/* authorName */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Author/Seller Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="authorName"
+                    value={formData.authorName}
+                    onChange={handleInputChange}
+                    className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none"
+                    placeholder={postType === 'course' ? 'e.g., Salauddin, UX Studio' : 'e.g., Tech Books Store'}
                     required
                   />
                 </div>
@@ -455,7 +472,7 @@ const SellerDashboard = () => {
                       required
                     />
                   </div>
-                  
+
                   {postType === 'course' && (
                     <div>
                       <label className="block text-sm font-medium mb-2">Original Price (BDT)</label>
@@ -474,17 +491,17 @@ const SellerDashboard = () => {
                 </div>
 
                 {/* Category */}
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Category</label>
-                    <input
-                      type="text"
-                      name="category"
-                      value={formData.category}
-                      onChange={handleInputChange}
-                      className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none"
-                      placeholder={postType === 'course' ? 'e.g., Design Thinking' : 'e.g., Programming Books'}
-                    />
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Category</label>
+                  <input
+                    type="text"
+                    name="category"
+                    value={formData.category}
+                    onChange={handleInputChange}
+                    className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none"
+                    placeholder={postType === 'course' ? 'e.g., Design Thinking' : 'e.g., Programming Books'}
+                  />
+                </div>
 
                 {/* Image Upload */}
                 <div>
