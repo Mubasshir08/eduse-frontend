@@ -89,16 +89,18 @@ const AddToCart = () => {
 
   // 🔹 Get image URL (supports backend URL or placeholder)
   const getImageUrl = (item) => {
-    if (!item?.img)
-      return "https://via.placeholder.com/150x120?text=Product";
+  const img = item?.image || item?.img; // supports both
 
-    if (item.img.startsWith("http") || item.img.startsWith("blob:")) {
-      return item.img;
-    }
+  if (!img)
+    return "https://via.placeholder.com/150x120?text=Product";
 
-    // For relative paths fallback (optional)
-    return `${import.meta.env.VITE_API_BASE_URL.replace("/api", "")}${item.img}`;
-  };
+  if (img.startsWith("http") || img.startsWith("blob:")) {
+    return img;
+  }
+
+  return `${import.meta.env.VITE_API_BASE_URL.replace("/api", "")}${img}`;
+};
+
 
   if (!user)
     return <p className="p-10 text-center">Loading user profile...</p>;
@@ -140,7 +142,7 @@ const AddToCart = () => {
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="flex items-start border rounded-lg p-4 relative"
+              className="flex items-start border rounded-lg p-4 pr-5 relative"
             >
               {/* Checkbox */}
               <input
@@ -167,7 +169,7 @@ const AddToCart = () => {
                   <h3 className="font-semibold text-blue-700 text-sm pr-4">
                     {item.name || item.title}
                   </h3>
-                  <span className="text-gray-700 text-sm font-medium whitespace-nowrap">
+                  <span className="text-gray-700 text-sm font-medium whitespace-nowrap mr-2">
                     Price: {item.price} BDT
                   </span>
                 </div>
@@ -230,7 +232,7 @@ const AddToCart = () => {
               {/* Delete Button */}
               <button
                 onClick={() => handleRemoveItem(item.id)}
-                className="absolute top-[18px] -right-1 text-red-500 hover:text-red-700"
+                className="absolute top-[18px] right-2 text-red-500 hover:text-red-700"
                 title="Remove from cart"
               >
                 <FaTrash className="text-sm" />

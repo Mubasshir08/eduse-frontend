@@ -18,6 +18,12 @@ export const deleteUser = async (userId) => {
   return response.data;
 };
 
+// Get All sellers
+export const getAllSellers = async (page = 1, limit = 10) => {
+  const response = await API.get(`/admin/sellers?page=${page}&limit=${limit}`);
+  return response.data;
+};
+
 // Get all courses
 export const getAllCourses = async (page = 1, limit = 10) => {
   const response = await API.get(`/admin/courses?page=${page}&limit=${limit}`);

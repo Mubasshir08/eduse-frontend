@@ -28,6 +28,7 @@ import SellerDashboard from "./pages/dashboard/seller/SellerDashboard";
 import SellerRegister from "./pages/auth/seller/SellerRegister";
 import SellerLogin from "./pages/auth/seller/SellerLogin";
 import Product_overview from "./pages/product_overview/Product_overview";
+import Course_overview from "./pages/course_overview/Course_overview";
 // import Catagory from "./pages/catagory/Catagory";
 // import Catagories from "./pages/e-commerce/Categories";
 
@@ -43,9 +44,10 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/coursepage" element={<CoursePage />} />
         <Route path= "/product/:id" element={<Product_overview />} />
+        <Route path = "/course/:courseId" element={<Course_overview/>} />
         <Route path="/cart" element={<CartSection />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/e-commerce" element={<E_commerce />} />
+        <Route path="/products" element={<E_commerce />} />
         <Route path="/courses" element={<E_learning />} />
         <Route path="/stripe-pay" element={<StripePayment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />

@@ -12,7 +12,7 @@ import {
 import {
   getDashboardStats,
   getAllUsers,
-  deleteUser,
+  getAllSellers,
   getAllCourses,
   deleteCourse,
   getAllProducts,

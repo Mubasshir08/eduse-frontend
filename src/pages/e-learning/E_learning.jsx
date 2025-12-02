@@ -69,7 +69,12 @@ const E_learning = () => {
             : "/placeholder.png";
 
           return (
+            <Link
+              key={course._id}
+              to={`/course/${course._id}`} 
+            >
               <CourseCard course={{ ...course, img: imgUrl }} />
+            </Link>
           );
         })}
       </div>

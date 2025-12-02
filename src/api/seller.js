@@ -19,9 +19,31 @@ export const getSellerProducts = async () => {
 };
 
 // Get single course
+// In api/seller.js
 export const getCourse = async (courseId) => {
-  const response = await API.get(`/courses/${courseId}`);
-  return response.data;
+  try {
+    console.log('Fetching course with ID:', courseId);
+    
+    if (!courseId || courseId === 'undefined') {
+      throw new Error('Invalid course ID');
+    }
+    
+    const response = await API.get(`/courses/${courseId}`);
+    console.log('API Response:', response.data);
+    
+    // Handle different response structures
+    if (response.data.course) {
+      return response.data.course;
+    }
+    if (response.data.data) {
+      return response.data.data;
+    }
+    return response.data;
+    
+  } catch (error) {
+    console.error('getCourse error:', error.response?.data || error.message);
+    throw error;
+  }
 };
 
 // Get single product

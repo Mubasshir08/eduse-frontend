@@ -215,20 +215,27 @@ const Checkout = () => {
 
   // Get image helper
   const getImageUrl = (item) => {
-    if (
-      item.img &&
-      (item.img.startsWith("/") ||
-        item.img.startsWith("blob:") ||
-        item.img.startsWith("http"))
-    ) {
-      return item.img;
-    }
-    return (
-      images[item.img] ||
-      item.img ||
-      "https://via.placeholder.com/150x120?text=Course"
-    );
-  };
+  const img = item?.image || item?.img;
+
+  // If no image provided
+  if (!img || typeof img !== "string" || img.trim() === "") {
+    return "https://via.placeholder.com/150x120?text=No+Image";
+  }
+
+  // If already absolute URL
+  if (img.startsWith("http://") || img.startsWith("https://") || img.startsWith("blob:")) {
+    return img;
+  }
+
+  // Clean base URL
+  const base = import.meta.env.VITE_API_BASE_URL?.replace("/api", "").replace(/\/$/, "");
+
+  // Ensure image path starts with slash
+  const filePath = img.startsWith("/") ? img : `/${img}`;
+
+  return `${base}${filePath}`;
+};
+
 
   // Show loading while checking auth
   if (authLoading) {

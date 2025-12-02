@@ -50,7 +50,7 @@ const Navbar = () => {
         {/* Right menu - desktop */}
         <div className="hidden md:flex items-center space-x-6">
           <nav className="flex space-x-8 ml-6 text-gray-700 text-sm font-medium">
-            <Link to="/e-commerce" className="hover:text-blue-700">E-Commerce</Link>
+            <Link to="/products" className="hover:text-blue-700">E-Commerce</Link>
             <Link to="/courses" className="hover:text-blue-700">E-Learning</Link>
             <Link to="/seller-login" className="hover:text-blue-700">Become a Seller</Link>
           </nav>
@@ -152,7 +152,7 @@ const Navbar = () => {
           )}
 
           <nav className="flex flex-col space-y-3 text-gray-700 text-sm font-medium">
-            <Link to="/e-commerce" className="hover:text-blue-700">E-Commerce</Link>
+            <Link to="/products" className="hover:text-blue-700">E-Commerce</Link>
             <Link to="/courses" className="hover:text-blue-700">E-Learning</Link>
             <Link to="/seller-login" className="hover:text-blue-700">Become a Seller</Link>
           </nav>
