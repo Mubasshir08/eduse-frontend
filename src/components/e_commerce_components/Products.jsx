@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Heart } from 'lucide-react';
-import FakeData from "../../assets/data/fakedata.json";
+import axios from 'axios';
 
 // Product Card Component
-const ProductCard = ({ product, getImageUrl }) => {
+const ProductCard = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  
+
+  // Full URL for product image
+  const imgUrl = product.image
+    ? `http://localhost:5000${product.image}`
+    : "https://via.placeholder.com/400x300?text=Product";
+
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
       {/* Image Container */}
       <div className="relative overflow-hidden">
         <img 
-          src={getImageUrl(product)} 
+          src={imgUrl} 
           alt={product.name}
           className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
@@ -64,7 +69,7 @@ const ProductCard = ({ product, getImageUrl }) => {
         {/* Rating */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-            <span className="text-gray-700 font-medium">{product.rating}</span>
+            <span className="text-gray-700 font-medium">{product.rating || 0}</span>
             <svg 
               className="w-5 h-5 text-yellow-400 fill-current" 
               viewBox="0 0 20 20"
@@ -81,78 +86,36 @@ const ProductCard = ({ product, getImageUrl }) => {
 // Main Products Component
 const Products = () => {
   const [productsData, setProductsData] = useState([]);
-  const [images, setImages] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // 🔹 Dynamically import product images
+  // Fetch products from backend
   useEffect(() => {
-    const importedImages = import.meta.glob(
-      "../../assets/images/e_commerce_Images/products_Images/*.{jpg,jpeg,png,webp,gif}",
-      { eager: true }
-    );
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/products");
+        // Backend response: { success, count, data }
+        setProductsData(response.data.data || []);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch products. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const imageMap = {};
-    for (const path in importedImages) {
-      // Extract just the filename (e.g., "img1.jpg")
-      const filename = path.split("/").pop();
-      
-      // Create multiple mapping formats for flexibility
-      const fullPath = "assets/images/e_commerce_Images/products_Images/" + filename;
-      
-      // Get the actual image URL
-      const imageUrl = importedImages[path].default || importedImages[path];
-      
-      // Map with full path
-      imageMap[fullPath] = imageUrl;
-      
-      // Also map by filename only as fallback
-      imageMap[filename] = imageUrl;
-    }
-    
-    console.log('✅ Image map created:', imageMap);
-    setImages(imageMap);
+    fetchProducts();
   }, []);
 
-  // 🔹 Load products data
-  useEffect(() => {
-    const products = FakeData.productsData || [];
-    console.log('📦 Products loaded:', products);
-    setProductsData(products);
-  }, []);
+  if (loading) return <div className="text-center mt-20 text-xl">Loading products...</div>;
+  if (error) return <div className="text-center mt-20 text-red-500">{error}</div>;
+  if (productsData.length === 0) return <div className="text-center mt-20 text-xl">No products found.</div>;
 
-  // 🔹 Get image URL (handles static + Vite dynamic + fallback)
-  const getImageUrl = (product) => {
-    if (!product?.image) return "https://via.placeholder.com/400x300?text=Product";
-
-    // Already a valid resolved path
-    if (
-      product.image.startsWith("/") ||
-      product.image.startsWith("blob:") ||
-      product.image.startsWith("http")
-    ) {
-      return product.image;
-    }
-
-    // Try to find image by full path first
-    let resolvedImage = images[product.image];
-    
-    // If not found, try by filename only
-    if (!resolvedImage) {
-      const filename = product.image.split("/").pop();
-      resolvedImage = images[filename];
-    }
-    
-    return resolvedImage || "https://via.placeholder.com/400x300?text=Product";
-  };
-  
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {productsData.map((product) => (
-          <ProductCard 
-            key={product.id} 
-            product={product} 
-            getImageUrl={getImageUrl}
-          />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>

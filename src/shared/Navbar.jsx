@@ -13,6 +13,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       if (parsedUser.token) {
@@ -51,7 +52,7 @@ const Navbar = () => {
           <nav className="flex space-x-8 ml-6 text-gray-700 text-sm font-medium">
             <Link to="/e-commerce" className="hover:text-blue-700">E-Commerce</Link>
             <Link to="/courses" className="hover:text-blue-700">E-Learning</Link>
-            <Link to="/verify-seller" className="hover:text-blue-700">Become a Seller</Link>
+            <Link to="/seller-login" className="hover:text-blue-700">Become a Seller</Link>
           </nav>
 
           {/* Check user login */}
@@ -153,7 +154,7 @@ const Navbar = () => {
           <nav className="flex flex-col space-y-3 text-gray-700 text-sm font-medium">
             <Link to="/e-commerce" className="hover:text-blue-700">E-Commerce</Link>
             <Link to="/courses" className="hover:text-blue-700">E-Learning</Link>
-            <Link to="/verify-seller" className="hover:text-blue-700">Become a Seller</Link>
+            <Link to="/seller-login" className="hover:text-blue-700">Become a Seller</Link>
           </nav>
         </div>
       )}

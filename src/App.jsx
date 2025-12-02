@@ -25,7 +25,8 @@ import E_learning from "./pages/e-learning/E_learning";
 import E_commerce from "./pages/e-commerce/E_commerce";
 import AdminDashboard from "./pages/dashboard/admin/AdminDashboard";
 import SellerDashboard from "./pages/dashboard/seller/SellerDashboard";
-import SellerLogin from "./pages/auth/verify/SellerLogin";
+import SellerRegister from "./pages/auth/seller/SellerRegister";
+import SellerLogin from "./pages/auth/seller/SellerLogin";
 // import Catagory from "./pages/catagory/Catagory";
 // import Catagories from "./pages/e-commerce/Categories";
 
@@ -47,7 +48,8 @@ function App() {
         <Route path="/courses" element={<E_learning />} />
         <Route path="/stripe-pay" element={<StripePayment />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/verify-seller" element={<SellerLogin />} />
+        <Route path="/seller-register" element={<SellerRegister />} />
+        <Route path="/seller-login" element={<SellerLogin />} />
         
           {/* Dashboard nested routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
@@ -63,7 +65,7 @@ function App() {
         </Route>
 
         {/* Seller nested routes */}
-        <Route path ="/seller" element={<SellerDashboard />}>
+        <Route path ="/seller/dashboard" element={<SellerDashboard />}>
         <Route index element={<SellerDashboard />} />
         </Route>
         

@@ -4,8 +4,11 @@ import { FaStar } from "react-icons/fa";
 const CourseCard = ({ course }) => {
   return (
     <div className="w-3/4">
-      <img src={course.img} alt={course.title} />
-      <div className="py-4">
+<img 
+  src={course.img ? `http://localhost:5000${course.img}` : '/placeholder.png'} 
+  alt={course.title} 
+  className="w-full h-48 object-cover"
+/>      <div className="py-4">
         <h1 className="text-gray-800">{course.title}</h1>
         <p className="text-gray-500">{course.author}</p>
 

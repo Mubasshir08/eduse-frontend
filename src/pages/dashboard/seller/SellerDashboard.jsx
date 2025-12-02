@@ -8,7 +8,6 @@ import {
   FaImage,
 } from 'react-icons/fa';
 import {
-  getSellerStats,
   getSellerCourses,
   getSellerProducts,
   createCourse,
@@ -22,8 +21,7 @@ const SellerDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const [showPostModal, setShowPostModal] = useState(false);
-  const [postType, setPostType] = useState('course'); // 'course' or 'product'
-  const [stats, setStats] = useState(null);
+  const [postType, setPostType] = useState('course');
   const [courses, setCourses] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,46 +41,40 @@ const SellerDashboard = () => {
 
   // Check if user is logged in
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (!user) {
+    const token = localStorage.getItem('sellerToken');
+    if (!token) {
       alert('Please login to continue');
-      navigate('/login');
+      navigate('/seller-login');
     }
   }, [navigate]);
 
   // Load initial data
   useEffect(() => {
-    loadStats();
     loadCourses();
     loadProducts();
   }, []);
 
-  const loadStats = async () => {
-    try {
-      const data = await getSellerStats();
-      setStats(data.stats);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading stats:', error);
-      setLoading(false);
-    }
-  };
-
   const loadCourses = async () => {
     try {
+      setLoading(true);
       const data = await getSellerCourses();
-      setCourses(data.courses);
+      setCourses(data.data || []);
+      setLoading(false);
     } catch (error) {
       console.error('Error loading courses:', error);
+      setLoading(false);
     }
   };
 
   const loadProducts = async () => {
     try {
+      setLoading(true);
       const data = await getSellerProducts();
-      setProducts(data.products);
+      setProducts(data.data || []);
+      setLoading(false);
     } catch (error) {
       console.error('Error loading products:', error);
+      setLoading(false);
     }
   };
 
@@ -114,6 +106,7 @@ const SellerDashboard = () => {
 
       if (postType === 'course') {
         formDataToSend.append('title', formData.title);
+        formDataToSend.append('name', formData.title); // Use title as name too
         formDataToSend.append('authorName', formData.authorName);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
@@ -125,22 +118,24 @@ const SellerDashboard = () => {
 
         await createCourse(formDataToSend);
         alert('Course created successfully!');
-        loadCourses();
+        await loadCourses();
       } else {
+        formDataToSend.append('title', formData.name); // Use name as title too
         formDataToSend.append('name', formData.name);
         formDataToSend.append('authorName', formData.authorName);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
+        formDataToSend.append('originalPrice', formData.price);
+        formDataToSend.append('category', formData.category);
         if (formData.image) {
           formDataToSend.append('image', formData.image);
         }
 
         await createProduct(formDataToSend);
         alert('Product created successfully!');
-        loadProducts();
+        await loadProducts();
       }
 
-      loadStats();
       setShowPostModal(false);
       resetForm();
       setLoading(false);
@@ -169,8 +164,7 @@ const SellerDashboard = () => {
       try {
         await deleteCourse(courseId);
         alert('Course deleted successfully');
-        loadCourses();
-        loadStats();
+        await loadCourses();
       } catch (error) {
         alert(error.response?.data?.message || 'Error deleting course');
       }
@@ -182,15 +176,21 @@ const SellerDashboard = () => {
       try {
         await deleteProduct(productId);
         alert('Product deleted successfully');
-        loadProducts();
-        loadStats();
+        await loadProducts();
       } catch (error) {
         alert(error.response?.data?.message || 'Error deleting product');
       }
     }
   };
 
-  if (loading && !stats) {
+  // Calculate stats from loaded data
+  const stats = {
+    totalPosts: courses.length + products.length,
+    totalCourses: courses.length,
+    totalProducts: products.length,
+  };
+
+  if (loading && courses.length === 0 && products.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -203,7 +203,7 @@ const SellerDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="max-w-7xl mx-auto p-6">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
@@ -224,39 +224,37 @@ const SellerDashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-500 text-sm">Total Posts</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.totalPosts}</p>
-                </div>
-                <FaPlus className="text-4xl text-blue-500" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-500 text-sm">Total Posts</p>
+                <p className="text-3xl font-bold text-gray-800">{stats.totalPosts}</p>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-500 text-sm">Total Courses</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.totalCourses}</p>
-                </div>
-                <FaBook className="text-4xl text-green-500" />
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-500 text-sm">Total Products</p>
-                  <p className="text-3xl font-bold text-gray-800">{stats.totalProducts}</p>
-                </div>
-                <FaShoppingBag className="text-4xl text-purple-500" />
-              </div>
+              <FaPlus className="text-4xl text-blue-500" />
             </div>
           </div>
-        )}
+
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-500 text-sm">Total Courses</p>
+                <p className="text-3xl font-bold text-gray-800">{stats.totalCourses}</p>
+              </div>
+              <FaBook className="text-4xl text-green-500" />
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-500 text-sm">Total Products</p>
+                <p className="text-3xl font-bold text-gray-800">{stats.totalProducts}</p>
+              </div>
+              <FaShoppingBag className="text-4xl text-purple-500" />
+            </div>
+          </div>
+        </div>
 
         {/* Tabs */}
         <div className="bg-white rounded-lg shadow-md">
@@ -264,30 +262,33 @@ const SellerDashboard = () => {
             <div className="flex">
               <button
                 onClick={() => setActiveTab('overview')}
-                className={`px-6 py-3 font-medium ${activeTab === 'overview'
+                className={`px-6 py-3 font-medium ${
+                  activeTab === 'overview'
                     ? 'border-b-2 border-blue-600 text-blue-600'
                     : 'text-gray-600 hover:text-gray-800'
-                  }`}
+                }`}
               >
                 Overview
               </button>
               <button
                 onClick={() => setActiveTab('courses')}
-                className={`px-6 py-3 font-medium ${activeTab === 'courses'
+                className={`px-6 py-3 font-medium ${
+                  activeTab === 'courses'
                     ? 'border-b-2 border-blue-600 text-blue-600'
                     : 'text-gray-600 hover:text-gray-800'
-                  }`}
+                }`}
               >
-                My Courses
+                My Courses ({courses.length})
               </button>
               <button
                 onClick={() => setActiveTab('products')}
-                className={`px-6 py-3 font-medium ${activeTab === 'products'
+                className={`px-6 py-3 font-medium ${
+                  activeTab === 'products'
                     ? 'border-b-2 border-blue-600 text-blue-600'
                     : 'text-gray-600 hover:text-gray-800'
-                  }`}
+                }`}
               >
-                My Products
+                My Products ({products.length})
               </button>
             </div>
           </div>
@@ -297,9 +298,33 @@ const SellerDashboard = () => {
             {activeTab === 'overview' && (
               <div>
                 <h2 className="text-xl font-semibold mb-4">Welcome to your Dashboard</h2>
-                <p className="text-gray-600">
+                <p className="text-gray-600 mb-4">
                   Create and manage your courses and products. Click "Create New Post" to get started!
                 </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 cursor-pointer transition"
+                    onClick={() => {
+                      setShowPostModal(true);
+                      setPostType('course');
+                      resetForm();
+                    }}
+                  >
+                    <FaBook className="text-5xl text-blue-500 mx-auto mb-3" />
+                    <h3 className="font-semibold text-lg mb-2">Create Course</h3>
+                    <p className="text-gray-600 text-sm">Share your knowledge with students</p>
+                  </div>
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-purple-500 cursor-pointer transition"
+                    onClick={() => {
+                      setShowPostModal(true);
+                      setPostType('product');
+                      resetForm();
+                    }}
+                  >
+                    <FaShoppingBag className="text-5xl text-purple-500 mx-auto mb-3" />
+                    <h3 className="font-semibold text-lg mb-2">Create Product</h3>
+                    <p className="text-gray-600 text-sm">Sell your products online</p>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -308,14 +333,27 @@ const SellerDashboard = () => {
               <div>
                 <h2 className="text-xl font-semibold mb-4">My Courses</h2>
                 {courses.length === 0 ? (
-                  <p className="text-gray-500">No courses yet. Create your first course!</p>
+                  <div className="text-center py-12">
+                    <FaBook className="text-6xl text-gray-300 mx-auto mb-4" />
+                    <p className="text-gray-500 mb-4">No courses yet. Create your first course!</p>
+                    <button
+                      onClick={() => {
+                        setShowPostModal(true);
+                        setPostType('course');
+                        resetForm();
+                      }}
+                      className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+                    >
+                      Create Course
+                    </button>
+                  </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {courses.map((course) => (
                       <div key={course._id} className="border rounded-lg p-4 hover:shadow-lg transition">
-                        {course.img && (
+                        {course.image && (
                           <img
-                            src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}${course.img}`}
+                            src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}${course.image}`}
                             alt={course.title}
                             className="w-full h-48 object-cover rounded-md mb-3"
                           />
@@ -323,7 +361,12 @@ const SellerDashboard = () => {
                         <h3 className="font-semibold text-lg mb-2">{course.title}</h3>
                         <p className="text-xs text-gray-500 mb-2">by {course.authorName}</p>
                         <p className="text-sm text-gray-600 mb-2 line-clamp-2">{course.description}</p>
-                        <p className="text-blue-600 font-bold mb-2">{course.price} BDT</p>
+                        <div className="flex items-center gap-2 mb-2">
+                          <p className="text-blue-600 font-bold">{course.price} BDT</p>
+                          {course.originalPrice && course.originalPrice !== course.price && (
+                            <p className="text-gray-400 line-through text-sm">{course.originalPrice} BDT</p>
+                          )}
+                        </div>
                         <p className="text-xs text-gray-500 mb-3">Category: {course.category}</p>
                         <button
                           onClick={() => handleDeleteCourse(course._id)}
@@ -343,7 +386,20 @@ const SellerDashboard = () => {
               <div>
                 <h2 className="text-xl font-semibold mb-4">My Products</h2>
                 {products.length === 0 ? (
-                  <p className="text-gray-500">No products yet. Create your first product!</p>
+                  <div className="text-center py-12">
+                    <FaShoppingBag className="text-6xl text-gray-300 mx-auto mb-4" />
+                    <p className="text-gray-500 mb-4">No products yet. Create your first product!</p>
+                    <button
+                      onClick={() => {
+                        setShowPostModal(true);
+                        setPostType('product');
+                        resetForm();
+                      }}
+                      className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700"
+                    >
+                      Create Product
+                    </button>
+                  </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {products.map((product) => (
@@ -356,9 +412,10 @@ const SellerDashboard = () => {
                           />
                         )}
                         <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-                        <p className="text-xs text-gray-500 mb-2">by {product.sellerName}</p> 
+                        <p className="text-xs text-gray-500 mb-2">by {product.authorName}</p>
                         <p className="text-sm text-gray-600 mb-2 line-clamp-2">{product.description}</p>
-                        <p className="text-blue-600 font-bold mb-3">{product.price} BDT</p>
+                        <p className="text-blue-600 font-bold mb-2">{product.price} BDT</p>
+                        <p className="text-xs text-gray-500 mb-3">Category: {product.category}</p>
                         <button
                           onClick={() => handleDeleteProduct(product._id)}
                           className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 flex items-center justify-center gap-2"
@@ -388,20 +445,22 @@ const SellerDashboard = () => {
                 <div className="flex gap-4">
                   <button
                     onClick={() => setPostType('course')}
-                    className={`flex-1 py-3 px-4 rounded-lg border-2 ${postType === 'course'
+                    className={`flex-1 py-3 px-4 rounded-lg border-2 ${
+                      postType === 'course'
                         ? 'border-blue-600 bg-blue-50 text-blue-600'
                         : 'border-gray-300'
-                      }`}
+                    }`}
                   >
                     <FaBook className="inline mr-2" />
                     Course
                   </button>
                   <button
                     onClick={() => setPostType('product')}
-                    className={`flex-1 py-3 px-4 rounded-lg border-2 ${postType === 'product'
+                    className={`flex-1 py-3 px-4 rounded-lg border-2 ${
+                      postType === 'product'
                         ? 'border-blue-600 bg-blue-50 text-blue-600'
                         : 'border-gray-300'
-                      }`}
+                    }`}
                   >
                     <FaShoppingBag className="inline mr-2" />
                     Product
@@ -426,10 +485,10 @@ const SellerDashboard = () => {
                   />
                 </div>
 
-                {/* authorName */}
+                {/* Author Name */}
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    Author/Seller Name *
+                    {postType === 'course' ? 'Instructor Name' : 'Seller Name'} *
                   </label>
                   <input
                     type="text"
@@ -492,21 +551,22 @@ const SellerDashboard = () => {
 
                 {/* Category */}
                 <div>
-                  <label className="block text-sm font-medium mb-2">Category</label>
+                  <label className="block text-sm font-medium mb-2">Category *</label>
                   <input
                     type="text"
                     name="category"
                     value={formData.category}
                     onChange={handleInputChange}
                     className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none"
-                    placeholder={postType === 'course' ? 'e.g., Design Thinking' : 'e.g., Programming Books'}
+                    placeholder={postType === 'course' ? 'e.g., Design, Programming, Business' : 'e.g., Books, Electronics, Clothing'}
+                    required
                   />
                 </div>
 
                 {/* Image Upload */}
                 <div>
                   <label className="block text-sm font-medium mb-2">
-                    {postType === 'course' ? 'Course Image' : 'Product Image'}
+                    {postType === 'course' ? 'Course Image' : 'Product Image'} *
                   </label>
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                     <input
@@ -515,6 +575,7 @@ const SellerDashboard = () => {
                       onChange={handleImageChange}
                       className="hidden"
                       id="imageUpload"
+                      required={!imagePreview}
                     />
                     <label htmlFor="imageUpload" className="cursor-pointer">
                       {imagePreview ? (
