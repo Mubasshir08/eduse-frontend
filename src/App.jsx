@@ -6,7 +6,7 @@ import SignIn from "./pages/auth/SignIn";
 import Blog from "./pages/blog/Blog";
 import CoursePage from "./pages/coursePage/CoursePage";
 import Empowering_Student_Combine from "./pages/empowering_student_combine/Empowering_Student_Combine";
-import Cource_overview from "./pages/course_overview/Course_overview";
+// import Cource_overview from "./pages/product_overview/Product_overview";
 import CartSection from "./pages/cart/CartSection";
 import Checkout from "./pages/checkout/Checkout";
 import DashboardLayout from "./layout/DashboardLayout";
@@ -27,6 +27,7 @@ import AdminDashboard from "./pages/dashboard/admin/AdminDashboard";
 import SellerDashboard from "./pages/dashboard/seller/SellerDashboard";
 import SellerRegister from "./pages/auth/seller/SellerRegister";
 import SellerLogin from "./pages/auth/seller/SellerLogin";
+import Product_overview from "./pages/product_overview/Product_overview";
 // import Catagory from "./pages/catagory/Catagory";
 // import Catagories from "./pages/e-commerce/Categories";
 
@@ -41,7 +42,7 @@ function App() {
         <Route path="/forget-password" element={<Id_Recovery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/coursepage" element={<CoursePage />} />
-        <Route path= "course-details/:id" element={<Cource_overview />} />
+        <Route path= "/product/:id" element={<Product_overview />} />
         <Route path="/cart" element={<CartSection />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/e-commerce" element={<E_commerce />} />

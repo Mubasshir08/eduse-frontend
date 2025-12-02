@@ -11,24 +11,27 @@ const E_learning = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  const fetchCourses = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/api/courses");
+    const fetchCourses = async () => {
+      try {
+        // Fetch courses from deployed backend
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/courses`
+        );
 
-      // response.data is { success, count, data }
-      setCourses(response.data.data); // <- use .data here
-    } catch (err) {
-      console.error(err);
-      setError("Failed to fetch courses. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
-  };
+        // Backend returns { success, count, data }
+        setCourses(response.data.data || []);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch courses. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchCourses();
-}, []);
+    fetchCourses();
+  }, []);
 
-  if (loading) {
+  if (loading)
     return (
       <div>
         <Navbar />
@@ -36,9 +39,8 @@ const E_learning = () => {
         <Footer />
       </div>
     );
-  }
 
-  if (error) {
+  if (error)
     return (
       <div>
         <Navbar />
@@ -46,29 +48,31 @@ const E_learning = () => {
         <Footer />
       </div>
     );
-  }
+
+  if (courses.length === 0)
+    return (
+      <div>
+        <Navbar />
+        <div className="text-center mt-20 text-xl">No courses available.</div>
+        <Footer />
+      </div>
+    );
 
   return (
     <div>
       <Navbar />
-      {courses.length === 0 ? (
-        <div className="text-center mt-20 text-xl">
-          No courses available at the moment.
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ml-20 mt-10">
-          {courses.map((course) => {
-            // Assuming the 'image' field contains the URL or relative path
-            const imgUrl = course.image || null;
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ml-20 mt-10">
+        {courses.map((course) => {
+          // Prepend deployed backend base URL to image path
+          const imgUrl = course.image
+            ? `${import.meta.env.VITE_API_BASE_URL.replace("/api", "")}${course.image}`
+            : "/placeholder.png";
 
-            return (
-              <Link key={course._id} to={`/course-details/${course._id}`}>
-                <CourseCard course={{ ...course, img: imgUrl }} />
-              </Link>
-            );
-          })}
-        </div>
-      )}
+          return (
+              <CourseCard course={{ ...course, img: imgUrl }} />
+          );
+        })}
+      </div>
       <Footer />
     </div>
   );

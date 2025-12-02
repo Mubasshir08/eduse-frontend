@@ -8,32 +8,33 @@ import {
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 
-const Right_section = ({ onReviewClick, course }) => {
+const Right_section = ({ onReviewClick, product }) => {
   const dispatch = useDispatch();
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(product.rating || 0);
   const [hover, setHover] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
-  const [wishlistCount, setWishlistCount] = useState(3);
+  const [wishlistCount, setWishlistCount] = useState(product.wishlistCount || 0);
   const [justAddedToCart, setJustAddedToCart] = useState(false);
 
-  console.log(course)
+  // Resolve image URL
+  const imgSrc =
+    product.image?.startsWith("http")
+      ? product.image
+      : `${import.meta.env.VITE_API_BASE_URL.replace("/api", "")}${product.image || ""}`;
 
   const handleAddToCart = () => {
-    // Prepare the product data from course prop with resolved image URL
-    const product = {
-      id: course.id,
-      name: course.title,
-      price: course.price,
-      author: course.author,
-      img: course.img,
-      category: course.category || "Programming",
-      isCourse: course.isCourse || false
+    const cartItem = {
+      id: product._id || product.id,
+      name: product.name || product.title,
+      price: product.price,
+      author: product.author || "Unknown",
+      img: imgSrc,
+      category: product.category || "Misc",
+      quantity: 1,
+      isCourse: product.isCourse || false,
     };
 
-    // Dispatch to Redux store
-    dispatch(addToCart(product));
-    
-    // Show confirmation message
+    dispatch(addToCart(cartItem));
     setJustAddedToCart(true);
     setTimeout(() => setJustAddedToCart(false), 1800);
   };
@@ -49,20 +50,28 @@ const Right_section = ({ onReviewClick, course }) => {
   return (
     <div className="max-w-4xl mx-auto bg-white shadow rounded-md pt-6 text-[#666666]">
       <div className="p-6">
-        <h2 className="text-xl font-semibold text-[#333333]">{course.title}</h2>
-        <p className="text-lg font-bold text-[#333333] mt-2">
-          Price: {course.price}
-        </p>
-        <p className="mt-1 text-gray-600 text-sm">
-          {course.title}
-        </p>
-        <p className="mt-2 font-semibold text-sm">by {course.author}</p>
+        {/* Title */}
+        <h2 className="text-xl font-semibold text-[#333333]">
+          {product.name || product.title}
+        </h2>
 
+        {/* Price */}
+        <p className="text-lg font-bold text-[#333333] mt-2">
+          Price: {product.price} BDT
+        </p>
+
+        {/* Author */}
+        <p className="mt-2 font-semibold text-sm">
+          by {product.author || "Unknown"}
+        </p>
+
+        {/* Stock */}
         <div className="w-55 my-4 border border-blue-600 text-[#666666] px-3 py-1 rounded-md text-sm">
           <span className="inline-block w-2 h-2 rounded-full bg-blue-600 mr-2" />
-          In Stock (only {course.stock || 21} left!)
+          In Stock (only {product.stock || 10} left!)
         </div>
 
+        {/* Wishlist */}
         <button
           onClick={toggleWishlist}
           className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-800"
@@ -78,10 +87,12 @@ const Right_section = ({ onReviewClick, course }) => {
           </span>
         </button>
 
+        {/* Category */}
         <p className="mt-3 text-sm">
-          <span className="font-medium">Category:</span> {course.category || "Programming"}
+          <span className="font-medium">Category:</span> {product.category || "Misc"}
         </p>
 
+        {/* Add to Cart */}
         <div className="mt-4">
           <button
             onClick={handleAddToCart}
@@ -98,17 +109,24 @@ const Right_section = ({ onReviewClick, course }) => {
 
         <hr className="my-6 border-[#D9D9D9]" />
 
+        {/* Ratings */}
         <h3 className="text-lg font-semibold">Reviews and Ratings</h3>
         <div className="mt-4">
-          <div className="text-[51px]">5</div>
+          <div className="text-[51px]">{product.rating || 0}</div>
           <div className="flex mt-2 text-yellow-500 text-xl">
             {[...Array(5)].map((_, i) => (
-              <AiFillStar key={i} />
+              <AiFillStar
+                key={i}
+                className={i < (product.rating || 0) ? "text-yellow-500" : "text-gray-300"}
+              />
             ))}
           </div>
-          <p className="text-gray-500 text-sm">(3 Ratings and 0 Reviews)</p>
+          <p className="text-gray-500 text-sm">
+            ({product.reviewsCount || 0} Ratings and {product.reviewsCount || 0} Reviews)
+          </p>
         </div>
 
+        {/* Rate this product */}
         <div className="mt-6">
           <p className="font-medium">Rate this product</p>
           <div className="flex space-x-1 mt-2">

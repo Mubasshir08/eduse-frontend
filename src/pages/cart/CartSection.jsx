@@ -12,7 +12,6 @@ import { getProfile } from "../../api/auth";
 
 const AddToCart = () => {
   const [user, setUser] = useState(null);
-  const [images, setImages] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartItems = useSelector((state) => state.cart.items);
@@ -32,23 +31,6 @@ const AddToCart = () => {
       }
     };
     loadUser();
-  }, []);
-
-  // 🔹 Dynamically import course images
-  useEffect(() => {
-    const importedImages = import.meta.glob(
-      "../../assets/images/course_Images/*",
-      { eager: true, query: "?url" }
-    );
-
-    const imageMap = {};
-    for (const path in importedImages) {
-      const parts = path.split("/");
-      const relativePath = "assets/images/course_Images/" + parts.pop();
-      // Some imports may not need .default depending on your Vite version
-      imageMap[relativePath] = importedImages[path].default || importedImages[path];
-    }
-    setImages(imageMap);
   }, []);
 
   // 🔹 Toggle item selection
@@ -105,24 +87,17 @@ const AddToCart = () => {
     navigate("/checkout");
   };
 
-  // 🔹 Get image URL (handles static + Vite dynamic + fallback)
+  // 🔹 Get image URL (supports backend URL or placeholder)
   const getImageUrl = (item) => {
-    if (!item?.img) return "https://via.placeholder.com/150x120?text=Course";
+    if (!item?.img)
+      return "https://via.placeholder.com/150x120?text=Product";
 
-    // Already a valid resolved path
-    if (
-      item.img.startsWith("/") ||
-      item.img.startsWith("blob:") ||
-      item.img.startsWith("http")
-    ) {
+    if (item.img.startsWith("http") || item.img.startsWith("blob:")) {
       return item.img;
     }
 
-    // Otherwise, resolve via dynamic imports
-    return (
-      images[item.img] ||
-      "https://via.placeholder.com/150x120?text=Course"
-    );
+    // For relative paths fallback (optional)
+    return `${import.meta.env.VITE_API_BASE_URL.replace("/api", "")}${item.img}`;
   };
 
   if (!user)
@@ -137,13 +112,13 @@ const AddToCart = () => {
             Your Cart is Empty
           </h2>
           <p className="text-gray-600 mb-6">
-            Add some courses to get started!
+            Add some products to get started!
           </p>
           <Link
-            to="/courses"
+            to="/products"
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-md"
           >
-            Browse Courses
+            Browse Products
           </Link>
         </div>
       </div>
@@ -182,7 +157,7 @@ const AddToCart = () => {
                 className="w-24 h-20 rounded-md ml-4 object-cover"
                 onError={(e) => {
                   e.target.src =
-                    "https://via.placeholder.com/150x120?text=Course";
+                    "https://via.placeholder.com/150x120?text=Product";
                 }}
               />
 
@@ -193,13 +168,12 @@ const AddToCart = () => {
                     {item.name || item.title}
                   </h3>
                   <span className="text-gray-700 text-sm font-medium whitespace-nowrap">
-                    Price: {item.price}
+                    Price: {item.price} BDT
                   </span>
                 </div>
 
                 <p className="text-xs text-gray-600 mt-1">
-                  Created By{" "}
-                  <span className="font-medium">{item.author}</span>
+                  Created By <span className="font-medium">{item.author}</span>
                 </p>
 
                 {/* Category */}
@@ -288,30 +262,6 @@ const AddToCart = () => {
           >
             Proceed to Checkout
           </button>
-        </div>
-
-        {/* Related Topics */}
-        <div className="mt-8 pb-4">
-          <h3 className="font-semibold text-gray-800 text-sm mb-3">
-            Related Topics
-          </h3>
-          <div className="flex flex-wrap gap-3">
-            {[
-              "Design Thinking",
-              "Web Development",
-              "Programming",
-              "UI/UX Design",
-              "Data Science",
-              "Machine Learning",
-            ].map((topic, index) => (
-              <span
-                key={index}
-                className="border border-gray-300 rounded-md px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer transition-colors"
-              >
-                {topic}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
 
