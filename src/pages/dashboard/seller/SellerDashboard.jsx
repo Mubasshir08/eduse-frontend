@@ -15,7 +15,9 @@ import {
   deleteCourse,
   deleteProduct,
 } from '../../../api/seller';
+import {sellerLogout} from '../../../api/auth';
 import Navbar from '../../../shared/Navbar';
+import { LogOut } from 'lucide-react';
 
 const SellerDashboard = () => {
   const navigate = useNavigate();
@@ -441,8 +443,10 @@ const SellerDashboard = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
-              <h2 className="text-2xl font-bold mb-6">Create New Post</h2>
-
+              <div className='flex items-center justify-between mb-6'>
+                <h2 className="text-2xl font-bold">Create New Post</h2>
+              <p onClick={() => setShowPostModal(false)} className="text-2xl font-bold mr-1 text-gray-500 cursor-pointer">X</p>
+              </div>
               {/* Post Type Selection */}
               <div className="mb-6">
                 <label className="block text-sm font-medium mb-2">Post Type *</label>
@@ -627,6 +631,9 @@ const SellerDashboard = () => {
           </div>
         </div>
       )}
+      <div onClick={sellerLogout} className="absolute bottom-7 right-5 cursor-pointer rounded-full hover:bg-gray-200 hover:text-red-500 p-3" >
+        <LogOut />
+      </div>
     </div>
   );
 };

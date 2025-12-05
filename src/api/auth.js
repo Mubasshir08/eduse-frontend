@@ -24,5 +24,12 @@ export const adminLogout = () => {
   window.location.href = "/login";
 };
 
+// Seller Logout (redirects to home)
+export const sellerLogout = () => {
+  localStorage.removeItem("sellerToken");
+  localStorage.removeItem("seller");
+  window.location.href = "/";
+}
+
 // Get user profile
 export const getProfile = () => API.get("/auth/profile");
