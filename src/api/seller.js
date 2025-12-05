@@ -7,14 +7,14 @@ export const getSellerStats = async () => {
 };
 
 // Get seller courses
-export const getSellerCourses = async () => {
-  const response = await API.get('/courses');
+export const getSellerCourses = async (sellerId) => {
+  const response = await API.get(`/courses/${sellerId}`);
   return response.data;
 };
 
 // Get seller products
-export const getSellerProducts = async () => {
-  const response = await API.get('/products');
+export const getSellerProducts = async (sellerId) => {
+  const response = await API.get(`/products/${sellerId}`);
   return response.data;
 };
 

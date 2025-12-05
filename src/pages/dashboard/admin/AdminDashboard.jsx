@@ -17,6 +17,7 @@ import {
   deleteCourse,
   getAllProducts,
   deleteProduct,
+  deleteUser,
 } from '../../../api/admin';
 import { adminLogout } from '../../../api/auth';
 import Navbar from '../../../shared/Navbar';
@@ -418,7 +419,7 @@ const AdminDashboard = () => {
                             <tr key={course._id} className="hover:bg-gray-50">
                               <td className="px-4 py-3">{course.title}</td>
                               <td className="px-4 py-3">
-                                {course.author?.name || 'N/A'}
+                                {course.authorName || 'N/A'}
                               </td>
                               <td className="px-4 py-3">{course.price} BDT</td>
                               <td className="px-4 py-3">
@@ -479,7 +480,7 @@ const AdminDashboard = () => {
                             <tr key={product._id} className="hover:bg-gray-50">
                               <td className="px-4 py-3">{product.name}</td>
                               <td className="px-4 py-3">
-                                {product.seller?.name || 'N/A'}
+                                {product.authorName || 'N/A'}
                               </td>
                               <td className="px-4 py-3">{product.price} BDT</td>
                               <td className="px-4 py-3">

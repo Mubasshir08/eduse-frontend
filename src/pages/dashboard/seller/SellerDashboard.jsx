@@ -19,6 +19,7 @@ import Navbar from '../../../shared/Navbar';
 
 const SellerDashboard = () => {
   const navigate = useNavigate();
+  const [sellerId, setSellerId] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [showPostModal, setShowPostModal] = useState(false);
   const [postType, setPostType] = useState('course');
@@ -50,6 +51,9 @@ const SellerDashboard = () => {
 
   // Load initial data
   useEffect(() => {
+    const seller = JSON.parse(localStorage.getItem("seller"));
+    const sellerId = seller?._id;
+    setSellerId(sellerId);
     loadCourses();
     loadProducts();
   }, []);
@@ -57,7 +61,7 @@ const SellerDashboard = () => {
   const loadCourses = async () => {
     try {
       setLoading(true);
-      const data = await getSellerCourses();
+      const data = await getSellerCourses(sellerId);
       setCourses(data.data || []);
       setLoading(false);
     } catch (error) {
@@ -69,7 +73,7 @@ const SellerDashboard = () => {
   const loadProducts = async () => {
     try {
       setLoading(true);
-      const data = await getSellerProducts();
+      const data = await getSellerProducts(sellerId);
       setProducts(data.data || []);
       setLoading(false);
     } catch (error) {
