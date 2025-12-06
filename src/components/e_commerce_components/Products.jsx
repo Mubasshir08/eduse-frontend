@@ -47,9 +47,9 @@ const ProductCard = ({ product }) => {
         <h3 className="text-gray-700 font-medium text-base mb-2 min-h-[48px] line-clamp-2">
           {product.name}
         </h3>
-        <p className="text-blue-600 text-sm font-medium mb-2">
+        {/* <p className="text-blue-600 text-sm font-medium mb-2">
           {product.inStock ? 'In stock*' : 'Out of stock'}
-        </p>
+        </p> */}
         <div className="mb-3">
           <span className="text-2xl font-bold text-gray-900">
             BDT {product.price.toFixed(2)}

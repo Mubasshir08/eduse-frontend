@@ -18,6 +18,7 @@ import {
   getAllProducts,
   deleteProduct,
   deleteUser,
+  deleteSeller,
 } from '../../../api/admin';
 import { adminLogout } from '../../../api/auth';
 import Navbar from '../../../shared/Navbar';
@@ -28,6 +29,7 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [stats, setStats] = useState(null);
   const [users, setUsers] = useState([]);
+  const [sellers, setSellers] = useState([]);
   const [courses, setCourses] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,6 +38,8 @@ const AdminDashboard = () => {
     pages: 1,
     total: 0,
   });
+
+  console.log(sellers)
 
   // Check if user is admin
   useEffect(() => {
@@ -61,6 +65,7 @@ const AdminDashboard = () => {
   // Load data based on active tab
   useEffect(() => {
     if (activeTab === 'users') loadUsers();
+    if (activeTab === 'sellers') loadSeller();
     if (activeTab === 'courses') loadCourses();
     if (activeTab === 'products') loadProducts();
   }, [activeTab, pagination.page]);
@@ -89,6 +94,19 @@ const AdminDashboard = () => {
       setLoading(false);
     } catch (error) {
       console.error('Error loading users:', error);
+      setLoading(false);
+    }
+  };
+
+  const loadSeller = async () => {
+    try {
+      setLoading(true);
+      const data = await getAllSellers(pagination.page);
+      setSellers(data.sellers);
+      setPagination(data.pagination);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error loading sellers:', error);
       setLoading(false);
     }
   };
@@ -128,6 +146,19 @@ const AdminDashboard = () => {
         alert('User deleted successfully');
       } catch (error) {
         alert(error.response?.data?.message || 'Error deleting user');
+      }
+    }
+  };
+
+  const handleDeleteSeller = async (sellerId) => {
+    if (window.confirm('Are you sure you want to delete this seller?')) {
+      try {
+        await deleteSeller(sellerId);
+        loadSeller();
+        loadStats();
+        alert('Seller deleted successfully');
+      } catch (error) {
+        alert(error.response?.data?.message || 'Error deleting seller');
       }
     }
   };
@@ -274,6 +305,19 @@ const AdminDashboard = () => {
               </button>
               <button
                 onClick={() => {
+                  setActiveTab('sellers');
+                  setPagination({ ...pagination, page: 1 });
+                }}
+                className={`px-6 py-3 font-medium ${
+                  activeTab === 'sellers'
+                    ? 'border-b-2 border-blue-600 text-blue-600'
+                    : 'text-gray-600 hover:text-gray-800'
+                }`}
+              >
+                Sellers
+              </button>
+              <button
+                onClick={() => {
                   setActiveTab('courses');
                   setPagination({ ...pagination, page: 1 });
                 }}
@@ -370,6 +414,55 @@ const AdminDashboard = () => {
                                   disabled={user.role === 'admin'}
                                 >
                                   {user.role === 'admin' ? '' : <FaTrash />}
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <Pagination />
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Sellers Tab */}
+            {activeTab === 'sellers' && (
+              <div>
+                <h2 className="text-xl font-semibold mb-4">All Sellers</h2>
+                {loading ? (
+                  <p>Loading...</p>
+                ) : sellers.length === 0 ? (
+                  <p className="text-gray-500">No sellers found</p>
+                ) : (
+                  <>
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                              Name
+                            </th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                              Email
+                            </th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                              Actions
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                          {sellers.map((seller) => (
+                            <tr key={seller._id} className="hover:bg-gray-50">
+                              <td className="px-4 py-3">{seller.name}</td>
+                              <td className="px-4 py-3">{seller.email}</td>
+                              <td className="px-4 py-3">
+                                <button
+                                  onClick={() => handleDeleteSeller(seller._id)}
+                                  className="text-red-600 hover:text-red-800"
+                                >
+                                  <FaTrash />
                                 </button>
                               </td>
                             </tr>

@@ -71,6 +71,7 @@ export default function Course_overview() {
       category: course.category,
       level: course.level,
       type: 'course', // to differentiate from products
+      isCourse: true,
       instructor: course.authorName || course.instructorName
     };
 

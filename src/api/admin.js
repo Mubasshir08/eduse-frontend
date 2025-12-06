@@ -14,13 +14,19 @@ export const getAllUsers = async (page = 1, limit = 10) => {
 
 // Delete user
 export const deleteUser = async (userId) => {
-  const response = await API.delete(`/admin/users/${userId}`);
+  const response = await API.delete(`/admin/sellers/${userId}`);
   return response.data;
 };
 
 // Get All sellers
 export const getAllSellers = async (page = 1, limit = 10) => {
   const response = await API.get(`/admin/sellers?page=${page}&limit=${limit}`);
+  return response.data;
+};
+
+// Delete seller
+export const deleteSeller = async (sellerId) => {
+  const response = await API.delete(`/admin/sellers/${sellerId}`);
   return response.data;
 };
 

@@ -6,6 +6,7 @@ import {
   FaPlus,
   FaTrash,
   FaImage,
+  FaEdit,
 } from 'react-icons/fa';
 import {
   getSellerCourses,
@@ -21,7 +22,7 @@ import { LogOut } from 'lucide-react';
 
 const SellerDashboard = () => {
   const navigate = useNavigate();
-  const [sellerId, setSellerId] = useState(null);
+  const [sellerId, setSellerId] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
   const [showPostModal, setShowPostModal] = useState(false);
   const [postType, setPostType] = useState('course');
@@ -51,16 +52,46 @@ const SellerDashboard = () => {
     }
   }, [navigate]);
 
-  // Load initial data
+  // Load initial data - FIXED: Now loads data after sellerId is set
   useEffect(() => {
-    const seller = JSON.parse(localStorage.getItem("seller"));
-    const sellerId = seller?._id;
-    setSellerId(sellerId);
-    loadCourses();
-    loadProducts();
-  }, []);
+    const loadData = async () => {
+      try {
+        const seller = JSON.parse(localStorage.getItem("seller"));
+        const id = seller?._id;
+        
+        if (!id) {
+          alert('Seller information not found. Please login again.');
+          navigate('/seller-login');
+          return;
+        }
+        
+        setSellerId(id);
+        
+        // Load courses and products with the seller ID
+        setLoading(true);
+        const [coursesData, productsData] = await Promise.all([
+          getSellerCourses(id),
+          getSellerProducts(id)
+        ]);
+        console.log("Courses response:", coursesData);
+        console.log("Products response:", productsData);
+
+        setCourses(coursesData.data || []);
+        setProducts(productsData.data || []);
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error loading data:', error);
+        alert('Error loading dashboard data');
+        setLoading(false);
+      }
+    };
+    
+    loadData();
+  }, [navigate]);
 
   const loadCourses = async () => {
+    if (!sellerId) return;
     try {
       setLoading(true);
       const data = await getSellerCourses(sellerId);
@@ -73,6 +104,7 @@ const SellerDashboard = () => {
   };
 
   const loadProducts = async () => {
+    if (!sellerId) return;
     try {
       setLoading(true);
       const data = await getSellerProducts(sellerId);
@@ -112,12 +144,13 @@ const SellerDashboard = () => {
 
       if (postType === 'course') {
         formDataToSend.append('title', formData.title);
-        formDataToSend.append('name', formData.title); // Use title as name too
+        formDataToSend.append('name', formData.title);
         formDataToSend.append('authorName', formData.authorName);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
         formDataToSend.append('originalPrice', formData.originalPrice || formData.price);
         formDataToSend.append('category', formData.category);
+        formDataToSend.append("type", "course");
         if (formData.image) {
           formDataToSend.append('image', formData.image);
         }
@@ -126,13 +159,14 @@ const SellerDashboard = () => {
         alert('Course created successfully!');
         await loadCourses();
       } else {
-        formDataToSend.append('title', formData.name); // Use name as title too
+        formDataToSend.append('title', formData.name);
         formDataToSend.append('name', formData.name);
         formDataToSend.append('authorName', formData.authorName);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
         formDataToSend.append('originalPrice', formData.price);
         formDataToSend.append('category', formData.category);
+        formDataToSend.append("type", "product");
         if (formData.image) {
           formDataToSend.append('image', formData.image);
         }
@@ -146,6 +180,7 @@ const SellerDashboard = () => {
       resetForm();
       setLoading(false);
     } catch (error) {
+      console.error('Error creating post:', error);
       alert(error.response?.data?.message || 'Error creating post');
       setLoading(false);
     }
@@ -172,6 +207,7 @@ const SellerDashboard = () => {
         alert('Course deleted successfully');
         await loadCourses();
       } catch (error) {
+        console.error('Error deleting course:', error);
         alert(error.response?.data?.message || 'Error deleting course');
       }
     }
@@ -184,9 +220,19 @@ const SellerDashboard = () => {
         alert('Product deleted successfully');
         await loadProducts();
       } catch (error) {
+        console.error('Error deleting product:', error);
         alert(error.response?.data?.message || 'Error deleting product');
       }
     }
+  };
+
+  // Navigate to view individual course/product
+  const handleViewCourse = (courseId) => {
+    navigate(`/courses/${courseId}`);
+  };
+
+  const handleViewProduct = (productId) => {
+    navigate(`/products/${productId}`);
   };
 
   // Calculate stats from loaded data
@@ -217,7 +263,8 @@ const SellerDashboard = () => {
             <h1 className="text-3xl font-bold text-gray-800">Seller Dashboard</h1>
             <p className="text-gray-600">Manage your courses and products</p>
           </div>
-          <button
+          <div className='flex gap-x-2'>
+            <button
             onClick={() => {
               setShowPostModal(true);
               setPostType('course');
@@ -227,6 +274,10 @@ const SellerDashboard = () => {
           >
             <FaPlus /> Create New Post
           </button>
+           <div onClick={sellerLogout} className=" cursor-pointer rounded-full hover:bg-gray-200 hover:text-red-500 p-3" >
+                  <LogOut />
+          </div>
+          </div>
         </div>
 
         {/* Stats Cards */}
@@ -361,10 +412,16 @@ const SellerDashboard = () => {
                           <img
                             src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}${course.image}`}
                             alt={course.title}
-                            className="w-full h-48 object-cover rounded-md mb-3"
+                            className="w-full h-48 object-cover rounded-md mb-3 cursor-pointer"
+                            onClick={() => handleViewCourse(course._id)}
                           />
                         )}
-                        <h3 className="font-semibold text-lg mb-2">{course.title}</h3>
+                        <h3 
+                          className="font-semibold text-lg mb-2 cursor-pointer hover:text-blue-600"
+                          onClick={() => handleViewCourse(course._id)}
+                        >
+                          {course.title}
+                        </h3>
                         <p className="text-xs text-gray-500 mb-2">by {course.authorName}</p>
                         <p className="text-sm text-gray-600 mb-2 line-clamp-2">{course.description}</p>
                         <div className="flex items-center gap-2 mb-2">
@@ -374,12 +431,20 @@ const SellerDashboard = () => {
                           )}
                         </div>
                         <p className="text-xs text-gray-500 mb-3">Category: {course.category}</p>
-                        <button
-                          onClick={() => handleDeleteCourse(course._id)}
-                          className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 flex items-center justify-center gap-2"
-                        >
-                          <FaTrash /> Delete
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleViewCourse(course._id)}
+                            className="flex-1 bg-blue-500 text-white py-2 rounded hover:bg-blue-600 flex items-center justify-center gap-2"
+                          >
+                            View
+                          </button>
+                          <button
+                            onClick={() => handleDeleteCourse(course._id)}
+                            className="flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600 flex items-center justify-center gap-2"
+                          >
+                            <FaTrash /> Delete
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -414,20 +479,34 @@ const SellerDashboard = () => {
                           <img
                             src={`${import.meta.env.VITE_API_BASE_URL.replace('/api', '')}${product.image}`}
                             alt={product.name}
-                            className="w-full h-48 object-cover rounded-md mb-3"
+                            className="w-full h-48 object-cover rounded-md mb-3 cursor-pointer"
+                            onClick={() => handleViewProduct(product._id)}
                           />
                         )}
-                        <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
+                        <h3 
+                          className="font-semibold text-lg mb-2 cursor-pointer hover:text-blue-600"
+                          onClick={() => handleViewProduct(product._id)}
+                        >
+                          {product.name}
+                        </h3>
                         <p className="text-xs text-gray-500 mb-2">by {product.authorName}</p>
                         <p className="text-sm text-gray-600 mb-2 line-clamp-2">{product.description}</p>
                         <p className="text-blue-600 font-bold mb-2">{product.price} BDT</p>
                         <p className="text-xs text-gray-500 mb-3">Category: {product.category}</p>
-                        <button
-                          onClick={() => handleDeleteProduct(product._id)}
-                          className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 flex items-center justify-center gap-2"
-                        >
-                          <FaTrash /> Delete
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleViewProduct(product._id)}
+                            className="flex-1 bg-blue-500 text-white py-2 rounded hover:bg-blue-600 flex items-center justify-center gap-2"
+                          >
+                            View
+                          </button>
+                          <button
+                            onClick={() => handleDeleteProduct(product._id)}
+                            className="flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600 flex items-center justify-center gap-2"
+                          >
+                            <FaTrash /> Delete
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -631,9 +710,7 @@ const SellerDashboard = () => {
           </div>
         </div>
       )}
-      <div onClick={sellerLogout} className="absolute bottom-7 right-5 cursor-pointer rounded-full hover:bg-gray-200 hover:text-red-500 p-3" >
-        <LogOut />
-      </div>
+     
     </div>
   );
 };

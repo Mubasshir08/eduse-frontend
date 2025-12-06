@@ -54,6 +54,8 @@ const SellerLogin = () => {
     setLoading(true);
 
     try {
+      console.log('Attempting login...');
+      
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/seller/login`,
         {
@@ -62,16 +64,47 @@ const SellerLogin = () => {
         }
       );
 
+      console.log('Login response:', response.data);
+
       if (response.data.success) {
-        // Store token and seller data
-        localStorage.setItem('sellerToken', response.data.data.token);
-        localStorage.setItem('seller', JSON.stringify(response.data.data));
+        // Extract token and seller data from response
+        const { token, seller } = response.data.data;
+        
+        // Store token
+        if (token) {
+          localStorage.setItem('sellerToken', token);
+          console.log('Token stored:', token);
+        }
+        
+        // Store seller data (the actual seller object, not the wrapper)
+        if (seller) {
+          localStorage.setItem('seller', JSON.stringify(seller));
+          console.log('Seller data stored:', seller);
+        }
+
+        // Verify storage
+        const storedToken = localStorage.getItem('sellerToken');
+        const storedSeller = localStorage.getItem('seller');
+        console.log('Verification - Token in localStorage:', !!storedToken);
+        console.log('Verification - Seller in localStorage:', !!storedSeller);
+
+        if (!storedToken || !storedSeller) {
+          console.error('Failed to store data in localStorage!');
+          alert('Login succeeded but failed to save session. Please try again.');
+          return;
+        }
 
         alert('Login successful! Welcome back.');
+        
+        // Navigate to dashboard
         navigate('/seller/dashboard');
+      } else {
+        alert(response.data.message || 'Login failed');
       }
     } catch (error) {
-      alert(error.response?.data?.message || 'Login failed. Please check your credentials.');
+      console.error('Login error:', error);
+      const errorMessage = error.response?.data?.message || 'Login failed. Please check your credentials.';
+      alert(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -110,7 +143,7 @@ const SellerLogin = () => {
               className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 errors.email ? 'border-red-500' : 'border-gray-300'
               }`}
-              placeholder="your.email@university.edu"
+              placeholder="your.email@edu.com"
               autoComplete="email"
             />
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -185,6 +218,20 @@ const SellerLogin = () => {
               ← Back to Home
             </Link>
           </div>
+
+          {/* Debug Info - Remove in production */}
+          {import.meta.env.NODE_ENV === 'development' && (
+            <div className="mt-4 p-3 bg-gray-100 rounded text-xs border border-gray-300">
+              <p className="font-semibold mb-2 text-gray-700">Debug Info:</p>
+              <p className="text-gray-600">Token stored: {localStorage.getItem('sellerToken') ? '✓ Yes' : '✗ No'}</p>
+              <p className="text-gray-600">Seller stored: {localStorage.getItem('seller') ? '✓ Yes' : '✗ No'}</p>
+              {localStorage.getItem('seller') && (
+                <p className="text-gray-600 mt-1 break-all">
+                  Seller ID: {JSON.parse(localStorage.getItem('seller'))?._id || 'Not found'}
+                </p>
+              )}
+            </div>
+          )}
         </form>
       </div>
     </div>

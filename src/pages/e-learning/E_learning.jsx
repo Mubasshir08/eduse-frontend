@@ -17,7 +17,7 @@ const E_learning = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/courses`
         );
-
+        console.log(response)
         // Backend returns { success, count, data }
         setCourses(response.data.data || []);
       } catch (err) {
