@@ -99,7 +99,11 @@ The app will start on the local address printed in your terminal (usually `http:
  
 ## Backend
  
-Eduse's frontend communicates with a backend API through Axios. Make sure the API is running and that the frontend is pointed at it before using features such as authentication, products and courses.
+Eduse's frontend communicates with a backend API through Axios.
+ 
+🔗 **Backend repository:** [Mubasshir08/eduse-backend](https://github.com/Mubasshir08/eduse-backend)
+ 
+Set up and run the backend first, and make sure the frontend is pointed at it, before using features such as authentication, products and courses.
  
 ---
  
@@ -111,6 +115,15 @@ The project is deployed on Vercel. To deploy your own copy:
 2. Import it into [Vercel](https://vercel.com/new)
 3. Use the default Vite settings (build command `npm run build`, output directory `dist`)
 4. Add any environment variables your setup needs, then deploy
+---
+ 
+## My Contribution
+ 
+I built the frontend of this project, with the exception of two pages:
+ 
+- ✅ Everything else in the application: layout, routing, state management, authentication flow, course pages, dashboards and the rest of the UI
+- ❌ **Blog page**: not built by me
+- ❌ **Product page**: not built by me
 ---
  
 ## Contributing
