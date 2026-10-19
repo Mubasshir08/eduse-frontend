@@ -122,8 +122,8 @@ The project is deployed on Vercel. To deploy your own copy:
 I built the frontend of this project, with the exception of two pages:
  
 - ✅ Everything else in the application: layout, routing, state management, authentication flow, course pages, dashboards and the rest of the UI
-- ❌ **Blog page**: not built by me
-- ❌ **Product page**: not built by me
+- **Blog page**: built by [nafeesahmed11](https://github.com/nafeesahmed11)
+- **Product page**: built by [Shazid123](https://github.com/Shazid123)
 ---
  
 ## Contributing
